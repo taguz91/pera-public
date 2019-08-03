@@ -13,3 +13,6 @@ nbdist/
 .nb-gradle/
 
 # End of https://www.gitignore.io/api/netbeans
+
+# Los datos de conexion
+config/
