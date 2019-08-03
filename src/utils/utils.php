@@ -25,11 +25,12 @@
   }
 
   function cargarVista($file){
-    $file = $this->dirVista.$file;
+    $dirVista = 'src/vista/';
+    $file = $dirVista.$file;
     if(file_exists($file)){
       return $file;
     }else {
-      Errores::error404();
+      echo "No encontramos la vista requerida parase que se elimino";
     }
   }
 

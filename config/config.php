@@ -4,7 +4,7 @@ define('URL', 'http://localhost/pera-public/');
 
 //Constantes de conexion a la base de datos
 define('HOST', 'localhost');
-define('DB', 'BDInstitutoJunio2019');
+define('DB', 'BDInstituto');
 define('PORT', '5433');
 define('USER', 'postgres');
 define('PASS', 'Holapostgres');

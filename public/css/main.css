@@ -1,0 +1,21 @@
+.bg-blue {
+  background-color: #0a3d62;
+}
+
+.bg-blue-claro {
+  background-color: #60a3bc;
+}
+
+.no-btn {
+  background-color: inherit;
+  border: none;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.2em;
+  height: 100%;
+}
+
+.no-btn:hover {
+  border-bottom: 5px solid #60a3bc;
+  font-size: 1.3em;
+}

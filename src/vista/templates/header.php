@@ -8,14 +8,14 @@
   </head>
   <body>
 
-<div class="bg-ista-blue">
+<div class="bg-blue">
 
   <div class="container">
     <nav class="navbar navbar-expand-md navbar-dark">
-      <a href="/pera-admin"
-      class="navbar-brand p-2 text-ista-yellow" >
+      <a href="<?php echo constant('URL'); ?>"
+      class="navbar-brand p-2" >
         <img src="<?php echo constant('URL'); ?>public/img/icons/pera.png" width="40" height="40" class="d-inline-block" alt="">
-        <span class="text-dark">Pera</span>
+        <span class="text-white" style="font-size: 1.6em;">Pera Public</span>
       </a>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,30 +23,31 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav mr-auto " style="font-size: 1.5em;">
 
-              <li class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">Permiso Ingreso</a>
-                <div class="dropdown-menu">
-                  <a href="<?php echo constant('URL'); ?>permisoficha" class="dropdown-item">Listar</a>
-                  <a href="<?php echo constant('URL'); ?>permisoficha/guardar" class="dropdown-item">Ingresar</a>
-                </div>
+              <li class="nav-item">
+                  <a href="<?php echo constant('URL'); ?>home" class="nav-link text-light">Home</a>
               </li>
 
               <li class="nav-item">
-                  <a href="<?php echo constant('URL'); ?>permisoingreso" class="nav-link text-light">Fichas</a>
+                  <a href="<?php echo constant('URL'); ?>home" class="nav-link text-light">Perfil</a>
               </li>
 
-              <form class="form-inline ml-lg-2"
-              action="<?php echo constant('URL'); ?>login/salir"
-              method="post">
-              <button type="submit" name="salir"
-              class="btn btn-small rounded-pill bg-danger">
-                Salir
-              </button>
-              </form>
+              <li class="nav-item">
+                  <a href="<?php echo constant('URL'); ?>home" class="nav-link text-light">Ficha</a>
+              </li>
           </ul>
       </div>
+
+      <form class="form-inline ml-lg-2"
+      action="<?php echo constant('URL'); ?>login/salir"
+      method="post">
+        <button type="submit" name="salir"
+        class="no-btn text-white">
+          Salir
+        </button>
+      </form>
+
     </nav>
   </div>
 

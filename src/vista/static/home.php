@@ -12,7 +12,7 @@ require 'src/vista/templates/header.php';
     </div>
 
     <div class="card mx-auto my-3">
-      <h1 class="text-center bg-ista-yellow py-2 text-white">
+      <h1 class="text-center bg-ista-yellow py-2">
         Nombre usuario
       </h1>
       <h2 class="text-center my-2">

@@ -39,8 +39,8 @@ class App {
       }else{
         $modelo->inicio();
       }
-      /*
       //Validamos si esta iniciado session
+      /*
       if (isset($_POST['ingresar'])) {
       } else {
         echo "Debemos ir al login";
