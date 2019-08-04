@@ -25,7 +25,7 @@ class App {
     //Nombre de la clase que llamaremos
     $nombre = $url[0];
 
-    $dir = 'src/controlador/'.$nombre.'/'.$nombre.'.php';
+    $dir = 'src/controlador/'.$nombre.'.php';
 
     if(file_exists($dir)){
       require_once $dir;

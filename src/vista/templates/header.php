@@ -34,7 +34,7 @@
               </li>
 
               <li class="nav-item">
-                  <a href="<?php echo constant('URL'); ?>home" class="nav-link text-light">Ficha</a>
+                  <a href="<?php echo constant('URL'); ?>ficha" class="nav-link text-light">Ficha</a>
               </li>
           </ul>
       </div>

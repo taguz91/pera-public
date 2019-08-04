@@ -2,9 +2,15 @@
 class UsuarioMD {
 
   public $id;
-  public $user;
-  public $persona;
-  public $roles;
+  public $username;
+  public $tipo;
+  public $idPersona;
+  public $primerNombre;
+  public $segundoNombre;
+  public $primerApellido;
+  public $segundoApellido;
+  public $correo;
+  public $celular;
 
 }
  ?>
