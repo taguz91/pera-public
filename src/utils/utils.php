@@ -30,7 +30,7 @@
     if(file_exists($file)){
       return $file;
     }else {
-      echo "No encontramos la vista requerida parase que se elimino";
+      return 'src/vista/static/errores/404php';
     }
   }
 

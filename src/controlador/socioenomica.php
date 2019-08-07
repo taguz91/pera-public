@@ -7,7 +7,9 @@ class SocioeconomicaCTR extends CTR implements DCTR {
   }
 
   public function inicio() {
-    echo "Estamos en la ficha socioenomica";
+    $tipoFicha = 'Socioeconomica';
+    //require_once 'src/vista/fichas/ficha.php';
+    require_once cargarVista('fichas/ficha.php');
   }
 
 }

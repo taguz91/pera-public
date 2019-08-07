@@ -14,7 +14,9 @@
     <nav class="navbar navbar-expand-md navbar-dark">
       <a href="<?php echo constant('URL'); ?>"
       class="navbar-brand p-2" >
-        <img src="<?php echo constant('URL'); ?>public/img/icons/pera.png" width="40" height="40" class="d-inline-block" alt="">
+      <!--
+        <img src="<?php echo constant('URL'); ?>public/img/icons/pera.png" width="40" height="40" class="d-inline-block" alt="...">
+      -->
         <span class="text-white" style="font-size: 1.6em;">Pera Public</span>
       </a>
 
@@ -30,7 +32,7 @@
               </li>
 
               <li class="nav-item">
-                  <a href="<?php echo constant('URL'); ?>home" class="nav-link text-light">Perfil</a>
+                  <a href="<?php echo constant('URL'); ?>perfil" class="nav-link text-light">Perfil</a>
               </li>
 
               <li class="nav-item">

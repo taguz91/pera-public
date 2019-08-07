@@ -5,11 +5,12 @@ abstract class CTR {
   protected $para;
 
   function __construct($para){
+    global $user;
     $this->para = $para;
-    if(strcasecmp("alumno", $para) != 0 AND strcasecmp("todos", $para) != 0){
+    if(strcasecmp($user->tipo, $para) != 0 AND strcasecmp("todos", $para) != 0){
       echo "No tiene acceso a esta pagina!";
     } else {
-      echo "Si tiene acceso a esta pagina!";
+      //echo "Si tiene acceso a esta pagina!";
     }
   }
 

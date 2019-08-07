@@ -9,7 +9,8 @@ class FichaCTR extends CTR implements DCTR {
   }
 
   public function inicio() {
-    if(false){
+    global $user;
+    if(strcasecmp("alumno", $user->tipo) == 0){
       $se = new SocioeconomicaCTR();
       $se->inicio();
     } else {
