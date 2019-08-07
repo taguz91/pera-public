@@ -17,7 +17,7 @@ class App {
       }
 
     }else{
-      require 'src/vista/static/home.php';
+      require_once cargarVista('static/home.php');
     }
   }
 

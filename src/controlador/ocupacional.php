@@ -7,7 +7,9 @@ class OcupacionalCTR extends CTR implements DCTR {
   }
 
   public function inicio() {
-    echo "Estamos en la ficha ocupacional";
+    $tipoFicha = 'Ocupacional';
+    require_once cargarVista('fichas/ficha.php');
+
   }
 
 }
