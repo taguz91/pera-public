@@ -4,8 +4,8 @@ INSERT INTO public."PermisoIngresoFichas" (
   permiso_ingreso_fecha_inicio,
   permiso_ingreso_fecha_fin
 ) VALUES (
-  21, 1,
-  '7/3/2019', '26/3/2019'
+  22, 1,
+  '7/8/2019', '26/8/2019'
 );
 
 
@@ -24,7 +24,7 @@ INSERT INTO public."PersonaFicha"(
   persona_ficha_fecha_ingreso,
   persona_ficha_fecha_modificacion
 ) VALUES (
-  1, 1,
+  2, 1,
   set_byte( MD5( '123' ) :: bytea, 4, 64 ),
   now(),
   now()

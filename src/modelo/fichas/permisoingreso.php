@@ -10,6 +10,17 @@ class PermisoIngresoMD {
   //Objetos
   public $tipoFicha;
 
+  public function sePuedeIngresar(){
+    $fa = strtotime(strftime("%d-%m-%Y"));
+    $ff = strtotime($this->fechaFin);
+    return $fa < $ff;
+    /*if($fa > $ff){
+      echo "<h3>Ya pasamos la fecha en la que se puede ingresar!</h3>";
+    }else{
+      echo "<h3>Aun no pasamos la fecha de ingreso</h3>";
+    }*/
+  }
+
 
   static function getFromRow($r){
     $pi = new PermisoIngresoMD();

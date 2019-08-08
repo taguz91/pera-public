@@ -23,18 +23,13 @@ class FichaMD {
     $f->periodoLectivo = isset($r['prd_lectivo_nombre']) ? $r['prd_lectivo_nombre'] : null;
 
     if(isset($r['id_tipo_ficha'])){
-      $f->tipoFicha = $r['id_tipo_ficha'];
+      $f->idTipoFicha = $r['id_tipo_ficha'];
       $f->tipoFicha = TipoFichaMD::getFromRow($r);
     }
 
-    /*if(isset($r['id_permiso_ingreso_ficha'])){
-      $f->idPermisoIngreso = $r['id_permiso_ingreso_ficha'];
-      $f->permisoIngreso = PermisoIngresoMD::getFromRow($r);
-    }*/
-
     if(isset($r['id_persona_ficha'])){
       $f->idPersonaFicha = $r['id_persona_ficha'];
-      $f->personaficha = PersonaFichaMD::getFromRow($r);
+      $f->personaFicha = PersonaFichaMD::getFromRow($r);
     }
 
     return $f;

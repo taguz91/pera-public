@@ -13,7 +13,7 @@ class PersonaFichaMD {
   public $persona;
 
 
-  static function getFromRow($r){
+  public static function getFromRow($r){
     $pf = new PersonaFichaMD();
     $pf->id = isset($r['id_persona_ficha']) ? $r['id_persona_ficha'] : null;
     $pf->fechaIngreso = isset($r['persona_ficha_fecha_ingreso']) ? $r['persona_ficha_fecha_ingreso'] : null;
@@ -28,7 +28,7 @@ class PersonaFichaMD {
       $pf->idPersona = $r['id_persona'];
       $pf->persona = PersonaMD::getFromRow($r);
     }
-
+    
     return $pf;
   }
 

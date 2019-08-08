@@ -1,4 +1,5 @@
 <?php
+require_once 'src/modelo/persona/personabd.php';
 
 class PerfilCTR extends CTR implements DCTR {
 
@@ -7,7 +8,13 @@ class PerfilCTR extends CTR implements DCTR {
   }
 
   public function inicio() {
+    global $user;
     require_once cargarVista('static/perfil.php');
+  }
+
+  function foto() {
+    global $user;
+    PersonaBD::cargarFoto($user->idPersona);
   }
 
 }

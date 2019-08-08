@@ -7,7 +7,7 @@ require 'src/vista/templates/header.php';
     <div class="row py-5">
 
       <div class="col-md-4 mx-center">
-        <img src="http://brownmead.academy/wp-content/uploads/2017/01/avatar.jpg" alt="" width="200px" height="200px" class="d-block rounded mx-auto">
+        <img src="<?php echo constant('URL'); ?>perfil/foto" alt="" width="250px" height="200px" class="d-block rounded mx-auto">
       </div>
 
       <div class="col-md-8">
@@ -18,7 +18,7 @@ require 'src/vista/templates/header.php';
 
             <span class="badge">
               <?php
-              global $user;
+
               echo $user->primerNombre .' '.$user->primerApellido; ?>
             </span>
 

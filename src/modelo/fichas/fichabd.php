@@ -28,6 +28,8 @@ abstract class FichaBD {
     pf.id_permiso_ingreso_ficha = pif.id_permiso_ingreso_ficha AND
     tf.id_tipo_ficha = pif.id_tipo_ficha AND
     pl.id_prd_lectivo = pif.id_prd_lectivo
+    ORDER BY
+    permiso_ingreso_fecha_fin DESC;
     ';
 
     if ($ct != null) {
@@ -36,10 +38,11 @@ abstract class FichaBD {
         $fichas = array();
         while($r = $res->fetch(PDO::FETCH_ASSOC)){
           $f = FichaMD::getFromRow($r);
-          echo "<hr>";
+          /*echo "<hr>";
           var_dump($f);
-          echo "<hr>";
-          array_push($fichas, $r);
+          echo "<hr>";*/
+          //array_push($fichas, $r);
+          array_push($fichas, $f);
         }
         return $fichas;
       } else {

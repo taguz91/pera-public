@@ -1,5 +1,5 @@
 <?php
-
+require_once 'src/modelo/fichas/fichabd.php';
 class SocioeconomicaCTR extends CTR implements DCTR {
 
   function __construct() {
@@ -11,7 +11,7 @@ class SocioeconomicaCTR extends CTR implements DCTR {
 
     $fichas = FichaBD::getPorPersona(1);
     require_once cargarVista('fichas/ficha.php');
-    
+
   }
 
 }
