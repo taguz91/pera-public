@@ -1,5 +1,5 @@
 <?php
-require_once 'src/modelo/fichas/seccionbd.php';
+require_once 'src/modelo/fichas/ficha.php';
 
 abstract class FichaBD {
 
@@ -16,7 +16,6 @@ abstract class FichaBD {
     pif.permiso_ingreso_fecha_inicio,
     pif.permiso_ingreso_fecha_fin,
     pf.id_persona_ficha,
-    pf.id_persona,
     pf.persona_ficha_fecha_ingreso,
     pf.persona_ficha_fecha_modificacion
     FROM
@@ -36,6 +35,10 @@ abstract class FichaBD {
       if ($res != null) {
         $fichas = array();
         while($r = $res->fetch(PDO::FETCH_ASSOC)){
+          $f = FichaMD::getFromRow($r);
+          echo "<hr>";
+          var_dump($f);
+          echo "<hr>";
           array_push($fichas, $r);
         }
         return $fichas;
