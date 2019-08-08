@@ -8,8 +8,10 @@ class SocioeconomicaCTR extends CTR implements DCTR {
 
   public function inicio() {
     $tipoFicha = 'Socioeconomica';
-    //require_once 'src/vista/fichas/ficha.php';
+
+    $fichas = FichaBD::getPorPersona(1);
     require_once cargarVista('fichas/ficha.php');
+    
   }
 
 }

@@ -8,8 +8,7 @@ class PersonaFichaMD {
   //Foraneas
   public $idPermisoIngreso;
   public $idPersona;
-  //Objetos
-  public $permisoIngreso;
+  //Persona
 
 }
 

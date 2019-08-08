@@ -1,9 +1,17 @@
 <?php
 
-class Ficha {
+require_once 'src/modelo/persona/personaficha.php';
 
+class FichaMD {
+
+  public $idTipoFicha;
   public $tipoFicha;
-  public $secciones;
+  public $idPeriodo;
+  public $periodoLectivo;
+  public $idPermisoingreso;
+  public $permisoIngresoFI;
+  public $permisoIngresoFF;
+  public $personaFicha;
 
 }
 

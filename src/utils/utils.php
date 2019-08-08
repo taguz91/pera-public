@@ -18,8 +18,8 @@
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       return $pdo;
     } catch (\Exception $e) {
-      Errores::errorConectarBD($e->getMessage());
-      //echo "Oh no: ".$e->getMessage();
+      /*Errores::errorConectarBD($e->getMessage());*/
+      echo "Oh no: ".$e->getMessage();
       return null;
     }
   }

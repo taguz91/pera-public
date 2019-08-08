@@ -1,6 +1,7 @@
 <?php
 require_once 'src/controlador/socioenomica.php';
 require_once 'src/controlador/ocupacional.php';
+require_once 'src/modelo/fichas/fichabd.php';
 
 class FichaCTR extends CTR implements DCTR {
 
