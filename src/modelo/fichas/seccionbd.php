@@ -7,16 +7,24 @@ abstract class SeccionBD {
   static function getPorIdTipoFicha($idFicha){
     $ct = getCon();
 
-    $sql = '';
+    $sql = '
+    SELECT
+    sf.id_seccion_ficha,
+    seccion_ficha_nombre
+    FROM
+    public."SeccionesFicha" sf
+    WHERE
+    sf.id_tipo_ficha = '.$idFicha.';
+    ';
 
     if ($ct != null) {
       $res = $ct->query($sql);
       if ($res != null) {
         $secciones = array();
         while($r = $res->fetch(PDO::FETCH_ASSOC)){
-          $s = new SeccionMD();
+          $s = SeccionFichaMD::getFromRow($r);
 
-          $s->preguntas = PreguntaBD::getPorIdSeccion(1);
+          $s->preguntas = PreguntaBD::getPorIdSeccion($s->id);
 
           array_push($secciones, $s);
         }

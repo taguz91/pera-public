@@ -1,5 +1,5 @@
 <?php
-require_once 'src/modelo/fichas/fichabd.php';
+
 class SocioeconomicaCTR extends CTR implements DCTR {
 
   function __construct() {

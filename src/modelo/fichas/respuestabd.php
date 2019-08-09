@@ -6,14 +6,22 @@ abstract class RespuestaBD {
   static function getPorIdPregunta($idPregunta){
     $ct = getCon();
 
-    $sql = '';
+    $sql = '
+    SELECT
+    rf.id_respuesta_ficha,
+    rf.respuesta_ficha
+    FROM
+    public."RespuestaFicha" rf
+    WHERE
+    rf.id_pregunta_ficha = '.$idPregunta.';
+    ';
 
     if ($ct != null) {
       $res = $ct->query($sql);
       if ($res != null) {
         $respuestas = array();
         while($r = $res->fetch(PDO::FETCH_ASSOC)){
-          $rt = new RespuestaMD();
+          $rt = RespuestaFichaMD::getFromRow($r);
 
           array_push($respuestas, $rt);
         }

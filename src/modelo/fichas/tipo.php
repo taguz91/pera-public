@@ -5,7 +5,7 @@ class TipoFichaMD {
   public $id;
   public $tipo;
 
-  public static function getFromRow($r){
+  static function getFromRow($r){
     $tf = new TipoFichaMD();
     $tf->id = isset($r['id_tipo_ficha']) ? $r['id_tipo_ficha'] : null;
 
