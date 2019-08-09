@@ -101,3 +101,11 @@ sf.id_seccion_ficha NOT IN (
   rf.id_pregunta_ficha = arl.id_pregunta_ficha AND
   arl.id_persona_ficha =
 );
+
+--Seleccionamos todas las secciones de una ficha por id_persona_ficha
+SELECT id_tipo_ficha
+FROM public."PermisoIngresoFichas" pif,
+public."PersonaFicha" pf
+WHERE
+id_persona_ficha = 7 AND
+pif.id_permiso_ingreso_ficha = pf.id_permiso_ingreso_ficha;

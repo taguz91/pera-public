@@ -14,28 +14,26 @@ abstract class SeccionBD {
   seccion_ficha_activa = true
   ';
 
+
+  static function getPorIdPersonaFicha($idPersonaFicha){
+    $sql = self::$BASESELECT . ' AND sf.id_tipo_ficha = (
+      SELECT id_tipo_ficha
+      FROM public."PermisoIngresoFichas" pif,
+      public."PersonaFicha" pf
+      WHERE
+      id_persona_ficha = '.$idPersonaFicha.' AND
+      pif.id_permiso_ingreso_ficha = pf.id_permiso_ingreso_ficha
+    );';
+
+    return self::getSecciones($sql);
+  }
+
   static function getPorIdTipoFicha($idFicha){
     $ct = getCon();
 
     $sql = self::$BASESELECT . " AND sf.id_tipo_ficha = $idFicha;";
 
-    if ($ct != null) {
-      $res = $ct->query($sql);
-      if ($res != null) {
-        $secciones = array();
-        while($r = $res->fetch(PDO::FETCH_ASSOC)){
-          $s = SeccionFichaMD::getFromRow($r);
-
-          $s->preguntas = PreguntaBD::getPorIdSeccion($s->id);
-
-          array_push($secciones, $s);
-        }
-        return $secciones;
-      } else {
-        echo "No pudimos consultar las secciones de la ficha.";
-        return [];
-      }
-    }
+    return self::getSecciones($sql);
   }
 
 
@@ -67,6 +65,11 @@ abstract class SeccionBD {
       )
     );';
 
+    return self::getSecciones($sql);
+  }
+
+  private static function getSecciones($sql){
+    $ct = getCon();
     if ($ct != null) {
       $res = $ct->query($sql);
       if ($res != null) {
