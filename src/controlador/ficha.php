@@ -27,7 +27,12 @@ class FichaCTR extends CTR implements DCTR {
 
   function ingresar($idTipoFicha) {
     $secciones = SeccionBD::getPorIdTipoFicha($idTipoFicha);
-    var_dump($secciones);
+    require_once cargarVista('fichas/formulario.php');
+  }
+
+  function seccion($idPersonaFicha) {
+    $secciones = SeccionBD::getSeccionFaltante($idPersonaFicha);
+    require_once cargarVista('fichas/formulario.php');
   }
 
 }

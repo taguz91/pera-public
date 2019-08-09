@@ -38,10 +38,6 @@ abstract class FichaBD {
         $fichas = array();
         while($r = $res->fetch(PDO::FETCH_ASSOC)){
           $f = FichaMD::getFromRow($r);
-          /*echo "<hr>";
-          var_dump($f);
-          echo "<hr>";*/
-          //array_push($fichas, $r);
           array_push($fichas, $f);
         }
         return $fichas;

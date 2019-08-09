@@ -4,7 +4,7 @@ require 'src/vista/templates/header.php';
 
 <div class="container my-4">
 
-  <h1 class="text-center"><?php echo $tipoFicha ?></h1>
+  <h1 class="text-center">FICHA</h1>
 
 <?php
 for ($i=1; $i <= count($fichas); $i++) {
