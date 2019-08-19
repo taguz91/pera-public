@@ -7,7 +7,7 @@ require 'src/vista/templates/header.php';
 <?php foreach ($secciones as $s) {
   ?>
   <div class="row my-3">
-    <div class="col-md-8 border mx-auto">
+    <div class="col-md-8 border rounded-lg mx-auto">
       <form class="" action="#" method="post">
         <h2 class="text-center my-2"><?php echo $s->nombre; ?></h2>
 
@@ -24,11 +24,11 @@ require 'src/vista/templates/header.php';
           <div class="card-body">
 
             <?php
-            foreach ($p->respuestas as $r) {
+            foreach ($p->respuestas as $vr => $r) {
              ?>
-             <div class="form-group form-check">
-              <input type="radio" class="form-check-input" name="<?php echo $vp; ?>">
-              <label class="form-check-label"><?php echo $r->respuesta; ?></label>
+             <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="<?php echo $vp.$vr; ?>" name="<?php echo $vp; ?>">
+              <label class="custom-control-label" for="<?php echo $vp.$vr; ?>"><?php echo $r->respuesta; ?></label>
             </div>
 
            <?php } ?>

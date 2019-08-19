@@ -96,7 +96,7 @@ for ($i=1; $i <= count($fichas); $i++) {
       </div>
 
       <div class="card-footer">
-        <a href="#" class="card-link">Ver ficha</a>
+        <a href="<?php echo constant('URL'); ?>ficha/ingresar/<?php echo $f->personaFicha->id; ?>" class="card-link">Ver ficha</a>
         <?php
         if($f->personaFicha->permisoIngreso->sePuedeIngresar()){
          ?>
@@ -104,14 +104,14 @@ for ($i=1; $i <= count($fichas); $i++) {
          type="button" data-toggle="collapse" data-target="#ingresar<?php echo $i; ?>">Ingresar</button>
          <div id="ingresar<?php echo $i; ?>" class="collapse">
 
-            <form class="form-inline my-2" action="#" method="post">
+            <form class="form-inline my-2" action="<?php echo constant('URL'); ?>ficha/seccion/<?php echo $f->personaFicha->id; ?>" method="post">
               <div class="input-group w-100">
                 <div class="input-group-prepend">
                   <span class="input-group-text">PS</span>
                 </div>
                 <input type="password" class="form-control" placeholder="Ingrese su contrasena:">
                 <div class="input-group-append">
-                  <button class="btn btn-success" type="button">Ingresar</button>
+                  <button class="btn btn-success" type="submit">Ingresar</button>
                 </div>
               </div>
             </form>
