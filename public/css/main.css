@@ -20,28 +20,10 @@
   font-size: 1.3em;
 }
 
-.btn-yel {
-  color: #212529;
-  background-color: #f6b93b !important;
-  border-color: #ffc107;
+.badge-blue {
+  color: white;
+  background-color: #6a89cc;
 }
-
-.btn-yel:hover {
-  color: #212529;
-  background-color: #f6b93b !important;
-  border-color: #d39e00;
-}
-
-.btn-yel:focus, .btn-yel.focus {
-  box-shadow: 0 0 0 0.2rem rgba(222, 170, 12, 0.5);
-}
-
-.btn-yel.disabled, .btn-yel:disabled {
-  color: #212529;
-  background-color: #f6b93b !important;
-  border-color: #ffc107;
-}
-
 
 .btn-blue {
   color: #212529;

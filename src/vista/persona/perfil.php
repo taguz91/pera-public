@@ -14,8 +14,7 @@ require 'src/vista/templates/nav.php';
 
         <div class="text-white">
           <h1>
-            <span class="badge badge-info">Nombres: </span>
-
+            <span class="badge badge-blue">Nombres: </span>
             <span class="badge">
               <?php
 
