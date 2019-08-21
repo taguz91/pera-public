@@ -19,3 +19,55 @@
   border-bottom: 5px solid #60a3bc;
   font-size: 1.3em;
 }
+
+.btn-yel {
+  color: #212529;
+  background-color: #f6b93b !important;
+  border-color: #ffc107;
+}
+
+.btn-yel:hover {
+  color: #212529;
+  background-color: #f6b93b !important;
+  border-color: #d39e00;
+}
+
+.btn-yel:focus, .btn-yel.focus {
+  box-shadow: 0 0 0 0.2rem rgba(222, 170, 12, 0.5);
+}
+
+.btn-yel.disabled, .btn-yel:disabled {
+  color: #212529;
+  background-color: #f6b93b !important;
+  border-color: #ffc107;
+}
+
+
+.btn-blue {
+  color: #212529;
+  background-color: #6a89cc !important;
+  border-color: #4a69bd;
+}
+
+.btn-blue:hover {
+  color: #212529;
+  background-color: #3c6382 !important;
+  border-color: #4a69bd;
+}
+
+.btn-blue:focus, .btn-blue.focus {
+  box-shadow: 0 0 0 0.2rem rgba(222, 170, 12, 0.5);
+}
+
+.btn-blue.disabled, .btn-blue:disabled {
+  color: #212529;
+  background-color: #6a89cc !important;
+  border-color: #4a69bd;
+}
+
+.input-icon {
+  background: #6a89cc !important;
+  color: white !important;
+  border: 0 !important;
+  border-radius: 0.25rem 0 0 0.25rem !important;
+}
