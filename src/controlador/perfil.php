@@ -9,7 +9,7 @@ class PerfilCTR extends CTR implements DCTR {
 
   public function inicio() {
     global $user;
-    require_once cargarVista('static/perfil.php');
+    require_once cargarVista('persona/perfil.php');
   }
 
   function foto() {

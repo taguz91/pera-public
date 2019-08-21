@@ -1,5 +1,5 @@
 <?php
-require 'src/vista/templates/header.php';
+require 'src/vista/templates/nav.php';
  ?>
 
 <div class="container my-4">
@@ -49,5 +49,5 @@ require 'src/vista/templates/header.php';
 
 
 <?php
-require 'src/vista/templates/footer.php';
+require 'src/vista/templates/copy.php';
 ?>
