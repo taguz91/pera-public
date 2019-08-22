@@ -21,7 +21,6 @@ class FichaCTR extends CTR implements DCTR {
   }
 
   function ingresar($idPersonaFicha) {
-
     $secciones = SeccionBD::getPorIdPersonaFicha($idPersonaFicha);
     //$titulo = 'Formulario de ficha';
     require_once cargarVista('fichas/formulario.php');
@@ -30,6 +29,11 @@ class FichaCTR extends CTR implements DCTR {
   function seccion($idPersonaFicha) {
     $secciones = SeccionBD::getSeccionFaltante($idPersonaFicha);
     require_once cargarVista('fichas/formulario.php');
+  }
+
+  function verficha($idPersonaFicha){
+    $secciones = SeccionBD::getPorIdPersonaFicha($idPersonaFicha);
+    require_once cargarVista('fichas/verficha.php');
   }
 
 }

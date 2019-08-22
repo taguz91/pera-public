@@ -4,8 +4,6 @@ require 'src/vista/templates/nav.php';
 
 <div class="container my-4">
 
-  <h1 class="text-center">FICHA</h1>
-
 <?php
 for ($i=1; $i <= count($fichas); $i++) {
   //echo "Posicion: $i ".($i % 2)." <br>" ;
@@ -29,9 +27,9 @@ for ($i=1; $i <= count($fichas); $i++) {
 
   <div class="col-md-6 mx-auto my-2">
 
-    <div class="card">
+    <div class="card-ficha">
 
-      <div class="card-body">
+      <div class="card-head-ficha">
         <h3 class="card-title">
           <?php
           //echo $f['prd_lectivo_nombre'];
@@ -45,15 +43,16 @@ for ($i=1; $i <= count($fichas); $i++) {
           echo $f->periodoLectivo;
           ?>
         </h6>
+      </div>
 
-        <hr>
+      <div class="card-body">
 
         <div class="card-group">
           <div class="card text-center">
-            <div class="card-header">
+            <div class="card-header-sm">
               Fecha Inicio
             </div>
-            <div class="card-body">
+            <div class="card-body-sm">
               <?php
               //echo $f['permiso_ingreso_fecha_inicio'];
               echo $f->personaFicha->permisoIngreso->fechaInicio;
@@ -61,10 +60,10 @@ for ($i=1; $i <= count($fichas); $i++) {
             </div>
           </div>
           <div class="card text-center">
-            <div class="card-header">
+            <div class="card-header-sm">
               Fecha Fin
             </div>
-            <div class="card-body">
+            <div class="card-body-sm">
               <?php
               //echo $f['permiso_ingreso_fecha_fin'];
               echo $f->personaFicha->permisoIngreso->fechaFin;
@@ -95,8 +94,8 @@ for ($i=1; $i <= count($fichas); $i++) {
 
       </div>
 
-      <div class="card-footer">
-        <a href="<?php echo constant('URL'); ?>ficha/ingresar/<?php echo $f->personaFicha->id; ?>" class="card-link">Ver ficha</a>
+      <div class="card-foot-ficha">
+        <a href="<?php echo constant('URL'); ?>ficha/verficha/<?php echo $f->personaFicha->id; ?>" class="card-link">Ver ficha</a>
         <?php
         if($f->personaFicha->permisoIngreso->sePuedeIngresar()){
          ?>
