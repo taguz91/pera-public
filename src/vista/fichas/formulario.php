@@ -14,12 +14,14 @@ require 'src/vista/templates/nav.php';
   ?>
   <div class="row my-3 seccion">
 
-    <div class="col-md-8 border pb-2 mx-auto bg-blue">
-        <h2 class="text-center text-white my-3 border-bottom pb-1"><?php echo $s->nombre; ?></h2>
+    <div class="col-md-8 pb-2 mx-auto ">
+      <div class="bg-blue py-1">
+        <h2 class="text-center text-white my-3 border-bottom pb-2"><?php echo $s->nombre; ?></h2>
+      </div>
 
         <?php foreach ($s->preguntas as $vp => $p) {?>
 
-        <div class="card m-3 mb-4 border-0">
+        <div class="card m-3 mb-4 border-0 ">
           <div class="card-header-blue">
             <h5 class="card-title"><?php echo $p->pregunta; ?></h5>
             <h6 class="card-subtitle text-white"><?php echo $p->ayuda; ?></h6>
