@@ -12,5 +12,14 @@ class UsuarioMD {
   public $correo;
   public $celular;
 
+  function getNombre(){
+    return $this->primerNombre . ' ' . $this->segundoNombre;
+  }
+
+  function getApellido(){
+    return $this->primerApellido . ' ' . $this->segundoApellido;
+  }
+
+
 }
  ?>

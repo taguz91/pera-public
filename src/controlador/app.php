@@ -17,14 +17,20 @@ class App {
       }
 
     }else{
-      require_once cargarVista('static/home.php');
+      global $U;
+      if($U != null){
+        include cargarVista('static/home.php');
+      } else {
+        Page::login();
+      }
+
     }
   }
 
   function cargarClase($url){
+    global $U;
     //Nombre de la clase que llamaremos
     $nombre = $url[0];
-
     $dir = 'src/controlador/'.$nombre.'.php';
 
     if(file_exists($dir)){
@@ -34,17 +40,15 @@ class App {
       //Creamos el objeto
       $modelo = new $nombre();
 
-      if(isset($url[1])){
-        $this->llamarMetodo($url, $modelo);
+      if($U != null OR isset($_POST['ingresar'])){
+        if(isset($url[1])){
+          $this->llamarMetodo($url, $modelo);
+        }else{
+          $modelo->inicio();
+        }
       }else{
-        $modelo->inicio();
+        Page::login();
       }
-      //Validamos si esta iniciado session
-      /*
-      if (isset($_POST['ingresar'])) {
-      } else {
-        echo "Debemos ir al login";
-      }*/
     }else{
         echo "No tenemos la pagina";
     }

@@ -11,18 +11,8 @@ class FichaCTR extends CTR implements DCTR {
   }
 
   function inicio() {
-
     $fichas = FichaBD::getPorPersona(1);
     require_once cargarVista('fichas/ficha.php');
-    /*
-    global $user;
-    if(strcasecmp("alumno", $user->tipo) == 0){
-      $se = new SocioeconomicaCTR();
-      $se->inicio();
-    } else {
-      $oc = new OcupacionalCTR();
-      $oc->inicio();
-    }*/
   }
 
   function tipo($idTipoFicha) {
@@ -31,7 +21,9 @@ class FichaCTR extends CTR implements DCTR {
   }
 
   function ingresar($idPersonaFicha) {
+
     $secciones = SeccionBD::getPorIdPersonaFicha($idPersonaFicha);
+    //$titulo = 'Formulario de ficha';
     require_once cargarVista('fichas/formulario.php');
   }
 

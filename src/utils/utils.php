@@ -24,6 +24,16 @@
     }
   }
 
+  function getRes($sql){
+    $ct = getCon();
+    if($ct != null){
+      $res = $ct->query($sql);
+      return $res;
+    }else {
+      return null;
+    }
+  }
+
   function cargarVista($file){
     $dirVista = 'src/vista/';
     $file = $dirVista.$file;

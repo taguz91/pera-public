@@ -27,7 +27,7 @@
                 U
               </span>
             </div>
-            <input type="text" class="form-control" id="pera-user" name="txtUsuario" placeholder="Ingrese su usuario">
+            <input type="text" class="form-control" id="pera-user" name="user" placeholder="Ingrese su usuario">
           </div>
 
         </div>
@@ -43,14 +43,13 @@
                   P
                 </span>
               </div>
-              <input type="password" class="form-control" id="pera-password" name="txtPass" placeholder="Ingrese su password">
+              <input type="password" class="form-control" id="pera-password" name="pass" placeholder="Ingrese su password">
             </div>
         </div>
 
         <div class="form-group">
             <button type="submit" class="btn btn-blue btn-block text-white"
-            name="ingresar"
-            id="pera-ingresar">
+            name="ingresar">
                 Ingresar
             </button>
             <button type="submit" class="btn btn-link btn-block"

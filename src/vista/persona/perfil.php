@@ -2,7 +2,7 @@
 require 'src/vista/templates/nav.php';
  ?>
 
-<div class="bg-blue">
+<div class="bg-blue border-top">
   <div class="container">
     <div class="row py-5">
 
@@ -16,12 +16,28 @@ require 'src/vista/templates/nav.php';
           <h1>
             <span class="badge badge-blue">Nombres: </span>
             <span class="badge">
-              <?php
-
-              echo $user->primerNombre .' '.$user->primerApellido; ?>
+              <?php echo $U->getNombre(); ?>
             </span>
+          </h1>
+          <h1>
+            <span class="badge badge-blue">Apellidos: </span>
+            <span class="badge">
+              <?php echo $U->getApellido(); ?>
+            </span>
+          </h1>
+          <h1>
+            <span class="badge badge-blue">Correo: </span>
+            <span class="badge">
+              <?php echo $U->correo; ?>
+            </span>
+          </h1>
+          <h1>
+            <span class="badge badge-blue">Celular: </span>
+            <span class="badge">
+              <?php echo $U->celular; ?>
+            </span>
+          </h1>
 
-            </h1>
         </div>
 
       </div>
