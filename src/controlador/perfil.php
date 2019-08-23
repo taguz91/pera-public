@@ -12,6 +12,11 @@ class PerfilCTR extends CTR implements DCTR {
     require_once cargarVista('persona/perfil.php');
   }
 
+  function editar() {
+    global $U;
+    include cargarVista('persona/form.php');
+  }
+
   function foto() {
     global $U;
     PersonaBD::cargarFoto($U->idPersona);

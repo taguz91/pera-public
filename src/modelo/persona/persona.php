@@ -3,13 +3,35 @@
 class PersonaMD {
 
   public $id;
+  public $identificacion;
   public $primerNombre;
   public $segundoNombre;
   public $primerApellido;
   public $segundoApellido;
-  public $correo;
+  public $genero;
+  public $sexo;
+  public $estadoCivil;
+  public $etnia;
+  public $idiomaRaiz;
+  public $idioma;
+  public $tipoSangre;
+  public $telefono;
   public $celular;
-
+  public $correo;
+  //Discapacidad
+  public $discapacidad;
+  public $tipoDiscapacidad;
+  public $porcentajeDiscapacidad;
+  public $carnetConadis;
+  //Direccion
+  public $callePrincipal;
+  public $numeroCasa;
+  public $calleSecundaria;
+  public $referencia;
+  public $sector;
+  public $tipoResidencia;
+  public $fechaNacimiento;
+  public $categoriaMigratoria;
 
   function static getFromRow($r){
     $p = new PersonaMD();

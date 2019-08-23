@@ -4,10 +4,15 @@ require 'src/vista/templates/nav.php';
 
 <div class="bg-blue border-top">
   <div class="container">
-    <div class="row py-5">
+    <div class="row py-4">
 
       <div class="col-md-4 mx-center">
         <img src="<?php echo constant('URL'); ?>perfil/foto" alt="" width="250px" height="200px" class="d-block rounded mx-auto">
+
+        <div class="my-2">
+            <button class="btn btn-blue btn-block text-white d-block w-75 mx-auto" type="button" name="button">Editar datos personales</button>
+        </div>
+
       </div>
 
       <div class="col-md-8">
@@ -43,11 +48,15 @@ require 'src/vista/templates/nav.php';
       </div>
 
     </div>
+
   </div>
 </div>
 
-<div class="container">
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-4 mx-auto">
 
+    </div>
 </div>
 
 
