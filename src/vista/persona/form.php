@@ -1,6 +1,6 @@
 <?php
 require 'src/vista/templates/nav.php';
-$var = 'Pepe';
+require_once 'src/datos/persona.php';
  ?>
 <div class="container my-5">
   <div class="col-md-8 mx-auto">
@@ -75,6 +75,25 @@ $var = 'Pepe';
         </div>
       </div>
 
+
+      <div class="form-row">
+
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="control-label">Fecha nacimiento:</label>
+            <input class="form-control" type="date" name="" value="">
+          </div>
+        </div>
+
+        <div class="col">
+
+          <label for="" class="control-label">Categoria migratoria:</label>
+
+
+        </div>
+
+      </div>
+
       <div class="form-row">
         <div class="col">
           <div class="form-group">
@@ -92,18 +111,25 @@ $var = 'Pepe';
       </div>
 
       <div class="form-row">
+
         <div class="col">
           <div class="form-group">
-            <label for="" class="control-label">Genero</label>
+            <label for="" class="control-label">Tipo Sangre</label>
 
-            <div class="custom-control custom-radio">
-              <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-              <label class="custom-control-label" for="customRadio1">Hombre</label>
-            </div>
-            <div class="custom-control custom-radio">
-              <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-              <label class="custom-control-label" for="customRadio2">Mujer</label>
-            </div>
+            <select class="form-control" name="">
+              <?php echo llenarCmb($cmbTipoSangre); ?>
+            </select>
+
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="control-label">Genero:</label>
+
+            <select class="form-control" name="">
+              <?php echo llenarCmb($cmbGenero); ?>
+            </select>
 
           </div>
         </div>
@@ -112,14 +138,9 @@ $var = 'Pepe';
           <div class="form-group">
             <label for="" class="control-label">Sexo:</label>
 
-            <div class="custom-control custom-radio">
-              <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-              <label class="custom-control-label" for="customRadio1">Femenino</label>
-            </div>
-            <div class="custom-control custom-radio">
-              <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-              <label class="custom-control-label" for="customRadio2">Masculino</label>
-            </div>
+            <select class="form-control" name="">
+              <?php echo llenarCmb($cmbSexo); ?>
+            </select>
 
           </div>
         </div>
@@ -128,21 +149,131 @@ $var = 'Pepe';
           <label for="" class="control-label">Estado civil:</label>
 
           <select class="form-control" name="">
-            <option value="0">Seleccione</option>
-            <option value="1">Casado</option>
-            <option value="2">Soltero</option>
+            <?php echo llenarCmb($cmbEstadoCivil);?>
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="control-label">Etnia:</label>
+
+            <select class="form-control" name="">
+              <?php echo llenarCmb($cmbEtnia); ?>
+            </select>
+
+          </div>
+        </div>
+
+        <div class="col">
+          <label for="" class="control-label">Idioma raiz:</label>
+
+          <select class="form-control" name="">
+            <?php echo llenarCmb($cmbEstadoCivil);?>
+          </select>
+
+        </div>
+
+        <div class="col">
+          <label for="" class="control-label">Idioma:</label>
+
+          <select class="form-control" name="">
+            <?php echo llenarCmb($cmbEstadoCivil);?>
+          </select>
+
+        </div>
+
+      </div>
+
+      <div class="form-row">
+
+        <div class="col">
+          <label for="" class="control-label">Tipo discapacidad:</label>
+
+          <select class="form-control" name="">
+            <?php echo llenarCmb($cmbTipoDiscapacidad);?>
+          </select>
+
+        </div>
+
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="control-label">Porcentaje discapacidad</label>
+            <input class="form-control" type="text" name="" value="">
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="control-label">Carnet Conadis:</label>
+            <input class="form-control" type="text" name="" value="">
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="form-row">
+
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="control-label">Calle principal:</label>
+            <input class="form-control" type="text" name="" value="">
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="control-label">Calle secundaria:</label>
+            <input class="form-control" type="text" name="" value="">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-row">
+
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="control-label">Numero Casa:</label>
+            <input class="form-control" type="text" name="" value="">
+          </div>
+        </div>
+
+        <div class="col-5">
+          <div class="form-group">
+            <label for="" class="control-label">Sector:</label>
+            <input class="form-control" type="text" name="" value="">
+          </div>
+        </div>
+
+        <div class="col">
+          <label for="" class="control-label">Tipo residencia:</label>
+
+          <select class="form-control" name="">
+            <?php echo llenarCmb($cmbTipoResidencia);?>
           </select>
         </div>
 
       </div>
 
+      <div class="form-row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="control-label">Referencia:</label>
+            <input class="form-control" type="text" name="" value="">
+          </div>
+        </div>
+      </div>
+
     </form>
   </div>
 </div>
-<?php
-function getString($o){
-  return isset($o) ? $o : '';
-}
 
+<?php
 require 'src/vista/templates/copy.php';
 ?>

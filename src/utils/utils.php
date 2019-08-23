@@ -44,4 +44,13 @@
     }
   }
 
+  //Para llenar los combos
+  function llenarCmb($cmb) {
+    $opts = '<option value="">Seleccione</option>';
+    foreach ($cmb as $c) {
+      $opts .= '<option value="' . $c . '">' . $c . '</option>';
+    }
+    return $opts;
+  }
+
  ?>
