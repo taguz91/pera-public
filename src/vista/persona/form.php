@@ -270,6 +270,36 @@ require_once 'src/datos/persona.php';
   </div>
 </div>
 
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4 mx-auto">
+      <button class="btn btn-primary" type="button" name="button" onclick="actualizar('<?php echo constant('URL').'api/v1/persona/actualizar/548' ?>')">Actualizar Prueba</button>
+    </div>
+  </div>
+</div>
+
 <?php
 require 'src/vista/templates/copy.php';
 ?>
+
+
+<script type="text/javascript">
+  function actualizar(url){
+
+    var data = new FormData();
+    data.append('actualizar', 'true');
+    data.append('valor', 'GUSTAVO');
+    data.append('columna', 'persona_primer_nombre');
+    
+    fetch(url, {
+      method: 'POST',
+      body: data
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+    }).catch(err => {
+      console.log('Obtuvimos un error: '+err);
+    });;
+  }
+</script>

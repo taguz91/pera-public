@@ -14,3 +14,7 @@ ALTER TABLE "UsersWeb" ADD CONSTRAINT
 FOREIGN KEY ("id_persona") REFERENCES
 "Personas"("id_persona")
 ON DELETE CASCADE ON UPDATE CASCADE;
+
+--Agregando las dos nuevas columnas
+ALTER TABLE public."PreguntasFicha" ADD COLUMN "pregunta_ficha_tipo" INT DEFAULT '1';
+ALTER TABLE public."PreguntasFicha" ADD COLUMN "pregunta_ficha_respuesta_tipo" INT DEFAULT '1';

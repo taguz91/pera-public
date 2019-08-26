@@ -18,7 +18,6 @@
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       return $pdo;
     } catch (\Exception $e) {
-      /*Errores::errorConectarBD($e->getMessage());*/
       echo "Oh no: ".$e->getMessage();
       return null;
     }
@@ -45,6 +44,20 @@
       return $array;
     }else{
       return [];
+    }
+  }
+
+  function executeSQL($sql, $params){
+    $ct = getCon();
+    if($ct != null){
+      try {
+        $sen= $ct->prepare($sql);
+        return $sen->execute($params);
+      } catch (\Exception $e) {
+        return false;
+      }
+    }else{
+      return false;
     }
   }
 

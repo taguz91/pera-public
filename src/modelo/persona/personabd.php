@@ -6,8 +6,7 @@ abstract class PersonaBD {
     $ct = getCon();
     $sql =  '
     SELECT encode(persona_foto, \'base64\') as foto FROM public."Personas"
-    WHERE id_persona = '.$idPersona.'
-    ';
+    WHERE id_persona = '.$idPersona.';';
 
     if($ct != null){
       $res = $ct->query($sql);
@@ -24,6 +23,17 @@ abstract class PersonaBD {
       }
     }
   }
+
+  static function actualizarDato($idPersona, $valor, $columna){
+    $sql = '
+    UPDATE public."Personas"
+    SET '.$columna.'= :valor
+    WHERE id_persona = ' .$idPersona.  ';';
+    return executeSQL($sql, [
+      'valor' => $valor
+    ]);
+  }
+
 }
 
  ?>
