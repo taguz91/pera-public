@@ -10,7 +10,8 @@ require 'src/vista/templates/nav.php';
         <img src="<?php echo constant('URL'); ?>perfil/foto" alt="" width="250px" height="200px" class="d-block rounded mx-auto">
 
         <div class="my-2">
-            <button class="btn btn-blue btn-block text-white d-block w-75 mx-auto" type="button" name="button">Editar datos personales</button>
+            <a href="<?php echo constant('URL'); ?>perfil/editar/"
+            class="btn btn-blue btn-block text-white d-block w-75 mx-auto">Editar datos personales</a>
         </div>
 
       </div>

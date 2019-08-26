@@ -1,10 +1,7 @@
 <?php
 
 class App {
-
-  function __construct(){
-  }
-
+  
   function obtenerUrl(){
     $url = isset($_GET['url']) ? $_GET['url']: NULL;
 
@@ -13,7 +10,13 @@ class App {
       $url = explode('/', $url);
 
       if(isset($url[0])){
-        $this->cargarClase($url);
+        if($url[0] == 'api'){
+          require 'src/api/api.php';
+          $AP = new Api();
+          $AP->obtenerUrl();
+        }else{
+          $this->cargarClase($url);
+        }
       }
 
     }else{

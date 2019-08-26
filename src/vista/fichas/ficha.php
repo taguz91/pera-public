@@ -25,7 +25,7 @@ for ($i=1; $i <= count($fichas); $i++) {
 
 <?php function agregarFicha($f, $i){ ?>
 
-  <div class="col-md-6 mx-auto my-2">
+  <div class="col-lg-6 col-md-10 mx-auto my-4 my-lg-0">
 
     <div class="card-ficha">
 

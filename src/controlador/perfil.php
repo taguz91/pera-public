@@ -16,7 +16,7 @@ class PerfilCTR extends CTR implements DCTR {
     include cargarVista('persona/form.php');
   }
 
-  function editar($idPersona) {
+  function editar($idPersona = 0) {
     include cargarVista('persona/form.php');
   }
 

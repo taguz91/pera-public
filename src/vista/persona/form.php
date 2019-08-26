@@ -6,11 +6,6 @@ require_once 'src/datos/persona.php';
   <div class="col-md-8 mx-auto">
     <form class="form-horizontal" action="#" method="post">
 
-      <div class="form-group">
-        <label for="" class="control-label">Nombre</label>
-        <input class="form-control" type="text" name="" value="<?php echo isset($U->primerNombre) ? $U->primerNombre : ''; ?>">
-      </div>
-
       <div class="form-row">
         <div class="col">
           <div class="form-group">
@@ -46,7 +41,8 @@ require_once 'src/datos/persona.php';
         <div class="col">
           <div class="form-group">
             <label for="" class="control-label">Primer nombre:</label>
-            <input class="form-control" type="text" name="" value="">
+            <input class="form-control" type="text" name=""
+            value="<?php echo isset($U->primerNombre) ? $U->primerNombre : ''; ?>">
           </div>
         </div>
 
@@ -173,7 +169,7 @@ require_once 'src/datos/persona.php';
           <label for="" class="control-label">Idioma raiz:</label>
 
           <select class="form-control" name="">
-            <?php echo llenarCmb($cmbEstadoCivil);?>
+            <?php echo llenarCmb($cmbIdioma);?>
           </select>
 
         </div>
@@ -182,7 +178,7 @@ require_once 'src/datos/persona.php';
           <label for="" class="control-label">Idioma:</label>
 
           <select class="form-control" name="">
-            <?php echo llenarCmb($cmbEstadoCivil);?>
+            <?php echo llenarCmb($cmbIdioma);?>
           </select>
 
         </div>

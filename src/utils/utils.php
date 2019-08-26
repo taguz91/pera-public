@@ -34,6 +34,20 @@
     }
   }
 
+  function getResArray($sql){
+    $ct = getCon();
+    if($ct != null){
+      $res = $ct->query($sql);
+      $array = [];
+      while($r = $res->fetch(PDO::FETCH_ASSOC)){
+        array_push($array, $r);
+      }
+      return $array;
+    }else{
+      return [];
+    }
+  }
+
   function cargarVista($file){
     $dirVista = 'src/vista/';
     $file = $dirVista.$file;
