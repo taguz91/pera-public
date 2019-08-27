@@ -83,6 +83,16 @@
   function loguear(url){
     var data = new FormData(formlogin);
     data.append('login', 'true');
+
+    if(data.get('user') != '' && data.get('pass') != ''){
+      comprobarLogin(url, data);
+    }else{
+      errorLogin('No ingreso usuario ni contrasena.');
+    }
+
+  }
+
+  function comprobarLogin(url, data){
     fetch(url, {
       method: 'POST',
       body: data
@@ -92,16 +102,19 @@
       if(data.statuscode  == 200){
         formlogin.submit();
       }else{
-        console.log( data);
-        errorlogin.innerHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <span>` + data.mensaje + `</span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button> </div>`;
+        errorLogin(data.mensaje);
       }
     })
     .catch(e =>{
       console.log('Errores: ' + e);
     })
+  }
+
+  function errorLogin(msg){
+    errorlogin.innerHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <span>` + msg + `</span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button> </div>`;
   }
 </script>
