@@ -1,7 +1,7 @@
 <?php
 
 class App {
-  
+
   function obtenerUrl(){
     $url = isset($_GET['url']) ? $_GET['url']: NULL;
 
@@ -43,19 +43,18 @@ class App {
       //Creamos el objeto
       $modelo = new $nombre();
 
-      if($U != null OR isset($_POST['ingresar'])){
+      if($U != null OR (isset($_POST['user']) AND isset($_POST['pass'])) ){
         if(isset($url[1])){
           $this->llamarMetodo($url, $modelo);
         }else{
           $modelo->inicio();
         }
       }else{
-        Page::login();
+        Page::login('Debe ingresar un usuario y una contrasena.');
       }
     }else{
         echo "No tenemos la pagina";
     }
-
   }
 
   function llamarMetodo($url, $modelo){

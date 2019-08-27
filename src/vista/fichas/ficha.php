@@ -1,14 +1,33 @@
 <?php
 require 'src/vista/templates/nav.php';
+$total = count($fichas);
  ?>
 
 <div class="container my-4">
 
-<?php
-for ($i=1; $i <= count($fichas); $i++) {
-  //echo "Posicion: $i ".($i % 2)." <br>" ;
- ?>
+<?php if ($total == 0): ?>
+  <div class="mx-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Mensaje!</h5>
+        <p class="card-text">No cuenta con fichas actualmente, por favor debe pedir que le envien su ficha al correo.</p>
+      </div>
+    </div>
+  </div>
+  <?php else: ?>
+    <div class="mx-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Como llenar la ficha</h5>
+          <p class="card-text">Para llenar la ficha, debera revisar su correo electronico ahi puede encontrar la contrasena asignada para el ingreso de su ficha.</p>
+        </div>
+      </div>
+    </div>
+<?php endif; ?>
 
+<?php
+for ($i=1; $i <= $total; $i++) {
+ ?>
 <?php
   if($i % 2 != 0 OR $i == 0){
    echo ' <div class="row m-3">';

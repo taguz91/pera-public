@@ -109,3 +109,17 @@ public."PersonaFicha" pf
 WHERE
 id_persona_ficha = 7 AND
 pif.id_permiso_ingreso_ficha = pf.id_permiso_ingreso_ficha;
+
+--Consultamos los usuarios
+SELECT
+uw.id_user_web,
+p.id_persona,
+p.persona_primer_nombre,
+p.persona_segundo_nombre,
+p.persona_primer_apellido,
+p.persona_segundo_apellido,
+p.persona_correo,
+p.persona_celular
+FROM public."UsersWeb" uw,
+JOIN public."Personas" p ON uw.id_persona = p.id_persona
+WHERE uw.id_user_web = ;

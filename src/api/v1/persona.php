@@ -8,7 +8,6 @@ class PersonaAPI {
       $valor = isset($_POST['valor']) ? $_POST['valor'] : '';
       $columna = isset($_POST['columna']) ? $_POST['columna'] : '';
       if($idPersona != 0 && $valor != '' && $columna != ''){
-        /*JSON::confirmacion('Columna: '.$columna.' Valor: '.$valor);*/
 
         $res = PersonaBD::actualizarDato($idPersona, $valor, $columna);
 
@@ -21,8 +20,6 @@ class PersonaAPI {
         JSON::error('No existen todos los valores requeridos.');
       }
     }else{
-      /*$data = json_decode(file_get_contents("php://input"));
-      var_dump($data);*/
       JSON::error('No especifico que actualizaremos ');
     }
 

@@ -1,4 +1,5 @@
 <?php
+require_once 'src/modelo/usuario/usuariobd.php';
 
 class LoginCTR extends CTR implements DCTR {
 
@@ -11,20 +12,20 @@ class LoginCTR extends CTR implements DCTR {
   }
 
   function ingresar() {
-    $user = new UsuarioMD();
-    $user->id = 1;
-    $user->username = 'Taguz';
-    $user->tipo = 'Alumno';
-    $user->idPersona = 548;
-    $user->primerNombre = 'Johnny';
-    $user->segundoNombre = 'Gustavo';
-    $user->primerApellido = 'Garcia';
-    $user->segundoApellido = 'Inga';
-    $user->correo = 'johnnygar98@hotmail.com';
-    $user->celular = '0968796010';
+    $u = null;
+    $user = isset($_POST['user']) ? $_POST['user'] : '';
+    $pass = isset($_POST['pass']) ? $_POST['pass'] : '';
+    if($user != '' AND $pass != ''){
+      $u = UsuarioBD::getPorUserAndPass($user, $pass);
+      if($u != null){
+        $_SESSION['U'] = $u;
+        header("Location: ".constant('URL'));
+      }
+    }
 
-    $_SESSION['U'] = $user;
-    header("Location: ".constant('URL'));
+    if($u == null){
+      Page::login('Usuario o contrasena incorrectos.');
+    }
   }
 
   function salir() {

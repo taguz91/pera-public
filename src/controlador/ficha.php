@@ -11,7 +11,8 @@ class FichaCTR extends CTR implements DCTR {
   }
 
   function inicio() {
-    $fichas = FichaBD::getPorPersona(1);
+    global $U;
+    $fichas = FichaBD::getPorPersona($U->id);
     require_once cargarVista('fichas/ficha.php');
   }
 
