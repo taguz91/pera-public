@@ -47,6 +47,32 @@
     }
   }
 
+  function getOneFromSQL($sql, $params){
+    $ct = getCon();
+    if($ct != null){
+      $sen = $ct->prepare($sql);
+      $sen->execute($params);
+      $res = null;
+      while($r = $sen->fetch(PDO::FETCH_ASSOC)){
+        $res = $r;
+      }
+      return $res;
+    }
+  }
+
+  function getArrayFromSQL($sql, $params){
+    $res = [];
+    $ct = getCon();
+    if($ct != null){
+      $sen = $ct->prepare($sql);
+      $sen->execute($params);
+      while($r = $sen->fetch(PDO::FETCH_ASSOC)){
+        array_push($res, $r);
+      }
+    }
+    return $res;
+  }
+
   function executeSQL($sql, $params){
     $ct = getCon();
     if($ct != null){
@@ -78,6 +104,23 @@
       $opts .= '<option value="' . $c . '">' . $c . '</option>';
     }
     return $opts;
+  }
+
+
+  function buscarPersona($aguja){
+    return "
+    TRANSLATE(persona_primer_nombre,'ÁÉÍÓÚáéíóú','AEIOUaeiou') ILIKE '%$aguja%' OR
+    TRANSLATE(persona_segundo_nombre,'ÁÉÍÓÚáéíóú','AEIOUaeiou') ILIKE '%$aguja%' OR
+    TRANSLATE(persona_primer_apellido,'ÁÉÍÓÚáéíóú','AEIOUaeiou') ILIKE '%$aguja%' OR
+    TRANSLATE(persona_segundo_apellido,'ÁÉÍÓÚáéíóú','AEIOUaeiou') ILIKE '%$aguja%' OR
+    TRANSLATE(persona_identificacion,'ÁÉÍÓÚáéíóú','AEIOUaeiou') ILIKE '%$aguja%' OR
+    TRANSLATE(persona_primer_nombre,'ÁÉÍÓÚáéíóú','AEIOUaeiou') ||
+    TRANSLATE(persona_segundo_nombre,'ÁÉÍÓÚáéíóú','AEIOUaeiou') ILIKE '%$aguja%' OR
+    TRANSLATE(persona_primer_apellido,'ÁÉÍÓÚáéíóú','AEIOUaeiou') ||
+    TRANSLATE(persona_segundo_apellido,'ÁÉÍÓÚáéíóú','AEIOUaeiou') ILIKE '%$aguja%' OR
+    TRANSLATE(persona_primer_nombre,'ÁÉÍÓÚáéíóú','AEIOUaeiou') ||
+    TRANSLATE(persona_primer_apellido,'ÁÉÍÓÚáéíóú','AEIOUaeiou') ILIKE '%$aguja%'
+    ";
   }
 
  ?>

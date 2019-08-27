@@ -1,5 +1,6 @@
 <?php
 require 'src/vista/templates/nav.php';
+global $U;
  ?>
 
 
@@ -15,10 +16,10 @@ require 'src/vista/templates/nav.php';
 
       <div class="mx-auto my-3">
         <h1 class="text-center bg-ista-yellow py-2">
-          Nombre usuario
+          <?php echo $U->username; ?>
         </h1>
         <h2 class="text-center my-2">
-          Nombre persona
+          <?php echo $U->getNombreCorto(); ?>
         </h2>
       </div>
 

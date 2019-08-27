@@ -2,7 +2,7 @@
 
 abstract class PersonaBD {
 
-  static function cargarFoto($idPersona) {
+  static function getFotoPorId($idPersona) {
     $ct = getCon();
     $sql =  '
     SELECT encode(persona_foto, \'base64\') as foto FROM public."Personas"
@@ -22,6 +22,16 @@ abstract class PersonaBD {
         }
       }
     }
+  }
+
+  function getFotoPorIden($identificacion) {
+    $sql =  '
+    SELECT encode(persona_foto, \'base64\') as foto FROM public."Personas"
+    WHERE persona_identificacion = :iden';
+    $res = getOneFromSQL($sql, [
+      'iden' => $identificacion
+    ]);
+    return $res['foto'];
   }
 
   static function actualizarDato($idPersona, $valor, $columna){

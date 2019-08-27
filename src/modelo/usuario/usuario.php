@@ -20,6 +20,10 @@ class UsuarioMD {
     return $this->primerApellido . ' ' . $this->segundoApellido;
   }
 
+  function getNombreCorto(){
+    return $this->primerNombre . ' ' . $this->primerApellido;
+  }
+
   static function getFromRow($r){
     $u = new UsuarioMD();
 
@@ -30,7 +34,7 @@ class UsuarioMD {
     $u->segundoNombre = isset($r['persona_segundo_nombre']) ? $r['persona_segundo_nombre'] : null;
     $u->primerApellido = isset($r['persona_primer_apellido']) ? $r['persona_primer_apellido'] : null;
     $u->segundoApellido = isset($r['persona_segundo_apellido']) ? $r['persona_segundo_apellido'] : null;
-    $u->correo = isset($r['persona_correo']) ? $r['persona_celular'] : null;
+    $u->correo = isset($r['persona_correo']) ? $r['persona_correo'] : null;
     $u->celular = isset($r['persona_celular']) ? $r['persona_celular'] : null;
 
     $u->tipo = 'todos';

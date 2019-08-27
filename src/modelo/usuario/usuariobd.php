@@ -31,6 +31,7 @@ class UsuarioBD {
     $sql = '
     SELECT
     uw.id_user_web,
+    uw.user_name,
     p.id_persona,
     p.persona_primer_nombre,
     p.persona_segundo_nombre,

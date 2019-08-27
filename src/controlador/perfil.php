@@ -22,7 +22,7 @@ class PerfilCTR extends CTR implements DCTR {
 
   function foto() {
     global $U;
-    PersonaBD::cargarFoto($U->idPersona);
+    PersonaBD::getFotoPorId($U->idPersona);
   }
 
 }
