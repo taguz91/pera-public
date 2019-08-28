@@ -64,10 +64,14 @@
     $res = [];
     $ct = getCon();
     if($ct != null){
-      $sen = $ct->prepare($sql);
-      $sen->execute($params);
-      while($r = $sen->fetch(PDO::FETCH_ASSOC)){
-        array_push($res, $r);
+      try {
+        $sen = $ct->prepare($sql);
+        $sen->execute($params);
+        while($r = $sen->fetch(PDO::FETCH_ASSOC)){
+          array_push($res, $r);
+        }
+      } catch (\PDOException $e) {
+        //error
       }
     }
     return $res;
