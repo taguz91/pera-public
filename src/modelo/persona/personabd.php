@@ -24,7 +24,7 @@ abstract class PersonaBD {
     }
   }
 
-  function getFotoPorIden($identificacion) {
+  static function getFotoPorIden($identificacion) {
     $sql =  '
     SELECT encode(persona_foto, \'base64\') as foto FROM public."Personas"
     WHERE persona_identificacion = :iden';

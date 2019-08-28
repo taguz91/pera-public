@@ -16,12 +16,12 @@ class PeriodoBD {
   prd_lectivo_fecha_fin DESC;
   ';
 
-  function cargarTodos() {
+  static function cargarTodos() {
     $sql = self::$BASEQUERY . ' ' . self::$ENDQUERY;
     return getArrayFromSQL($sql , []);
   }
 
-  function buscar($idPeriodo) {
+  static function buscar($idPeriodo) {
     $sql = self::$BASEQUERY . "
       id_prd_lectivo = :idPeriodo AND
     " . self::$ENDQUERY;
@@ -30,7 +30,7 @@ class PeriodoBD {
     ]);
   }
 
-  function buscarPeriodo($aguja) {
+  static function buscarPeriodo($aguja) {
     $sql = self::$BASEQUERY . "
       prd_lectivo_nombre ILIKE '%:aguja%' AND
     " . self::$ENDQUERY;
@@ -39,7 +39,7 @@ class PeriodoBD {
     ]);
   }
 
-  function buscarPorCarrera($idCarrera) {
+  static function buscarPorCarrera($idCarrera) {
     $sql = self::$BASEQUERY . "
       id_carrera = :idCarrera AND
     " . self::$ENDQUERY;

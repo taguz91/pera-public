@@ -30,13 +30,13 @@ class SilaboBD {
     ORDER BY prd_lectivo_nombre
   ';
 
-  function cargarSilabos(){
+  static function cargarSilabos(){
     $query =  self::$BASEQUERY .' '. self::$ENDQUERY;
 
     return getArrayFromSQL($query, []);
   }
 
-  function buscar($id_silabo){
+  static function buscar($id_silabo){
     $query =  self::$BASEQUERY ."
     AND s.id_silabo = :idSilabo
     ". self::$ENDQUERY;
@@ -46,7 +46,7 @@ class SilaboBD {
     ]);
   }
 
-  function buscarPorPeriodoMateria($aguja){
+  static function buscarPorPeriodoMateria($aguja){
     $query =  self::$BASEQUERY ."
     AND s.id_prd_lectivo = :idPeriodo
     AND s.id_materia = :idMateria
@@ -58,7 +58,7 @@ class SilaboBD {
     ]);
   }
 
-  function buscarPorDoncente($identificacion){
+  static function buscarPorDoncente($identificacion){
     $query =  self::$BASEQUERY .'
     AND c.id_curso IN (
       SELECT id_curso
@@ -76,7 +76,7 @@ class SilaboBD {
     ]);
   }
 
-  function buscarPorCurso($id_curso){
+  static function buscarPorCurso($id_curso){
     $query = self::$BASEQUERY . "
     AND c.id_curso = :idCurso
     ".self::$ENDQUERY;
@@ -85,8 +85,8 @@ class SilaboBD {
     ]);
   }
 
-  function buscarPorCursoNombrePeriodo($cursoNombre, $idPeriodo){
-    $query = $this->BASEQUERY . "
+  static function buscarPorCursoNombrePeriodo($cursoNombre, $idPeriodo){
+    $query = self::$BASEQUERY . "
     AND c.curso_nombre ILIKE :cursoNombre
     AND pl.id_prd_lectivo = :idPeriodo
     " . self::$ENDQUERY;
@@ -96,17 +96,17 @@ class SilaboBD {
     ]);
   }
 
-  function buscarSilabosPorPeriodo($idPeriodo){
-    $query =  $this->BASEQUERY ."
+  static function buscarSilabosPorPeriodo($idPeriodo){
+    $query =  self::$BASEQUERY ."
     AND s.id_prd_lectivo = :idPeriodo
-    ". $this->ENDQUERY;
+    ". self::$ENDQUERY;
 
     return getArrayFromSQL($query, [
       'idPeriodo' => $idPeriodo
     ]);
   }
 
-  function buscarSilabosPorMateria($idMateria){
+  static function buscarSilabosPorMateria($idMateria){
     $query =  self::$BASEQUERY ."
     AND s.id_materia = :idMateria
     ". self::$ENDQUERY;
@@ -116,7 +116,7 @@ class SilaboBD {
     ]);
   }
 
-  function cargarPDF($id_silabo) {
+  static function cargarPDF($id_silabo) {
     $query =  '
     SELECT encode(documento_silabo, \'base64\') as pdf  FROM public."Silabo"
     WHERE id_silabo = :idSilabo';
@@ -126,7 +126,7 @@ class SilaboBD {
     return $res['pdf'];
   }
 
-  function buscarActividadesSilabo($id_silabo) {
+  static function buscarActividadesSilabo($id_silabo) {
     $query = '
     SELECT
     numero_unidad,

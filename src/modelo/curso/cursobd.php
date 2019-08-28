@@ -29,12 +29,12 @@ class CursoBD {
   ORDER BY prd_lectivo_nombre
   ';
 
-  function cargarCursos() {
+  static function cargarCursos() {
     $query =  self::$BASEQUERY .' '. self::$ENDQUERY;
     return getArrayFromSQL($query, []);
   }
 
-  function buscar($id_curso){
+  static function buscar($id_curso){
     $query = self::$BASEQUERY . "
       AND c.id_curso = :idCurso
     " . self::$ENDQUERY;
@@ -43,7 +43,7 @@ class CursoBD {
     ]);
   }
 
-  function buscarPorAlumno($aguja){
+  static function buscarPorAlumno($aguja){
     $query = self::$BASEQUERY . '
       AND c.id_curso IN (
         SELECT id_curso
@@ -61,14 +61,14 @@ class CursoBD {
     return getArrayFromSQL($query, []);
   }
 
-  function cargarPorDoncente($aguja){
+  static function cargarPorDoncente($aguja){
     $query = self::$BASEQUERY . "
       AND (".buscarPersona($aguja).")
     " . self::$ENDQUERY;
     return getArrayFromSQL($query, []);
   }
 
-  function cargarCursosPorPeriodo($id_periodo) {
+  static function cargarCursosPorPeriodo($id_periodo) {
     $query = self::$BASEQUERY . "
       AND c.id_prd_lectivo = :idPeriodo
     " . self::$ENDQUERY;
@@ -77,7 +77,7 @@ class CursoBD {
     ]);
   }
 
-  function cargarCursosPorNombrePeriodo($curso_nombre, $id_periodo) {
+  static function cargarCursosPorNombrePeriodo($curso_nombre, $id_periodo) {
     $query = self::$BASEQUERY . "
     AND c.curso_nombre ILIKE :cursoNombre
     AND c.id_prd_lectivo = :idPeriodo
@@ -88,7 +88,7 @@ class CursoBD {
     ]);
   }
 
-  function buscarCursos($aguja) {
+  static function buscarCursos($aguja) {
     $query = self::$BASEQUERY."
     AND(curso_nombre ILIKE :aguja1 OR "
        . buscarPersona( $aguja ) . "OR
@@ -100,7 +100,7 @@ class CursoBD {
     ]);
   }
 
-  function cargarCursosNombrePorPeriodo($id_periodo){
+  static function cargarCursosNombrePorPeriodo($id_periodo){
     $query = '
     SELECT
     DISTINCT curso_nombre
@@ -115,7 +115,7 @@ class CursoBD {
     ]);
   }
 
-  function cargarCursosMateriaPorNombrePeriodo($curso_nombre, $id_periodo){
+  static function cargarCursosMateriaPorNombrePeriodo($curso_nombre, $id_periodo){
     $query = "
     SELECT
     id_curso,

@@ -26,12 +26,12 @@ class AlumnoBD {
   persona_primer_apellido,
   persona_segundo_apellido;';
 
-  function cargarTodos() {
+  static function cargarTodos() {
     $query = self::$BASEQUERY . ' ' . self::$ENDQUERY;
     return getArrayFromSQL($query, []);
   }
 
-  function buscar($id_alumno){
+  static function buscar($id_alumno){
     $query = self::$BASEQUERY . "
     AND a.id_alumno = :idAlumno
     " . self::$ENDQUERY;
@@ -41,14 +41,14 @@ class AlumnoBD {
     ]);
   }
 
-  function buscarAlumno($aguja){
+  static function buscarAlumno($aguja){
     $query = self::$BASEQUERY . '
     AND ('.buscarPersona($aguja).')
     ' . self::$ENDQUERY;
     return getArrayFromSQL($query, []);
   }
 
-  function buscarPorCurso($id_curso) {
+  static function buscarPorCurso($id_curso) {
     $query = self::$BASEQUERY . '
     AND id_alumno IN (
       SELECT id_alumno

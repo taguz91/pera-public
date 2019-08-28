@@ -15,12 +15,12 @@ class CarreraBD {
   ORDER BY carrera_codigo;
   ';
 
-  function cargarTodos() {
+  static function cargarTodos() {
     $query = self::$BASEQUERY . ' ' . self::$ENDQUERY;
     return getArrayFromSQL($query, []);
   }
 
-  function buscar($id_carrera) {
+  static function buscar($id_carrera) {
     $query = self::$BASEQUERY . "
     id_carrera = :idCarrera AND
     " . self::$ENDQUERY;
@@ -29,7 +29,7 @@ class CarreraBD {
     ]);
   }
 
-  function buscarCarrera($aguja) {
+  static function buscarCarrera($aguja) {
     $query = self::$BASEQUERY . "
     (carrera_nombre ILIKE :aguja1 OR
       carrera_codigo ILIKE :aguja2 ) AND
