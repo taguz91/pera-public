@@ -33,7 +33,7 @@ class PersonaMD {
   public $fechaNacimiento;
   public $categoriaMigratoria;
 
-  function static getFromRow($r){
+  static function getFromRow($r){
     $p = new PersonaMD();
 
     $p->id = isset($r['id_persona']) ? $r['id_persona'] : null;
