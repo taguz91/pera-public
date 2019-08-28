@@ -1,7 +1,7 @@
 <?php
 include_once 'src/modelo/carrera/carrerabd.php';
 
-class CarreraAPI extends Api {
+class CarreraAPI {
 
   function todos() {
     $res = CarreraBD::cargarTodos();

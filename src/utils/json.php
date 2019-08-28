@@ -36,6 +36,11 @@ abstract class JSON {
     echo base64_decode($img);
   }
 
+  public static function muestraPDF($pdf){
+    header("Content-type: application/pdf");
+    echo base64_decode($pdf);
+  }
+
   private static function imprimeJson($json) {
     header("Content-Type: application/json");
     echo $json;
