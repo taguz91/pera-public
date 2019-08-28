@@ -7,3 +7,11 @@ require 'src/vista/templates/nav.php';
 <?php
 require 'src/vista/templates/copy.php';
 ?>
+
+<script type="text/javascript">
+  const ALLRADIOS = document.querySelectorAll('.custom-control-input');
+
+  ALLRADIOS.forEach(i => {
+    i.disabled = true;
+  });
+</script>

@@ -1,5 +1,7 @@
 <?php
 require 'src/vista/templates/nav.php';
+//Para actualizar
+$act = true;
  ?>
 <?php if(isset($titulo)){ ?>
  <div class="border-top pt-3  ">

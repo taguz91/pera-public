@@ -22,9 +22,9 @@
              ?>
              <div class="custom-control custom-radio">
               <input
-              onchange="actualizar('<?php echo $p->r['actualizar']; ?>', '<?php echo $r->id; ?>')"
+              onchange="<?php echo isset($act) ? "actualizar('" . $p->r['actualizar'] . "', '". $r->id."')" : '' ?>"
               value="<?php echo $r->id; ?>" type="radio" class="custom-control-input"
-              id="<?php echo $vp.$vr.$r->id; ?>" name="<?php echo $vp.$vr.'n'.$r->id; ?>"
+              id="<?php echo $vp.$vr.$r->id; ?>" name="<?php echo $vp.'n'.$p->id; ?>"
               <?php if($r->id == $p->r['respuesta']){ echo "checked";}?>>
               <label class="custom-control-label" for="<?php echo $vp.$vr.$r->id; ?>"><?php echo $r->respuesta; ?></label>
             </div>
@@ -43,31 +43,32 @@
 <?php } ?>
 
 
+<?php if (isset($act)): ?>
+  <script type="text/javascript">
+    const URLACT = '<?php echo constant('URL').'api/v1/ficha/guardar/?socioeconomica=asas'?>';
 
-<script type="text/javascript">
-  const URLACT = '<?php echo constant('URL').'api/v1/ficha/guardar/?socioeconomica=asas'?>';
+    function act(id, id2){
+      console.log('ID: '+id
+      + '\nID2: '+id2 ,'\nURL: '+URLACT);
+    }
 
-  function act(id, id2){
-    console.log('ID: '+id
-    + '\nID2: '+id2 ,'\nURL: '+URLACT);
-  }
-
-  function actualizar(idActualizar, idRespuesta){
-    console.log(URLACT);
-    let data = new FormData();
-    data.append('id_respuesta', idRespuesta);
-    data.append('id_actualizar', idActualizar);
-    fetch(URLACT, {
-      method: 'POST',
-      body: data
-    })
-    .then(res => res.json())
-    .then(data => {
-      console.log('Nice JOB: \n');
-      console.log(data);
-    })
-    .catch(e => {
-      console.log('Error: ' + e);
-    })
-  }
-</script>
+    function actualizar(idActualizar, idRespuesta){
+      console.log(URLACT);
+      let data = new FormData();
+      data.append('id_respuesta', idRespuesta);
+      data.append('id_actualizar', idActualizar);
+      fetch(URLACT, {
+        method: 'POST',
+        body: data
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log('Nice JOB: \n');
+        console.log(data);
+      })
+      .catch(e => {
+        console.log('Error: ' + e);
+      })
+    }
+  </script>
+<?php endif; ?>
