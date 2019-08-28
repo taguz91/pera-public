@@ -4,10 +4,14 @@ abstract class JSON {
 
   static function muestraJSON($items) {
     if($items != null){
-      self::imprimeJson(json_encode([
-        'statuscode' => 200,
-        'items' => $items
-      ]));
+      if(isset($items['error'])){
+        self::error($items['error']);
+      }else{
+        self::imprimeJson(json_encode([
+          'statuscode' => 200,
+          'items' => $items
+        ]));
+      }
     }else{
       self::error('No encontramos lo que buscaba.');
     }

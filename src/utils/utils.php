@@ -71,7 +71,7 @@
           array_push($res, $r);
         }
       } catch (\PDOException $e) {
-        //error
+        return ['error' => $e->getMessage()];
       }
     }
     return $res;
