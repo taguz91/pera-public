@@ -59,16 +59,16 @@ class App {
 
   function llamarMetodo($url, $modelo){
     $metodo = $url[1];
-
-    if(isset($url[2])){
-      $this->llamarMetodoConParametro($url, $modelo);
-    }else{
-      try{
+    if(method_exists($modelo, $metodo)){
+      if(isset($url[2])){
+        $this->llamarMetodoConParametro($url, $modelo);
+      }else{
         $modelo->{$metodo}();
-      }catch(\Exception $e){
-        echo "<h1>No pudimos enontrar el metodo </h1>".$e->getMessage();
       }
+    } else {
+      echo "NO EXISTE NO EXISTE!!!";
     }
+
 
   }
 

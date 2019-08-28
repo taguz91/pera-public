@@ -89,7 +89,6 @@
     }else{
       errorLogin('No ingreso usuario ni contrasena.');
     }
-
   }
 
   function comprobarLogin(url, data){

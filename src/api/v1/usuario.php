@@ -9,7 +9,6 @@ class UsuarioAPI {
       $pass = isset($_POST['pass']) ?  $_POST['pass'] : '';
       if($user != '' && $pass != ''){
         $res = UsuarioBD::login($user, $pass);
-        //var_dump($res);
         if($res){
           JSON::confirmacion('Usuario encontrado, puede loguearse.');
         }else{
