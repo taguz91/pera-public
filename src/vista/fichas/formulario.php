@@ -9,15 +9,16 @@ require 'src/vista/templates/nav.php';
 
 <div class="container my-4">
 
-  <form class="" action="#" method="post">
+  <div class="row">
+    <form class="col" action="#" method="post">
 
-    <?php include cargarVista('fichas/formato.php'); ?>
+      <?php include cargarVista('fichas/formato.php'); ?>
 
-  <div id="finfor">
-    <button id="enviarficha" type="submit" class="btn btn-blue d-block w-50 mx-auto mb-3">Guardar</button>
+    <div id="finfor">
+      <button id="enviarficha" type="submit" class="btn btn-blue d-block w-50 mx-auto mb-3">Guardar</button>
+    </div>
+    </form>
   </div>
-  </form>
-
 
   <div class="row" id="btnsnav">
 

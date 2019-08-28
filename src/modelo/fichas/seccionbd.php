@@ -25,7 +25,7 @@ abstract class SeccionBD {
       pif.id_permiso_ingreso_ficha = pf.id_permiso_ingreso_ficha
     );';
 
-    return self::getSecciones($sql);
+    return self::getSecciones($sql, $idPersonaFicha);
   }
 
   static function getPorIdTipoFicha($idFicha){
@@ -65,10 +65,10 @@ abstract class SeccionBD {
       )
     );';
 
-    return self::getSecciones($sql);
+    return self::getSecciones($sql, $idPersonaFicha);
   }
 
-  private static function getSecciones($sql){
+  private static function getSecciones($sql, $idPersonaFicha){
     $ct = getCon();
     if ($ct != null) {
       $res = $ct->query($sql);
@@ -77,7 +77,7 @@ abstract class SeccionBD {
         while($r = $res->fetch(PDO::FETCH_ASSOC)){
           $s = SeccionFichaMD::getFromRow($r);
 
-          $s->preguntas = PreguntaBD::getPorIdSeccion($s->id);
+          $s->preguntas = PreguntaBD::getPorIdSeccion($s->id, $idPersonaFicha);
           array_push($secciones, $s);
         }
         return $secciones;

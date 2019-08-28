@@ -8,6 +8,7 @@ class PreguntaFichaMD {
   public $ayuda;
   public $preguntaTipo;
   public $respuestaTipo;
+  public $r;
   //Foraneas
   public $idSeccionFicha;
   //Objetos

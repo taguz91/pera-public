@@ -12,13 +12,9 @@ class FichaCTR extends CTR implements DCTR {
 
   function inicio() {
     global $U;
-    $fichas = FichaBD::getPorPersona($U->id);
-    require_once cargarVista('fichas/ficha.php');
-  }
+    $fichas = FichaBD::getPorPersona($U->idPersona);
 
-  function tipo($idTipoFicha) {
-    $secciones = SeccionBD::getPorIdTipoFicha($idTipoFicha);
-    require_once cargarVista('fichas/formulario.php');
+    require_once cargarVista('fichas/ficha.php');
   }
 
   function ingresar($idPersonaFicha) {
