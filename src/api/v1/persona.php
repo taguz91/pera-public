@@ -11,10 +11,11 @@ class PersonaAPI {
 
         $res = PersonaBD::actualizarDato($idPersona, $valor, $columna);
 
-        if($res){
+        if($res == '1'){
           JSON::confirmacion('Editamos correctamente el campo.');
         }else{
-          JSON::error('No editamos el campo, posiblemente exista un error en la sintaxis.');
+          JSON::error('No editamos el campo, posiblemente exista un error en la sintaxis.'
+          .$columna . ' | ' . $valor . ' Error: ' . $res);
         }
       }else{
         JSON::error('No existen todos los valores requeridos.');

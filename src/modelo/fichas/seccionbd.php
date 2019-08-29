@@ -24,7 +24,6 @@ abstract class SeccionBD {
       id_persona_ficha = '.$idPersonaFicha.' AND
       pif.id_permiso_ingreso_ficha = pf.id_permiso_ingreso_ficha
     );';
-
     return self::getSecciones($sql, $idPersonaFicha);
   }
 

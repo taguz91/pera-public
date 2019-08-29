@@ -38,11 +38,53 @@ abstract class PersonaBD {
     $sql = '
     UPDATE public."Personas"
     SET '.$columna.'= :valor
-    WHERE id_persona = ' .$idPersona.  ';';
+    WHERE id_persona = :id;';
     return executeSQL($sql, [
-      'valor' => $valor
+      'valor' => $valor,
+      'id' => $idPersona
     ]);
   }
+
+  static function getPorId($idPersona){
+    $sql = self::$SELECTALL . ' WHERE id_persona = :id';
+    return getOneFromSQL($sql, [
+      'id' => $idPersona
+    ]);
+  }
+
+  static private $SELECTALL = '
+  SELECT
+  id_lugar_natal,
+  id_lugar_residencia,
+  persona_identificacion,
+  persona_primer_apellido,
+  persona_segundo_apellido,
+  persona_primer_nombre,
+  persona_segundo_nombre,
+  persona_genero,
+  persona_sexo,
+  persona_estado_civil,
+  persona_etnia,
+  persona_idioma_raiz,
+  persona_tipo_sangre,
+  persona_telefono,
+  persona_celular,
+  persona_correo,
+  persona_fecha_registro,
+  persona_discapacidad,
+  persona_tipo_discapacidad,
+  persona_porcenta_discapacidad,
+  persona_carnet_conadis,
+  persona_calle_principal,
+  persona_numero_casa,
+  persona_calle_secundaria,
+  persona_referencia,
+  persona_sector,
+  persona_idioma,
+  persona_tipo_residencia,
+  persona_fecha_nacimiento,
+  persona_categoria_migratoria
+  FROM public."Personas" ';
 
 }
 

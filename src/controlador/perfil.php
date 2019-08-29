@@ -16,7 +16,9 @@ class PerfilCTR extends CTR implements DCTR {
     include cargarVista('persona/form.php');
   }
 
-  function editar($idPersona = 0) {
+  function editar() {
+    global $U;
+    $persona = PersonaBD::getPorId($U->idPersona);
     include cargarVista('persona/form.php');
   }
 

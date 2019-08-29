@@ -42,7 +42,6 @@ abstract class PreguntaBD {
         }
         return $preguntas;
       } else {
-        echo "No pudimos consultar las preguntas de las fichas";
         return [];
       }
     }

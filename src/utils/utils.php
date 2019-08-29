@@ -84,10 +84,11 @@
         $sen= $ct->prepare($sql);
         return $sen->execute($params);
       } catch (\Exception $e) {
-        return false;
+        return $e->getMessage();
+        //return false;
       }
     }else{
-      return false;
+      return '';
     }
   }
 
@@ -102,10 +103,15 @@
   }
 
   //Para llenar los combos
-  function llenarCmb($cmb) {
+  function llenarCmb($cmb, $selec = '') {
     $opts = '<option value="">Seleccione</option>';
     foreach ($cmb as $c) {
-      $opts .= '<option value="' . $c . '">' . $c . '</option>';
+      if($selec == mb_strtoupper($c) ){
+        $opts .= '<option selected value="' . mb_strtoupper($c) . '">' . $c . '</option>';
+      }else{
+        $opts .= '<option value="' . mb_strtoupper($c) . '">' . $c . '</option>';
+      }
+
     }
     return $opts;
   }
