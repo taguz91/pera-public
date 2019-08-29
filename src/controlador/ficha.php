@@ -24,7 +24,8 @@ class FichaCTR extends CTR implements DCTR {
   }
 
   function verficha($idPersonaFicha){
-    $secciones = SeccionBD::getPorIdPersonaFicha($idPersonaFicha);
+    $res = SeccionBD::getPorIDPersonaFicha($idPersonaFicha);
+    $secciones = json_decode($res['secciones'], true);
     require_once cargarVista('fichas/verficha.php');
   }
 
