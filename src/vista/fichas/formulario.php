@@ -11,6 +11,18 @@ $act = true;
 
 <div class="container my-4">
 
+  <div class="row my-2">
+    <div class="col-12 col-lg-8 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Indicaciones generales</h3>
+          <p class="card-text"> <strong>1.</strong> Sr./Srta. estudiante, LEA detenidamente el formulario y complemente TODOS los casilleros con la información solicitada.</p>
+          <p class="card-text"> <strong>2.</strong> Deberá complementar la presente ficha con datos CLAROS y PRECISOS. La información personal proporcionada en este formulario, tendrá el carácter de información CONFIDENCIAL y será sujeta a VERIFICACIÓN. La comprobación en la FALSEDAD de la misma, determinará la ELIMINACIÓN de los futuros procesos a los que pueda solicitar o postular.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     <form class="col" action="#" method="post">
 

@@ -41,11 +41,14 @@ BEGIN
     END IF;
     FETCH c_preguntas INTO reg;
   END LOOP;
+  CLOSE c_preguntas;
   RETURN NEW;
 END;
 $iniciar_ficha_alumno$ LANGUAGE plpgsql;
 
 --Para generar las respuestas automaticamente
+DROP TRIGGER ficha_alumno ON public."PersonaFicha";
+
 CREATE TRIGGER ficha_alumno
-BEFORE INSERT ON public."PersonaFicha" FOR EACH ROW
+AFTER INSERT ON public."PersonaFicha" FOR EACH ROW
 EXECUTE PROCEDURE iniciar_ficha_alumno();
