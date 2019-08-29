@@ -1,5 +1,4 @@
 <?php
-require_once 'src/modelo/fichas/seccion.php';
 require_once 'src/modelo/fichas/preguntabd.php';
 
 abstract class SeccionBD {
@@ -11,9 +10,7 @@ abstract class SeccionBD {
   FROM
   public."SeccionesFicha" sf
   WHERE
-  seccion_ficha_activa = true
-  ';
-
+  seccion_ficha_activa = true';
 
   static function getPorIdPersonaFicha($idPersonaFicha){
     $sql = self::$BASESELECT . ' AND sf.id_tipo_ficha = (
@@ -24,15 +21,20 @@ abstract class SeccionBD {
       id_persona_ficha = '.$idPersonaFicha.' AND
       pif.id_permiso_ingreso_ficha = pf.id_permiso_ingreso_ficha
     );';
-    return self::getSecciones($sql, $idPersonaFicha);
-  }
 
-  static function getPorIdTipoFicha($idFicha){
-    $ct = getCon();
+    $secciones = getArrayFromSQL($sql, []);
+    $newsecciones = [];
+    if(!isset($secciones['error'])){
+      foreach ($secciones as $s) {
+        $preguntas = PreguntaBD::getPorIdSeccionIdPersonaFicha($s['id_seccion_ficha'], $idPersonaFicha);
+        if(!isset($preguntas['error'])){
+          $s += ['preguntas' => $preguntas];
+          array_push($newsecciones, $s);
+        }
+      }
+    }
 
-    $sql = self::$BASESELECT . " AND sf.id_tipo_ficha = $idFicha;";
-
-    return self::getSecciones($sql);
+    return $newsecciones;
   }
 
 
@@ -65,26 +67,6 @@ abstract class SeccionBD {
     );';
 
     return self::getSecciones($sql, $idPersonaFicha);
-  }
-
-  private static function getSecciones($sql, $idPersonaFicha){
-    $ct = getCon();
-    if ($ct != null) {
-      $res = $ct->query($sql);
-      if ($res != null) {
-        $secciones = array();
-        while($r = $res->fetch(PDO::FETCH_ASSOC)){
-          $s = SeccionFichaMD::getFromRow($r);
-
-          $s->preguntas = PreguntaBD::getPorIdSeccion($s->id, $idPersonaFicha);
-          array_push($secciones, $s);
-        }
-        return $secciones;
-      } else {
-        echo "No pudimos consultar la seccion faltante";
-        return [];
-      }
-    }
   }
 
 }

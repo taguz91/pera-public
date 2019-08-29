@@ -1,10 +1,8 @@
 <?php
-require_once 'src/modelo/fichas/ficha.php';
 
 abstract class FichaBD {
 
   static function getPorPersona($idPersona){
-    $ct = getCon();
 
     $sql = '
     SELECT
@@ -24,7 +22,7 @@ abstract class FichaBD {
     public."TipoFicha" tf,
     public."PeriodoLectivo" pl
     WHERE
-    pf.id_persona = '.$idPersona.' AND
+    pf.id_persona = :id AND
     pf.id_permiso_ingreso_ficha = pif.id_permiso_ingreso_ficha AND
     tf.id_tipo_ficha = pif.id_tipo_ficha AND
     pl.id_prd_lectivo = pif.id_prd_lectivo
@@ -32,20 +30,9 @@ abstract class FichaBD {
     permiso_ingreso_fecha_fin DESC;
     ';
 
-    if ($ct != null) {
-      $res = $ct->query($sql);
-      if ($res != null) {
-        $fichas = array();
-        while($r = $res->fetch(PDO::FETCH_ASSOC)){
-          $f = FichaMD::getFromRow($r);
-          array_push($fichas, $f);
-        }
-        return $fichas;
-      } else {
-        echo "No pudimos consultar fichas";
-        return null;
-      }
-    }
+    return getArrayFromSQL($sql, [
+      'id' => $idPersona
+    ]);
   }
 
 }

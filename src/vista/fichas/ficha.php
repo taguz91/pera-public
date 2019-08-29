@@ -33,7 +33,7 @@ for ($i=1; $i <= $total; $i++) {
    echo ' <div class="row m-3">';
   }
   agregarFicha($fichas[$i-1], $i);
-  if($i % 2 == 0 OR $i == count($fichas)){
+  if($i % 2 == 0 OR $i == $total){
     echo "</div>";
   }
  ?>
@@ -52,14 +52,14 @@ for ($i=1; $i <= $total; $i++) {
         <h3 class="card-title">
           <?php
           //echo $f['prd_lectivo_nombre'];
-          echo $f->tipoFicha->tipo;
+          echo $f['tipo_ficha'];
           ?>
         </h3>
 
         <h6 class="card-subtitle text-muted">
           <?php
           //echo $f['prd_lectivo_nombre'];
-          echo $f->periodoLectivo;
+          echo $f['prd_lectivo_nombre'];
           ?>
         </h6>
       </div>
@@ -73,8 +73,7 @@ for ($i=1; $i <= $total; $i++) {
             </div>
             <div class="card-body-sm">
               <?php
-              //echo $f['permiso_ingreso_fecha_inicio'];
-              echo $f->personaFicha->permisoIngreso->fechaInicio;
+              echo $f['permiso_ingreso_fecha_inicio'];
               ?>
             </div>
           </div>
@@ -84,8 +83,7 @@ for ($i=1; $i <= $total; $i++) {
             </div>
             <div class="card-body-sm">
               <?php
-              //echo $f['permiso_ingreso_fecha_fin'];
-              echo $f->personaFicha->permisoIngreso->fechaFin;
+              echo $f['permiso_ingreso_fecha_fin'];
               ?>
             </div>
           </div>
@@ -96,8 +94,7 @@ for ($i=1; $i <= $total; $i++) {
            Fecha Ingreso:
            <span class="d-block">
              <?php
-             //echo $f['persona_ficha_fecha_ingreso'];
-             echo $f->personaFicha->fechaIngreso;
+             echo $f['persona_ficha_fecha_ingreso'];
              ?>
            </span>
          </li>
@@ -105,8 +102,7 @@ for ($i=1; $i <= $total; $i++) {
            Fecha Modificacion:
            <span class="d-block">
              <?php
-             //echo $f['persona_ficha_fecha_modificacion'];
-             echo $f->personaFicha->fechaModificacion;
+             echo $f['persona_ficha_fecha_modificacion'];
              ?>
            </span> </li>
        </ul>
@@ -114,15 +110,17 @@ for ($i=1; $i <= $total; $i++) {
       </div>
 
       <div class="card-foot-ficha">
-        <a href="<?php echo constant('URL'); ?>ficha/verficha/<?php echo $f->personaFicha->id; ?>" class="card-link">Ver ficha</a>
+        <a href="<?php echo constant('URL'); ?>ficha/verficha/<?php echo $f['id_persona_ficha']; ?>" class="card-link">Ver ficha</a>
         <?php
-        if($f->personaFicha->permisoIngreso->sePuedeIngresar()){
+        $fa = strtotime(strftime("%d-%m-%Y"));
+        $ff = strtotime($f['permiso_ingreso_fecha_fin']);
+        if($fa < $ff){
          ?>
          <button class="btn btn-link"
          type="button" data-toggle="collapse" data-target="#ingresar<?php echo $i; ?>">Ingresar</button>
          <div id="ingresar<?php echo $i; ?>" class="collapse">
 
-            <form class="form-inline my-2" action="<?php echo constant('URL'); ?>ficha/ingresar/<?php echo $f->personaFicha->id; ?>" method="post">
+            <form class="form-inline my-2" action="<?php echo constant('URL'); ?>ficha/ingresar/<?php echo $f['id_persona_ficha']; ?>" method="post">
               <div class="input-group w-100">
                 <div class="input-group-prepend">
                   <span class="input-group-text">PS</span>
