@@ -5,7 +5,7 @@ VALUES ('Ficha Socioeconómica', 'Nivel socioeconómico.');
 INSERT INTO public."SeccionesFicha"(
   id_tipo_ficha, seccion_ficha_nombre)
 VALUES
-(1, 'Características de la vivienda'),
+(1, 'Características de la Vivienda'),
 (1, 'Acceso a Tecnología'),
 (1, 'Posesión de Bienes'),
 (1, 'Hábitos de Consumo'),
@@ -41,6 +41,9 @@ VALUES
   WHERE seccion_ficha_nombre = 'Características de la Vivienda'),
   'El tipo de servicio higiénico con que cuenta este hogar es:',
 'Tipo de servicios');
+
+
+
 
 
 INSERT INTO public."RespuestaFicha"(
@@ -105,6 +108,7 @@ VALUES
   WHERE pregunta_ficha = 'El material predominante de las paredes exteriores de la vivienda es de:'), 'Caña revestida o bahareque/Madera', 17),
 ((SELECT id_pregunta_ficha FROM public."PreguntasFicha"
   WHERE pregunta_ficha = 'El material predominante de las paredes exteriores de la vivienda es de:'), 'Caña no revestida/Otros materiales', 0);
+
 
 
 --Pregunta El material predominante del piso de la vivienda es de:
