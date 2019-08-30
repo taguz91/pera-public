@@ -7,9 +7,13 @@ class FichaAPI {
     if(isset($_GET['socioeconomica'])){
       $this->socioeconomica();
     }
-    
+
     if(isset($_GET['guardarlibre'])){
-      guardarRespuestaLibre();
+      $this->guardarRespuestaLibre();
+    }
+
+    if(isset($_GET['actualizarlibre'])){
+      $this->actualizarRespuestaLibre();
     }
   }
 
@@ -32,7 +36,7 @@ class FichaAPI {
 
   private function guardarRespuestaLibre() {
 
-    $idPersonaFicha = isset($_POST['id_persona_ficha']) ? $_POST['id_persona_ficha'] : '';
+    $idPersonaFicha = isset($_SESSION['id_persona_ficha']) ? $_SESSION['id_persona_ficha'] : '';
     $idPreguntaFicha = isset($_POST['id_pregunta_ficha']) ? $_POST['id_pregunta_ficha'] : '';
     $respuesta = isset($_POST['respuesta']) ? $_POST['respuesta'] : '';
 
@@ -42,10 +46,35 @@ class FichaAPI {
         $idPreguntaFicha,
         $respuesta
       );
-      if($res != null){
-        JSON::confirmacion('Guardamos correctamente la respuesta libre.');
+      if(is_bool($res)){
+        JSON::confirmacion('Guardamos correctamente la respuesta libre '
+        . $idPersonaFicha . ' ID respuesta guardada: ' . $idPreguntaFicha);
       }else{
-        JSON::error('No pudimos guardar la respuesta libre.');
+        JSON::error('No pudimos guardar la respuesta libre: ' . $res);
+      }
+    }else{
+      JSON::error('No tenemos todos los campos.');
+    }
+
+  }
+
+  private function actualizarRespuestaLibre() {
+    $idPersonaFicha = isset($_SESSION['id_persona_ficha']) ? $_SESSION['id_persona_ficha'] : '';
+    $idAlmnResLibre = isset($_POST['id_almn_respuesta_fs']) ? $_POST['id_almn_respuesta_fs'] : '';
+    $respuesta = isset($_POST['respuesta']) ? $_POST['respuesta'] : '';
+
+    if($idAlmnResLibre != '' && $respuesta != ''){
+      $idAlmnResLibre = rtrim($idAlmnResLibre, '-');
+      $idAlmnResLibre = explode('-', $idAlmnResLibre);
+      $idAlmnResLibre = $idAlmnResLibre[1];
+      $res = RespuestaFSBD::actualizarRespuestaLibre(
+        $idAlmnResLibre,
+        $respuesta
+      );
+      if(is_bool($res)){
+        JSON::confirmacion('Editamos correctamente la respuesta libre. ' . $idAlmnResLibre);
+      }else{
+        JSON::error('No pudimos editar la respuesta libre: ' . $res);
       }
     }else{
       JSON::error('No tenemos todos los campos.');

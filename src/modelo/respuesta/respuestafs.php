@@ -37,7 +37,7 @@ class RespuestaFSBD {
     UPDATE public."AlumnoRespuestaLibreFS"
     SET alumno_fs_libre = :respuesta
     WHERE id_almn_respuesta_libre_fs = :idRespuestaLibre;';
-    return executeSQLO($sql, [
+    return executeSQL($sql, [
       'respuesta' => $respuesta,
       'idRespuestaLibre' => $idRespuestaLibre
     ]);

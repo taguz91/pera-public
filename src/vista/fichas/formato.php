@@ -48,12 +48,16 @@
               <?php
               if ($p['pregunta_ficha_respuesta_tipo'] == 3) {
                 formRespuestaLibreUnica(
-                  $ks, $ks, $p['id_pregunta_ficha']
+                  $ks, $ks, $p['id_pregunta_ficha'],
+                  isset($p['respuesta_libre']) ? $p['respuesta_libre'] : null
                 );
               }
 
               if($p['pregunta_ficha_respuesta_tipo'] == 4){
-                formRespuestaLibreMultiple();
+                formRespuestaLibreMultiple(
+                  $p['id_pregunta_ficha'],
+                  isset($p['respuesta_libre']) ? $p['respuesta_libre'] : null
+                );
               }
               ?>
 
@@ -98,28 +102,83 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 <?php } ?>
 
 
-<?php function formRespuestaLibreUnica($ks , $kp, $id){ ?>
+<?php function formRespuestaLibreUnica($ks , $kp, $id, $respuestas){ ?>
+
+
+<?php if ($respuestas != null): ?>
+  <?php foreach ($respuestas as $kr => $r): ?>
+
+    <div class="form-group">
+      <input class="form-control rlu-<?php echo $ks.'-'.$kp.$kr ; ?> "
+      type="text" name="" value="<?php echo $r['alumno_fs_libre']; ?>"
+      id="reslibre-<?php echo $r['id_almn_respuesta_libre_fs']; ?>"
+      onblur="<?php echo "actualizarRespuestaLibre('reslibre-".$r['id_almn_respuesta_libre_fs']."')" ?>">
+    </div>
+
+  <?php endforeach; ?>
+<?php else: ?>
+
   <div class="form-group">
-    <input class="form-control rlu-<?php echo $ks.'-'.$kp ; ?> "
+    <input class="form-control rlu-<?php echo $ks.'-'.$kp.$kr ; ?> "
     type="text" name="" value="" id="<?php echo $id; ?>"
-    onblur="<?php echo "valirdarTodosLlenos('rlu-$ks-$kp')" ?>">
+    onblur="<?php echo "valirdarTodosLlenos('rlu-$ks-$kp"."$kr')" ?>">
   </div>
+
+<?php endif; ?>
+
+
+
 <?php } ?>
 
-<?php function formRespuestaLibreMultiple(){ ?>
-  <div class="form-horizontal form-res-mul">
-    <div class="form-row">
-      <div class="col-10">
-        <div class="form-group">
-          <input class="form-control res-mul" type="text" name="" value="">
+<?php function formRespuestaLibreMultiple($id, $respuestas){ ?>
+
+<?php if ($respuestas != null): ?>
+  <?php foreach ($respuestas as $kr => $r): ?>
+
+    <div class="form-horizontal form-res-mul" id="<?php echo $id; ?>">
+      <div class="form-row">
+        <div class="col-10">
+          <div class="form-group">
+            <input id="reslibre-<?php echo $r['id_almn_respuesta_libre_fs']; ?>" 
+            class="form-control res-mul"
+            onblur="<?php echo "actualizarRespuestaLibre('reslibre-".$r['id_almn_respuesta_libre_fs']."')" ?>"
+            value="<?php echo $r['alumno_fs_libre']; ?>"
+            type="text" name="">
+          </div>
         </div>
-      </div>
-      <div class="col-2">
-        <button class="btn btn-success btn-block btn-mas-txt" type="button" name="button">Más</button>
+
+        <?php if ($kr == 0): ?>
+          <div class="col-2">
+            <button class="btn btn-success btn-block btn-mas-txt" type="button" name="button">Mas</button>
+          </div>
+        <?php endif; ?>
+
       </div>
     </div>
 
+  <?php endforeach; ?>
+<?php else: ?>
+
+  <div class="form-horizontal form-res-mul" id="<?php echo $id; ?>" >
+    <div class="form-row">
+      <div class="col-10">
+        <div class="form-group">
+          <input id="<?php echo $id; ?>" class="form-control res-mul" type="text" name="" value="">
+        </div>
+      </div>
+      <div class="col-2">
+        <button class="btn btn-success btn-block btn-mas-txt" type="button" name="button">Mas</button>
+      </div>
+    </div>
   </div>
+
+  <script type="text/javascript">
+    agregarVal('res-mul');
+  </script>
+
+<?php endif; ?>
+
+
 <?php } ?>
 
 <?php if (isset($act)):;?>
@@ -160,14 +219,10 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
   const BTNSMASTXT = document.querySelectorAll('.btn-mas-txt');
   var vclick = 0;
   BTNSMASTXT.forEach(b => {
-    /*b.addEventListener('click', function(){
-      console.log('Agregaaa');
-      agregarOtroTxtResMul();
-    });*/
     b.onclick = agregarOtroTxtResMul;
   });
 
-  agregarVal('res-mul');
+
 
 
   function agregarOtroTxtResMul(){
@@ -185,6 +240,9 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
       D3.classList.add('form-group');
       I.classList.add('form-control', 'res-mul'+vclick);
 
+      console.log('ID desde formuarlio: ' + f.id);
+      I.id = f.id;
+
       D3.appendChild(I);
       D2.appendChild(D3);
       D1.appendChild(D2);
@@ -199,7 +257,6 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
     let I = document.querySelectorAll('.'+clase);
     I.forEach(i =>{
       i.onblur = function(){
-        console.log('Periooo el focuss ' + this.value);
         valirdarTodosLlenos(clase);
       }
     });
@@ -215,13 +272,54 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
     });
 
     if(llenos){
+      let URL = URLGURDAR + '?guardarlibre=true';
+      console.log(URL);
       I.forEach(i => {
-  /*      console.log('Valor id: ' + i.id);
-        console.log('Valor: ' + i.value); */
+
         let data = new FormData();
         data.append('id_pregunta_ficha', i.id);
         data.append('respuesta', i.value);
-        let URL = URLGURDAR + '?guardarlibre=true';
+
+        console.log('ID: ' + i.id);
+        console.log('Value: ' + i.value);
+
+        fetch(URL, {
+          method: 'POST',
+          body: data
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log('Nice JOB: \n');
+          console.log(data);
+          if(data.statuscode == 200){
+            i.onblur = '';
+            i.disabled = true;
+          }
+        })
+        .catch(e => {
+          console.log('Error: ' + e);
+        });
+
+      });
+    }else{
+      console.log('No estan todos llenos aun no guardaremos!');
+    }
+  }
+
+  function actualizarRespuestaLibre(id){
+    let i = document.querySelector('#'+id);
+    if(i != null){
+
+      if(i.value != ''){
+        let URL = URLGURDAR + '?actualizarlibre=true';
+        console.log(URL);
+        console.log('Valor id: ' + i.id);
+        console.log('Valor: ' + i.value);
+
+        let data = new FormData();
+        data.append('id_almn_respuesta_fs', i.id);
+        data.append('respuesta', i.value);
+
         fetch(URL, {
           method: 'POST',
           body: data
@@ -234,11 +332,14 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
         .catch(e => {
           console.log('Error: ' + e);
         });
+      }
 
-      });
     }else{
-      console.log('No estan todos llenos aun no guardaremos!');
+      console.log('No tenemos el input '+id);
     }
+
   }
+
+
 
 </script>

@@ -1,3 +1,6 @@
+INSERT INTO public."TipoFicha"(tipo_ficha, tipo_ficha_descripcion)
+VALUES ('Ficha Libre Socioeconomica', 'Informacion sobre la ficha socioeconomica.');
+
 INSERT INTO public."PermisoIngresoFichas" (
   id_prd_lectivo,
   id_tipo_ficha,

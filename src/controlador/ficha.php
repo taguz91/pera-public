@@ -19,6 +19,7 @@ class FichaCTR extends CTR implements DCTR {
 
   function ingresar($idPersonaFicha) {
     $res = SeccionBD::getPorIDPersonaFicha($idPersonaFicha);
+    $_SESSION['id_persona_ficha'] = $idPersonaFicha;
     $secciones = json_decode($res['secciones'], true);
     require_once cargarVista('fichas/formulario.php');
   }
@@ -31,6 +32,8 @@ class FichaCTR extends CTR implements DCTR {
 
   function json(){
     $res = SeccionBD::getJSON();
+    var_dump($res);
+    /*
     $secciones = json_decode($res['secciones'], true);
     foreach ($secciones as $s) {
       echo "<h1>".$s['seccion_ficha_nombre']."</h1>";
@@ -45,6 +48,7 @@ class FichaCTR extends CTR implements DCTR {
         echo "<hr>";
       }
     }
+    */
   }
 
 }

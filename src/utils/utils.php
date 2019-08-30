@@ -88,7 +88,7 @@
         //return false;
       }
     }else{
-      return '';
+      return 'No nos conectammos';
     }
   }
 
