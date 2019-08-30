@@ -7,6 +7,10 @@ class FichaAPI {
     if(isset($_GET['socioeconomica'])){
       $this->socioeconomica();
     }
+    
+    if(isset($_GET['guardarlibre'])){
+      guardarRespuestaLibre();
+    }
   }
 
   private function socioeconomica(){
@@ -24,9 +28,6 @@ class FichaAPI {
       }
     }
 
-    if(isset($_GET['guardarlibre'])){
-      guardarRespuestaLibre();
-    }
   }
 
   private function guardarRespuestaLibre() {
@@ -49,7 +50,7 @@ class FichaAPI {
     }else{
       JSON::error('No tenemos todos los campos.');
     }
-    
+
   }
 
 

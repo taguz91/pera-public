@@ -48,7 +48,7 @@
               <?php
               if ($p['pregunta_ficha_respuesta_tipo'] == 3) {
                 formRespuestaLibreUnica(
-                  $ks, $vp
+                  $ks, $ks, $p['id_pregunta_ficha']
                 );
               }
 
@@ -98,10 +98,11 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 <?php } ?>
 
 
-<?php function formRespuestaLibreUnica($ks , $kp){ ?>
+<?php function formRespuestaLibreUnica($ks , $kp, $id){ ?>
   <div class="form-group">
     <input class="form-control rlu-<?php echo $ks.'-'.$kp ; ?> "
-    type="text" name="" value="">
+    type="text" name="" value="" id="<?php echo $id; ?>"
+    onblur="<?php echo "valirdarTodosLlenos('rlu-$ks-$kp')" ?>">
   </div>
 <?php } ?>
 
@@ -155,6 +156,7 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 
 
 <script type="text/javascript">
+  const URLGURDAR = '<?php echo constant('URL').'api/v1/ficha/guardar'; ?>';
   const BTNSMASTXT = document.querySelectorAll('.btn-mas-txt');
   var vclick = 0;
   BTNSMASTXT.forEach(b => {
@@ -213,7 +215,27 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
     });
 
     if(llenos){
-      console.log('Todos llenos podemos guardar!!!');
+      I.forEach(i => {
+  /*      console.log('Valor id: ' + i.id);
+        console.log('Valor: ' + i.value); */
+        let data = new FormData();
+        data.append('id_pregunta_ficha', i.id);
+        data.append('respuesta', i.value);
+        let URL = URLGURDAR + '?guardarlibre=true';
+        fetch(URL, {
+          method: 'POST',
+          body: data
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log('Nice JOB: \n');
+          console.log(data);
+        })
+        .catch(e => {
+          console.log('Error: ' + e);
+        });
+
+      });
     }else{
       console.log('No estan todos llenos aun no guardaremos!');
     }
