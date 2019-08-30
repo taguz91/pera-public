@@ -18,7 +18,7 @@ require_once 'src/datos/persona.php';
       <div class="form-row">
         <div class="col">
           <div class="form-group">
-            <label for="" class="control-label">Identificacion:</label>
+            <label for="" class="control-label">Identificación:</label>
             <input disabled class="form-control txt" type="text" name="persona_identificacion"
             value="<?php echo isset($persona['persona_identificacion']) ? $persona['persona_identificacion'] : ''; ?>">
           </div>
@@ -28,14 +28,14 @@ require_once 'src/datos/persona.php';
 
           <div class="form-group">
 
-            <label for="" class="control-label d-block">Tipo identificacion:</label>
+            <label for="" class="control-label d-block">Tipo de Identificación:</label>
 
             <div class="p-1">
               <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" <?php
                 if(strlen($persona['persona_identificacion']) == 10){echo "checked";}
                 ?>>
-                <label class="custom-control-label" for="customRadioInline1">Cedula</label>
+                <label class="custom-control-label" for="customRadioInline1">Cédula</label>
               </div>
               <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" <?php
@@ -52,7 +52,7 @@ require_once 'src/datos/persona.php';
       <div class="form-row">
         <div class="col">
           <div class="form-group">
-            <label for="" class="control-label">Primer nombre:</label>
+            <label for="" class="control-label">Primer Nombre:</label>
             <input class="form-control txt" type="text" name="persona_primer_nombre"
             value="<?php echo isset($persona['persona_primer_nombre']) ? $persona['persona_primer_nombre'] : ''; ?>">
           </div>
@@ -60,7 +60,7 @@ require_once 'src/datos/persona.php';
 
         <div class="col">
           <div class="form-group">
-            <label for="" class="control-label">Segundo nombre:</label>
+            <label for="" class="control-label">Segundo Nombre:</label>
             <input class="form-control txt" type="text" name="persona_segundo_nombre"
             value="<?php echo isset($persona['persona_segundo_nombre']) ? $persona['persona_segundo_nombre'] : ''; ?>">
           </div>
@@ -71,7 +71,7 @@ require_once 'src/datos/persona.php';
       <div class="form-row">
         <div class="col">
           <div class="form-group">
-            <label for="" class="control-label">Primer apellido:</label>
+            <label for="" class="control-label">Primer Apellido:</label>
             <input class="form-control txt" type="text" name="persona_primer_apellido"
             value="<?php echo isset($persona['persona_primer_apellido']) ? $persona['persona_primer_apellido'] : ''; ?>">
           </div>
@@ -79,7 +79,7 @@ require_once 'src/datos/persona.php';
 
         <div class="col">
           <div class="form-group">
-            <label for="" class="control-label">Segundo apellido:</label>
+            <label for="" class="control-label">Segundo Apellido:</label>
             <input class="form-control txt" type="text" name="persona_segundo_apellido"
             value="<?php echo isset($persona['persona_segundo_apellido']) ? $persona['persona_segundo_apellido'] : ''; ?>">
           </div>
@@ -99,7 +99,7 @@ require_once 'src/datos/persona.php';
 
         <div class="col-md-6">
 
-          <label for="" class="control-label">Categoria migratoria:</label>
+          <label for="" class="control-label">Categoría Migratoria:</label>
 
           <select class="form-control cmb" name="persona_categoria_migratoria">
             <?php echo llenarCmb($cmbCategoriaMigratoria,
@@ -116,7 +116,7 @@ require_once 'src/datos/persona.php';
       <div class="form-row mt-3 mt-md-0">
         <div class="col">
           <div class="form-group">
-            <label for="" class="control-label">Telefono</label>
+            <label for="" class="control-label">Teléfono</label>
             <input class="form-control txt" type="text" name="persona_telefono"
             value="<?php echo isset($persona['persona_telefono']) ? $persona['persona_telefono'] :  ''; ?>">
           </div>
@@ -135,7 +135,7 @@ require_once 'src/datos/persona.php';
 
         <div class="col-6 col-md-3">
           <div class="form-group">
-            <label for="" class="control-label">Tipo Sangre</label>
+            <label for="" class="control-label">Tipo de Sangre</label>
 
             <select class="form-control cmb" name="persona_tipo_sangre">
               <?php echo llenarCmb($cmbTipoSangre,
@@ -147,7 +147,7 @@ require_once 'src/datos/persona.php';
 
         <div class="col-6 col-md-3">
           <div class="form-group">
-            <label for="" class="control-label">Genero:</label>
+            <label for="" class="control-label">Género:</label>
 
             <select class="form-control cmb" name="persona_genero">
               <?php echo llenarCmb($cmbGenero,
@@ -170,7 +170,7 @@ require_once 'src/datos/persona.php';
         </div>
 
         <div class="col-6 col-md-3">
-          <label for="" class="control-label">Estado civil:</label>
+          <label for="" class="control-label">Estado Civil:</label>
 
           <select class="form-control cmb" name="persona_estado_civil">
             <?php echo llenarCmb($cmbEstadoCivil,
@@ -196,7 +196,7 @@ require_once 'src/datos/persona.php';
         </div>
 
         <div class="col-6 col-md-4">
-          <label for="" class="control-label">Idioma raiz:</label>
+          <label for="" class="control-label">Idioma Raíz:</label>
 
           <select class="form-control cmb" name="persona_idioma_raiz">
             <?php echo llenarCmb($cmbIdioma,
@@ -221,7 +221,7 @@ require_once 'src/datos/persona.php';
         <div class="form-row mt-3 mt-md-0">
 
           <div class="col">
-            <label for="" class="control-label">Tipo discapacidad:</label>
+            <label for="" class="control-label">Tipo de Discapacidad:</label>
 
             <select class="form-control cmb" name="persona_tipo_residencia">
               <?php echo llenarCmb($cmbTipoDiscapacidad,
@@ -232,7 +232,7 @@ require_once 'src/datos/persona.php';
 
           <div class="col">
             <div class="form-group">
-              <label for="" class="control-label">Porcentaje discapacidad</label>
+              <label for="" class="control-label">Porcentaje de Discapacidad</label>
               <input class="form-control txt" type="text" name="persona_porcenta_discapacidad"
               value="<?php echo isset($persona['persona_porcenta_discapacidad']) ? $persona['persona_porcenta_discapacidad'] : ''; ?>">
             </div>
@@ -288,7 +288,7 @@ require_once 'src/datos/persona.php';
         </div>
 
         <div class="col-12 col-md-4">
-          <label for="" class="control-label">Tipo residencia:</label>
+          <label for="" class="control-label">Tipo de Residencia:</label>
 
           <select class="form-control cmb" name="persona_tipo_residencia">
             <?php echo llenarCmb($cmbTipoResidencia,

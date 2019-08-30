@@ -114,7 +114,7 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
         </div>
       </div>
       <div class="col-2">
-        <button class="btn btn-success btn-block btn-mas-txt" type="button" name="button">Mas</button>
+        <button class="btn btn-success btn-block btn-mas-txt" type="button" name="button">Más</button>
       </div>
     </div>
 

@@ -9,7 +9,7 @@ $total = count($fichas);
   <div class="mx-3">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Mensaje!</h5>
+        <h5 class="card-title">Mensaje!!</h5>
         <p class="card-text">No cuenta con fichas actualmente, por favor debe pedir que le envien su ficha al correo.</p>
       </div>
     </div>
@@ -19,7 +19,7 @@ $total = count($fichas);
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Como llenar la ficha</h5>
-          <p class="card-text">Para llenar la ficha, debera revisar su correo electronico ahi puede encontrar la contrasena asignada para el ingreso de su ficha.</p>
+          <p class="card-text">Para llenar la ficha, deberá revisar su Correo Electrónico ahí puede encontrar la contraseña asignada para el ingreso de su ficha.</p>
         </div>
       </div>
     </div>
@@ -99,7 +99,7 @@ for ($i=1; $i <= $total; $i++) {
            </span>
          </li>
          <li class="list-group-item">
-           Fecha Modificacion:
+           Fecha Modificación:
            <span class="d-block">
              <?php
              echo $f['persona_ficha_fecha_modificacion'];
@@ -131,7 +131,7 @@ for ($i=1; $i <= $total; $i++) {
                 </div>
               </div>
             </form>
-            <a href="#" class="badge">Solicitar contrasena</a>
+            <a href="#" class="badge">Solicitar Contraseña</a>
             <a href="#" class="badge">Ayuda</a>
 
          </div>
