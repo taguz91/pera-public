@@ -140,7 +140,7 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
         <div class="col-10">
           <div class="form-group">
             <input id="reslibre-<?php echo $r['id_almn_respuesta_libre_fs']; ?>" 
-            class="form-control res-mul"
+            class="form-control"
             onblur="<?php echo "actualizarRespuestaLibre('reslibre-".$r['id_almn_respuesta_libre_fs']."')" ?>"
             value="<?php echo $r['alumno_fs_libre']; ?>"
             type="text" name="">
@@ -171,10 +171,6 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
       </div>
     </div>
   </div>
-
-  <script type="text/javascript">
-    agregarVal('res-mul');
-  </script>
 
 <?php endif; ?>
 
@@ -222,8 +218,7 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
     b.onclick = agregarOtroTxtResMul;
   });
 
-
-
+  agregarVal('res-mul');
 
   function agregarOtroTxtResMul(){
     vclick++;
