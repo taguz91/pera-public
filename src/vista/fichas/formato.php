@@ -1,6 +1,6 @@
 
 
-<?php foreach ($secciones as $s) :?>
+<?php foreach ($secciones as $ks => $s) :?>
   <div class="row my-3 seccion">
 
     <div class="col-sm-11 col-lg-8 col-xl-7 pb-2 mx-auto ">
@@ -47,7 +47,9 @@
 
               <?php
               if ($p['pregunta_ficha_respuesta_tipo'] == 3) {
-                formRespuestaLibreUnica();
+                formRespuestaLibreUnica(
+                  $ks, $vp
+                );
               }
 
               if($p['pregunta_ficha_respuesta_tipo'] == 4){
@@ -96,9 +98,10 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 <?php } ?>
 
 
-<?php function formRespuestaLibreUnica(){ ?>
+<?php function formRespuestaLibreUnica($ks , $kp){ ?>
   <div class="form-group">
-    <input class="form-control" type="text" name="" value="">
+    <input class="form-control rlu-<?php echo $ks.'-'.$kp ; ?> "
+    type="text" name="" value="">
   </div>
 <?php } ?>
 

@@ -23,6 +23,33 @@ class FichaAPI {
         JSON::error('No logramos actualizar la respuesta.');
       }
     }
+
+    if(isset($_GET['guardarlibre'])){
+      guardarRespuestaLibre();
+    }
+  }
+
+  private function guardarRespuestaLibre() {
+
+    $idPersonaFicha = isset($_POST['id_persona_ficha']) ? $_POST['id_persona_ficha'] : '';
+    $idPreguntaFicha = isset($_POST['id_pregunta_ficha']) ? $_POST['id_pregunta_ficha'] : '';
+    $respuesta = isset($_POST['respuesta']) ? $_POST['respuesta'] : '';
+
+    if($idPersonaFicha != '' && $idPreguntaFicha != '' && $respuesta != ''){
+      $res = RespuestaFSBD::ingresarRespuestaLibre(
+        $idPersonaFicha,
+        $idPreguntaFicha,
+        $respuesta
+      );
+      if($res != null){
+        JSON::confirmacion('Guardamos correctamente la respuesta libre.');
+      }else{
+        JSON::error('No pudimos guardar la respuesta libre.');
+      }
+    }else{
+      JSON::error('No tenemos todos los campos.');
+    }
+    
   }
 
 
