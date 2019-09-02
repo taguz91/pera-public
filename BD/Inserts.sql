@@ -33,6 +33,23 @@ INSERT INTO public."PersonaFicha"(
   now()
 );
 
+--Insertamos todos
+
+INSERT INTO public."PersonaFicha"(
+  id_permiso_ingreso_ficha,
+  id_persona,
+  persona_ficha_clave,
+  persona_ficha_fecha_ingreso,
+  persona_ficha_fecha_modificacion
+) SELECT
+1, id_persona ,
+set_byte( MD5( '123' ) :: bytea, 4, 64 ),
+now(),
+now()
+FROM public."Personas";
+  
+
+
 ---Para pruebas con tipos de preguntas libres
 INSERT INTO public."SeccionesFicha" (
   id_tipo_ficha, seccion_ficha_nombre

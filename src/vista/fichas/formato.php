@@ -1,5 +1,3 @@
-
-
 <?php foreach ($secciones as $ks => $s) :?>
   <div class="row my-3 seccion">
 
@@ -48,13 +46,17 @@
               <?php
               if ($p['pregunta_ficha_respuesta_tipo'] == 3) {
                 formRespuestaLibreUnica(
-                  $ks, $ks, $p['id_pregunta_ficha'],
+                  isset($act) ? $act : false,
+                  $ks,
+                  $ks,
+                  $p['id_pregunta_ficha'],
                   isset($p['respuesta_libre']) ? $p['respuesta_libre'] : null
                 );
               }
 
               if($p['pregunta_ficha_respuesta_tipo'] == 4){
                 formRespuestaLibreMultiple(
+                  isset($act) ? $act : false,
                   $p['id_pregunta_ficha'],
                   isset($p['respuesta_libre']) ? $p['respuesta_libre'] : null
                 );
@@ -102,8 +104,7 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 <?php } ?>
 
 
-<?php function formRespuestaLibreUnica($ks , $kp, $id, $respuestas){ ?>
-
+<?php function formRespuestaLibreUnica($act, $ks , $kp, $id, $respuestas){ ?>
 
 <?php if ($respuestas != null): ?>
   <?php foreach ($respuestas as $kr => $r): ?>
@@ -112,7 +113,13 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
       <input class="form-control rlu-<?php echo $ks.'-'.$kp.$kr ; ?> "
       type="text" name="" value="<?php echo $r['alumno_fs_libre']; ?>"
       id="reslibre-<?php echo $r['id_almn_respuesta_libre_fs']; ?>"
-      onblur="<?php echo "actualizarRespuestaLibre('reslibre-".$r['id_almn_respuesta_libre_fs']."')" ?>">
+      onblur="<?php
+      if($act){
+        echo "actualizarRespuestaLibre('reslibre-".$r['id_almn_respuesta_libre_fs']."')" ;
+      }else {
+        echo "";
+      }
+      ?>">
     </div>
 
   <?php endforeach; ?>
@@ -121,53 +128,66 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
   <div class="form-group">
     <input class="form-control rlu-<?php echo $ks.'-'.$kp.$kr ; ?> "
     type="text" name="" value="" id="<?php echo $id; ?>"
-    onblur="<?php echo "valirdarTodosLlenos('rlu-$ks-$kp"."$kr')" ?>">
+    onblur="<?php
+    if($act){
+      echo "valirdarTodosLlenos('rlu-$ks-$kp"."$kr')" ;
+    }else{
+      echo "";
+    }
+    ?>">
   </div>
 
 <?php endif; ?>
 
-
-
 <?php } ?>
 
-<?php function formRespuestaLibreMultiple($id, $respuestas){ ?>
+
+<?php function formRespuestaLibreMultiple($act, $id, $respuestas){ ?>
 
 <?php if ($respuestas != null): ?>
-  <?php foreach ($respuestas as $kr => $r): ?>
 
-    <div class="form-horizontal form-res-mul" id="<?php echo $id; ?>">
+  <div class="form-horizontal form-res-mul" id="<?php echo $id; ?>">
+
+  <?php foreach ($respuestas as $kr => $r): ?>
       <div class="form-row">
         <div class="col-10">
           <div class="form-group">
-            <input id="reslibre-<?php echo $r['id_almn_respuesta_libre_fs']; ?>" 
+            <input id="reslibre-<?php echo $r['id_almn_respuesta_libre_fs']; ?>"
             class="form-control res-mul"
-            onblur="<?php echo "actualizarRespuestaLibre('reslibre-".$r['id_almn_respuesta_libre_fs']."')" ?>"
+            onblur="<?php
+            if($act){
+              echo "actualizarRespuestaLibre('reslibre-".$r['id_almn_respuesta_libre_fs']."')";
+            }else{
+              echo "";
+            }
+            ?>"
             value="<?php echo $r['alumno_fs_libre']; ?>"
             type="text" name="">
           </div>
         </div>
 
-        <?php if ($kr == 0): ?>
+        <?php if ($kr == 0 && $act): ?>
           <div class="col-2">
             <button class="btn btn-success btn-block btn-mas-txt" type="button" name="button">Mas</button>
           </div>
         <?php endif; ?>
-
       </div>
-    </div>
 
   <?php endforeach; ?>
+
+  </div>
+
 <?php else: ?>
 
   <div class="form-horizontal form-res-mul" id="<?php echo $id; ?>" >
     <div class="form-row">
       <div class="col-10">
         <div class="form-group">
-          <input id="<?php echo $id; ?>" class="form-control res-mul" type="text" name="" value="">
+          <input id="<?php echo $id; ?>" class="form-control res-mul" type="text">
         </div>
       </div>
       <div class="col-2">
-        <button class="btn btn-success btn-block btn-mas-txt" type="button" name="button">Mas</button>
+        <button class="btn btn-success btn-block btn-mas-txt" type="button">Mas</button>
       </div>
     </div>
   </div>
@@ -178,19 +198,13 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 
 <?php endif; ?>
 
-
 <?php } ?>
 
-<?php if (isset($act)):;?>
+
+<?php if (isset($act)):?>
   <script type="text/javascript">
     const URLACT = '<?php echo constant('URL').'api/v1/ficha/guardar/?socioeconomica=asas'?>';
-
-    console.log('Cargamos excelentemente: '+URLACT);
-
-    function act(id, id2){
-      console.log('ID: '+id
-      + '\nID2: '+id2 ,'\nURL: '+URLACT);
-    }
+    const URLGURDAR = '<?php echo constant('URL').'api/v1/ficha/guardar'; ?>';
 
     function actualizar(idActualizar, idRespuesta){
       console.log(URLACT);
@@ -214,15 +228,15 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 <?php endif; ?>
 
 
+<?php if (isset($act)): ?>
+
 <script type="text/javascript">
-  const URLGURDAR = '<?php echo constant('URL').'api/v1/ficha/guardar'; ?>';
+
   const BTNSMASTXT = document.querySelectorAll('.btn-mas-txt');
   var vclick = 0;
   BTNSMASTXT.forEach(b => {
     b.onclick = agregarOtroTxtResMul;
   });
-
-
 
 
   function agregarOtroTxtResMul(){
@@ -240,7 +254,6 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
       D3.classList.add('form-group');
       I.classList.add('form-control', 'res-mul'+vclick);
 
-      console.log('ID desde formuarlio: ' + f.id);
       I.id = f.id;
 
       D3.appendChild(I);
@@ -340,6 +353,6 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 
   }
 
-
-
 </script>
+
+<?php endif; ?>

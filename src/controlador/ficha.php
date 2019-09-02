@@ -21,13 +21,13 @@ class FichaCTR extends CTR implements DCTR {
     $res = SeccionBD::getPorIDPersonaFicha($idPersonaFicha);
     $_SESSION['id_persona_ficha'] = $idPersonaFicha;
     $secciones = json_decode($res['secciones'], true);
-    require_once cargarVista('fichas/formulario.php');
+    require_once cargarVista('fichas/socioeconomica/ingresar.php');
   }
 
   function verficha($idPersonaFicha){
     $res = SeccionBD::getPorIDPersonaFicha($idPersonaFicha);
     $secciones = json_decode($res['secciones'], true);
-    require_once cargarVista('fichas/verficha.php');
+    require_once cargarVista('fichas/socioeconomica/ver.php');
   }
 
   function json(){

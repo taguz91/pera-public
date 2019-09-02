@@ -9,7 +9,7 @@ $total = count($fichas);
   <div class="mx-3">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Mensaje!!</h5>
+        <h5 class="card-title">Mensaje</h5>
         <p class="card-text">No cuenta con fichas actualmente, por favor debe pedir que le envien su ficha al correo.</p>
       </div>
     </div>

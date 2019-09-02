@@ -8,3 +8,6 @@ GRANT ALL ON public."PersonaFicha" TO fichasphpubi;
 GRANT ALL ON public."DocenteRespuestaFO" TO fichasphpubi;
 GRANT ALL ON public."AlumnoRespuestaFS" TO fichasphpubi;
 GRANT ALL ON public."AlumnoRespuestaLibreFS" TO fichasphpubi;
+
+--Permiso con todas las secuencias
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO fichasphpubi;
