@@ -14,11 +14,31 @@ class FichaCTR extends CTR implements DCTR {
   function inicio() {
     global $U;
     $fichas = FichaBD::getPorPersona($U->idPersona);
-
     require_once cargarVista('fichas/ficha.php');
   }
 
   function ingresar() {
+    global $U;
+    if($U->tipo == 'A'){
+      //Cargamos la ficha socioeconomica
+      $this->ingresarFS();
+    } else {
+      echo "NO ES ALUMNOOOO!!!";
+    }
+
+  }
+
+  function verficha($idPersonaFicha){
+    global $U;
+    if($U->tipo == 'A'){
+      //Cargamos la ficha socioeconomica
+      $this->verfichaFS($idPersonaFicha);
+    } else {
+      echo "NO ES PERSONA FICHA!!!";
+    }
+  }
+
+  private function ingresarFS(){
     $pass = isset($_POST['pass']) ? $_POST['pass'] : '';
     $idPer = isset($_POST['idper']) ? $_POST['idper'] : 0;
     if($pass != '' && $idPer != 0){
@@ -28,18 +48,16 @@ class FichaCTR extends CTR implements DCTR {
       );
       $secciones = $this->getFS($idPersonaFicha);
       require_once cargarVista('fichas/socioeconomica/ingresar.php');
-    } else {
-      echo "NOOOOOOO";
     }
   }
 
-  function verficha($idPersonaFicha){
+  private function verfichaFS($idPersonaFicha){
     $secciones = $this->getFS($idPersonaFicha);
     require_once cargarVista('fichas/socioeconomica/ver.php');
   }
 
   private function getFS($idPersonaFicha){
-    $res = SeccionBD::getPorIDPersonaFicha($idPersonaFicha);
+    $res = SeccionBD::getFSPorIDPersonaFicha($idPersonaFicha);
     return json_decode($res['secciones'], true);
   }
 

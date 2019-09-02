@@ -38,7 +38,8 @@ class UsuarioBD {
     p.persona_primer_apellido,
     p.persona_segundo_apellido,
     p.persona_correo,
-    p.persona_celular
+    p.persona_celular,
+    tipo_persona(p.id_persona) AS tipo
     FROM public."UsersWeb" uw
     JOIN public."Personas" p ON uw.id_persona = p.id_persona
     WHERE uw.user_name = :user AND

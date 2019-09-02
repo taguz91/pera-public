@@ -12,7 +12,7 @@ abstract class SeccionBD {
   WHERE
   seccion_ficha_activa = true';
 
-  static function getPorIDPersonaFicha($idPersonaFicha){
+  static function getFSPorIDPersonaFicha($idPersonaFicha){
     $sql = '
     SELECT array_to_json(
       array_agg(s.*)
@@ -31,7 +31,7 @@ abstract class SeccionBD {
     			pregunta_ficha_tipo,
     			pregunta_ficha_respuesta_tipo,
 
-          
+
     			(
     				 SELECT array_to_json(
     					 array_agg(rl.*)

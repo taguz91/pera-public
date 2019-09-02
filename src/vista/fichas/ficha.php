@@ -19,7 +19,7 @@ $total = count($fichas);
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Como llenar la ficha</h5>
-          <p class="card-text">Para llenar la ficha, deberá revisar su Correo Electrónico ahí puede encontrar la contraseña asignada para el ingreso de su ficha.</p>
+          <p class="card-text">Para llenar la ficha, deberá revisar su correo electrónico ahí puede encontrar la contraseña asignada para el ingreso de su ficha.</p>
         </div>
       </div>
     </div>
@@ -51,14 +51,12 @@ for ($i=1; $i <= $total; $i++) {
       <div class="card-head-ficha">
         <h3 class="card-title">
           <?php
-          //echo $f['prd_lectivo_nombre'];
           echo $f['tipo_ficha'];
           ?>
         </h3>
 
         <h6 class="card-subtitle text-muted">
           <?php
-          //echo $f['prd_lectivo_nombre'];
           echo $f['prd_lectivo_nombre'];
           ?>
         </h6>
@@ -137,9 +135,7 @@ for ($i=1; $i <= $total; $i++) {
                 </div>
               </div>
             </form>
-            <a href="#" class="badge">Solicitar Contraseña</a>
             <a href="#" class="badge">Ayuda</a>
-
          </div>
 
         <?php } ?>

@@ -36,8 +36,8 @@ class UsuarioMD {
     $u->segundoApellido = isset($r['persona_segundo_apellido']) ? $r['persona_segundo_apellido'] : null;
     $u->correo = isset($r['persona_correo']) ? $r['persona_correo'] : null;
     $u->celular = isset($r['persona_celular']) ? $r['persona_celular'] : null;
+    $u->tipo = isset($r['tipo']) ? $r['tipo'] : 'T';
 
-    $u->tipo = 'todos';
     return $u;
   }
 
