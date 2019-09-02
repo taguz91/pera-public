@@ -20,6 +20,7 @@ class FichaCTR extends CTR implements DCTR {
   function ingresar($idPersonaFicha) {
     $res = SeccionBD::getPorIDPersonaFicha($idPersonaFicha);
     $_SESSION['id_persona_ficha'] = $idPersonaFicha;
+    
     $secciones = json_decode($res['secciones'], true);
     require_once cargarVista('fichas/socioeconomica/ingresar.php');
   }

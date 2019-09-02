@@ -41,7 +41,7 @@ abstract class SeccionBD {
     					 alumno_fs_libre
     					 FROM public."AlumnoRespuestaLibreFS" arl
     					 WHERE id_pregunta_ficha = pf.id_pregunta_ficha AND
-    					 id_persona_ficha = 10
+    					 id_persona_ficha = :idPersonaFicha4
     				 ) AS rl
     			),
 
@@ -85,7 +85,8 @@ abstract class SeccionBD {
     return getOneFromSQL($sql, [
       'idPersonaFicha1' => $idPersonaFicha,
       'idPersonaFicha2' => $idPersonaFicha,
-      'idPersonaFicha3' => $idPersonaFicha
+      'idPersonaFicha3' => $idPersonaFicha,
+      'idPersonaFicha4' => $idPersonaFicha
     ]);
   }
 
