@@ -3,6 +3,7 @@ require_once 'src/controlador/socioenomica.php';
 require_once 'src/controlador/ocupacional.php';
 require_once 'src/modelo/fichas/fichabd.php';
 require_once 'src/modelo/fichas/seccionbd.php';
+require_once 'src/modelo/persona/personafichabd.php';
 
 class FichaCTR extends CTR implements DCTR {
 
@@ -17,18 +18,29 @@ class FichaCTR extends CTR implements DCTR {
     require_once cargarVista('fichas/ficha.php');
   }
 
-  function ingresar($idPersonaFicha) {
-    $res = SeccionBD::getPorIDPersonaFicha($idPersonaFicha);
-    $_SESSION['id_persona_ficha'] = $idPersonaFicha;
-    
-    $secciones = json_decode($res['secciones'], true);
-    require_once cargarVista('fichas/socioeconomica/ingresar.php');
+  function ingresar() {
+    $pass = isset($_POST['pass']) ? $_POST['pass'] : '';
+    $idPer = isset($_POST['idper']) ? $_POST['idper'] : 0;
+    if($pass != '' && $idPer != 0){
+      $idPersonaFicha = PersonaFichaBD::getPorLogin(
+        $idPer,
+        $pass
+      );
+      $secciones = $this->getFS($idPersonaFicha);
+      require_once cargarVista('fichas/socioeconomica/ingresar.php');
+    } else {
+      echo "NOOOOOOO";
+    }
   }
 
   function verficha($idPersonaFicha){
-    $res = SeccionBD::getPorIDPersonaFicha($idPersonaFicha);
-    $secciones = json_decode($res['secciones'], true);
+    $secciones = $this->getFS($idPersonaFicha);
     require_once cargarVista('fichas/socioeconomica/ver.php');
+  }
+
+  private function getFS($idPersonaFicha){
+    $res = SeccionBD::getPorIDPersonaFicha($idPersonaFicha);
+    return json_decode($res['secciones'], true);
   }
 
   function json(){

@@ -32,7 +32,7 @@ for ($i=1; $i <= $total; $i++) {
   if($i % 2 != 0 OR $i == 0){
    echo ' <div class="row m-3">';
   }
-  agregarFicha($fichas[$i-1], $i);
+  agregarFicha($fichas[$i-1], $i, $U->idPersona);
   if($i % 2 == 0 OR $i == $total){
     echo "</div>";
   }
@@ -42,7 +42,7 @@ for ($i=1; $i <= $total; $i++) {
 
 </div>
 
-<?php function agregarFicha($f, $i){ ?>
+<?php function agregarFicha($f, $i, $idPer){ ?>
 
   <div class="col-lg-6 col-md-10 mx-auto my-4 my-lg-0">
 
@@ -120,14 +120,20 @@ for ($i=1; $i <= $total; $i++) {
          type="button" data-toggle="collapse" data-target="#ingresar<?php echo $i; ?>">Ingresar</button>
          <div id="ingresar<?php echo $i; ?>" class="collapse">
 
-            <form class="form-inline my-2" action="<?php echo constant('URL'); ?>ficha/ingresar/<?php echo $f['id_persona_ficha']; ?>" method="post">
+            <form class="form-inline my-2" action="<?php echo constant('URL'); ?>ficha/ingresar" method="post"
+              id="form-<?php echo $i ?>">
               <div class="input-group w-100">
                 <div class="input-group-prepend">
                   <span class="input-group-text">PS</span>
                 </div>
-                <input type="password" class="form-control" placeholder="Ingrese su contrasena:">
+                <input type="hidden" name="idper"
+                value="<?php echo $idPer; ?>">
+                <input type="password" class="form-control" placeholder="Ingrese su contrasena:"
+                name="pass" required>
                 <div class="input-group-append">
-                  <button class="btn btn-success" type="submit">Ingresar</button>
+                  <button class="btn btn-success" type="submit"
+                  onclick="ingresarPF('form-<?php echo $i ?>')"
+                  >Ingresar</button>
                 </div>
               </div>
             </form>
@@ -147,3 +153,9 @@ for ($i=1; $i <= $total; $i++) {
 <?php
 require 'src/vista/templates/copy.php';
  ?>
+
+ <script type="text/javascript">
+   URLLOGINPF = '<?php echo constant('URL') ?>api/v1/personaficha/login';
+ </script>
+
+ <script type="text/javascript" src="<?php echo constant('URL') ?>public/js/ajax/loginpf.js"> </script>
