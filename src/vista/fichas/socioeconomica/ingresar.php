@@ -23,13 +23,30 @@ $act = true;
     </div>
   </div>
 
+  <div class="row my-2 sticky-top">
+
+    <div class="alert alert-info alert-dismissible fade show mx-auto" role="alert">
+      <h5 class="alert-heading">Importante!!!</h5>
+      Las respuestas de opcion se guardan automaticamente.
+      <hr>
+      Las preguntas con campos libres es necesario llenar toda la seccion para que sean guardadas.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+  </div>
+
   <div class="row">
     <form class="col" action="#" method="post">
 
       <?php include cargarVista('fichas/socioeconomica/form.php'); ?>
 
-    <div id="finfor">
-      <button id="enviarficha" type="submit" class="btn btn-blue d-block w-50 mx-auto mb-3">Guardar</button>
+    <div id="finfor" class="my-3">
+      <div class="alert alert-info mb-3">
+        Al terminar y enviar la ficha usted ya no podra modificarla, unicamente envie su ficha si esta lleno toda la informacion requerida.
+      </div>
+      <button id="enviarficha" type="submit" class="btn btn-blue d-block w-50 mx-auto mb-3">Terminar y Enviar</button>
     </div>
     </form>
   </div>

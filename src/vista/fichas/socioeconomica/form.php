@@ -33,6 +33,9 @@ require_once 'src/vista/fichas/socioeconomica/respuestas.php';
             <div class="card-header-blue">
               <h5 class="card-title"><?php echo $p['pregunta_ficha']; ?></h5>
               <h6 class="card-subtitle text-white"><?php echo $p['pregunta_ficha_ayuda']; ?></h6>
+              <?php if (isset($act) && $p['pregunta_ficha_tipo'] == 1): ?>
+                <span class="badge badge-danger">Obligatoria</span>
+              <?php endif; ?>
             </div>
 
             <div class="card-body">
