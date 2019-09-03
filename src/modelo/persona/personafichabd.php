@@ -27,6 +27,11 @@ abstract class PersonaFichaBD {
     ]);
   }
 
+  static function getFinalizados() {
+    $sql = '';
+    return getArrayFromSQL($sql , []);
+  }
+
 }
 
  ?>
