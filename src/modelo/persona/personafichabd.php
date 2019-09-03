@@ -17,6 +17,16 @@ abstract class PersonaFichaBD {
     }
   }
 
+  static function finalizar($idPersonaFicha) {
+    $sql = '
+    UPDATE public."PersonaFicha"
+    SET persona_ficha_finalizada = true
+    WHERE id_persona_ficha = :id;';
+    return executeSQL($sql, [
+      'id' => $idPersonaFicha
+    ]);
+  }
+
 }
 
  ?>

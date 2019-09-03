@@ -25,6 +25,12 @@ $total = count($fichas);
     </div>
 <?php endif; ?>
 
+<?php if (isset($msg)): ?>
+  <div class="row my-2">
+    <?php echo $msg ?>
+  </div>
+<?php endif; ?>
+
 <?php
 for ($i=1; $i <= $total; $i++) {
  ?>

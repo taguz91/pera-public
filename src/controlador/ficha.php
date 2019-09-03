@@ -11,30 +11,57 @@ class FichaCTR extends CTR implements DCTR {
     parent::__construct("todos");
   }
 
-  function inicio() {
+  function inicio($msg = '') {
     global $U;
+    if(isset($_SESSION['id_persona_ficha'])){
+      unset($_SESSION['id_persona_ficha']);
+    }
     $fichas = FichaBD::getPorPersona($U->idPersona);
     require_once cargarVista('fichas/ficha.php');
   }
 
   function ingresar() {
     global $U;
-    if($U->tipo == 'A'){
-      //Cargamos la ficha socioeconomica
-      $this->ingresarFS();
-    } else {
-      echo "NO ES ALUMNOOOO!!!";
+    switch ($U->tipo) {
+      case 'A':
+        //Cargamos la ficha socioeconomica
+        $this->ingresarFS();
+        break;
+      case 'D':
+        echo "NO TENEMOS EL FORMULARIO OCUPACIONAL, ESTA EN DESARROLLO";
+        break;
+      default:
+        $this->inicio(getErrorMsg('Debe indicar la consena para llenar la ficha.'));
+        break;
     }
-
   }
 
   function verficha($idPersonaFicha){
     global $U;
-    if($U->tipo == 'A'){
-      //Cargamos la ficha socioeconomica
-      $this->verfichaFS($idPersonaFicha);
+    switch ($U->tipo) {
+      case 'A':
+        $this->verfichaFS($idPersonaFicha);
+        break;
+      case 'D':
+        echo "NO TENEMOS EL FORMULARIO OCUPACIONAL, ESTA EN DESARROLLO";
+        break;
+      default:
+        $this->inicio(getErrorMsg('No tiene permitido ver esta ficha.'));
+        break;
+    }
+  }
+
+  function finalizar(){
+    $idPersonaFicha = isset($_SESSION['id_persona_ficha']) ? $_SESSION['id_persona_ficha'] : 0;
+    if($idPersonaFicha != 0){
+      $res = PersonaFichaBD::finalizar($idPersonaFicha);
+      if($res != null){
+        $this->inicio(getInfoMsg('Finalizamos correctamente su ficha.'));
+      } else {
+        $this->inicio(getErrorMsg('En este momento no pudimos finalizar su ficha, por favor vuelva a intentarlo mas tarde.'));
+      }
     } else {
-      echo "NO ES PERSONA FICHA!!!";
+      $this->inicio(getErrorMsg('No pudimos finalizar su ficha, porque no indico que ficha finalizara.'));
     }
   }
 
