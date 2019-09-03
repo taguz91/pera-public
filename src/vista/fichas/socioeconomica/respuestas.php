@@ -25,7 +25,7 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 <?php } ?>
 
 
-<?php function formRespuestaLibreUnica($act, $ks , $kp, $id, $respuestas){ ?>
+<?php function formRespuestaLibreUnica($act, $ks, $kp, $id, $respuestas){ ?>
 
 <?php if ($respuestas != null): ?>
   <?php foreach ($respuestas as $kr => $r): ?>
@@ -47,11 +47,11 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 <?php else: ?>
 
   <div class="form-group">
-    <input class="form-control rlu-<?php echo $ks.'-'.$kp.$kr ; ?> "
+    <input class="form-control rlu-<?php echo $ks.'-'.$kp ; ?> "
     type="text" name="" value="" id="<?php echo $id; ?>"
     onblur="<?php
     if($act){
-      echo "valirdarTodosLlenos('rlu-$ks-$kp"."$kr')" ;
+      echo "valirdarTodosLlenos('rlu-$ks-$kp"."')" ;
     }else{
       echo "";
     }
@@ -90,14 +90,16 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
       </div>
 
   <?php endforeach; ?>
-  
+
   </div>
 
-  <div class="row">
-    <div class="col-2">
-      <button class="btn btn-success btn-block btn-mas-txt" type="button" name="button">Mas</button>
+  <?php if ($act): ?>
+    <div class="row">
+      <div class="col-2">
+        <button class="btn btn-success btn-block btn-mas-txt" type="button" name="button">Mas</button>
+      </div>
     </div>
-  </div>
+  <?php endif; ?>
 
 <?php else: ?>
 
@@ -111,15 +113,17 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-2">
-      <button class="btn btn-success btn-block btn-mas-txt" type="button">Mas</button>
+  <?php if ($act): ?>
+    <div class="row">
+      <div class="col-2">
+        <button class="btn btn-success btn-block btn-mas-txt" type="button">Mas</button>
+      </div>
     </div>
-  </div>
 
-  <script type="text/javascript">
-    agregarVal('res-mul');
-  </script>
+    <script type="text/javascript">
+      agregarVal('res-mul');
+    </script>
+  <?php endif; ?>
 
 <?php endif; ?>
 

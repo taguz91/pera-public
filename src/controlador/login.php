@@ -31,6 +31,7 @@ class LoginCTR extends CTR implements DCTR {
   function salir() {
     if(isset($_SESSION['U'])){
       unset($_SESSION['U']);
+      unset($_SESSION['id_persona_ficha']);
       Page::login();
     }
   }

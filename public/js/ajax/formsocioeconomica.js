@@ -53,7 +53,6 @@ function valirdarTodosLlenos(clase){
   if(llenos){
     let URL = URLGURDAR + '?guardarlibre=true';
     I.forEach(i => {
-
       let data = new FormData();
       data.append('id_pregunta_ficha', i.id);
       data.append('respuesta', i.value);

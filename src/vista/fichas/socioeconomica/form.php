@@ -1,3 +1,14 @@
+<?php if (isset($act)): ?>
+<!--Iniciamos las constantes-->
+<script type="text/javascript">
+  const URLACT = '<?php echo constant('URL').'api/v1/ficha/guardar/?socioeconomica=asas'?>';
+  const URLGURDAR = '<?php echo constant('URL').'api/v1/ficha/guardar'; ?>';
+</script>
+
+<script type="text/javascript" src="<?php echo constant('URL') ?>public/js/ajax/formsocioeconomica.js"></script>
+
+<?php endif; ?>
+
 <?php
 //Cargamos las funciones para generar el formulario
 require_once 'src/vista/fichas/socioeconomica/respuestas.php';
@@ -7,6 +18,7 @@ require_once 'src/vista/fichas/socioeconomica/respuestas.php';
   <div class="row my-3 seccion">
 
     <div class="col-sm-11 col-lg-8 col-xl-7 pb-2 mx-auto ">
+
       <div class="bg-blue py-1">
         <h2 class="text-center text-white my-3 border-bottom pb-2">
           <?php echo $s['seccion_ficha_nombre']; ?>
@@ -81,14 +93,3 @@ require_once 'src/vista/fichas/socioeconomica/respuestas.php';
   <?php endif; ?>
 
 <?php endforeach; ?>
-
-<?php if (isset($act)): ?>
-<!--Iniciamos las constantes-->
-<script type="text/javascript">
-  const URLACT = '<?php echo constant('URL').'api/v1/ficha/guardar/?socioeconomica=asas'?>';
-  const URLGURDAR = '<?php echo constant('URL').'api/v1/ficha/guardar'; ?>';
-</script>
-
-<script type="text/javascript" src="<?php echo constant('URL') ?>public/js/ajax/formsocioeconomica.js"></script>
-
-<?php endif; ?>

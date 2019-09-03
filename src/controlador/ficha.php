@@ -41,11 +41,13 @@ class FichaCTR extends CTR implements DCTR {
   private function ingresarFS(){
     $pass = isset($_POST['pass']) ? $_POST['pass'] : '';
     $idPer = isset($_POST['idper']) ? $_POST['idper'] : 0;
+
     if($pass != '' && $idPer != 0){
       $idPersonaFicha = PersonaFichaBD::getPorLogin(
         $idPer,
         $pass
       );
+      $_SESSION['id_persona_ficha'] = $idPersonaFicha;
       $secciones = $this->getFS($idPersonaFicha);
       require_once cargarVista('fichas/socioeconomica/ingresar.php');
     }
