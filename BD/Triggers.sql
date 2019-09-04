@@ -58,11 +58,11 @@ EXECUTE PROCEDURE iniciar_ficha_alumno();
 CREATE OR REPLACE FUNCTION fecha_persona_ficha()
 RETURNS TRIGGER AS $fecha_persona_ficha$
 BEGIN
-  IF old.persona_ficha_fecha_ingreso = '' THEN
-    new.persona_ficha_fecha_ingreso := now();
-  ELSE
+  IF old.persona_ficha_fecha_ingreso IS NOT NULL THEN
     new.persona_ficha_fecha_modificacion := new.persona_ficha_fecha_ingreso;
     new.persona_ficha_fecha_ingreso := old.persona_ficha_fecha_ingreso;
+  ELSE
+    new.persona_ficha_fecha_ingreso := now();
   END IF;
   RETURN NEW;
 END;
