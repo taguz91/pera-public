@@ -15,7 +15,8 @@ abstract class FichaBD {
     pif.permiso_ingreso_fecha_fin,
     pf.id_persona_ficha,
     pf.persona_ficha_fecha_ingreso,
-    pf.persona_ficha_fecha_modificacion
+    pf.persona_ficha_fecha_modificacion,
+    pf.persona_ficha_finalizada
     FROM
     public."PersonaFicha" pf,
     public."PermisoIngresoFichas" pif,

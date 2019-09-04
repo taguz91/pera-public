@@ -52,3 +52,23 @@ DROP TRIGGER ficha_alumno ON public."PersonaFicha";
 CREATE TRIGGER ficha_alumno
 AFTER INSERT ON public."PersonaFicha" FOR EACH ROW
 EXECUTE PROCEDURE iniciar_ficha_alumno();
+
+
+--Para actualizar la fecha
+CREATE OR REPLACE FUNCTION fecha_persona_ficha()
+RETURNS TRIGGER AS $fecha_persona_ficha$
+BEGIN
+  IF old.persona_ficha_fecha_ingreso = '' THEN
+    new.persona_ficha_fecha_ingreso := now();
+  ELSE
+    new.persona_ficha_fecha_modificacion := new.persona_ficha_fecha_ingreso;
+    new.persona_ficha_fecha_ingreso := old.persona_ficha_fecha_ingreso;
+  END IF;
+  RETURN NEW;
+END;
+$fecha_persona_ficha$ LANGUAGE plpgsql;
+
+CREATE TRIGGER actualiza_fecha
+BEFORE UPDATE OF persona_ficha_fecha_ingreso
+ON public."PersonaFicha" FOR EACH ROW
+EXECUTE PROCEDURE fecha_persona_ficha();

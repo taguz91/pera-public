@@ -29,7 +29,7 @@ $act = true;
       <h5 class="alert-heading">Importante!!!</h5>
       Las respuestas de opcion se guardan automaticamente.
       <hr>
-      Las preguntas con campos libres es necesario llenar toda la seccion para que sean guardadas.
+      La seccion con preguntas libres sera guardada automaticamente,al estar llenas todos los campos.
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -38,18 +38,21 @@ $act = true;
   </div>
 
   <div class="row">
-    <form class="col" action="#" method="post">
+    <form class="col" action="<?php echo constant('URL') ?>ficha/finalizar" method="post">
 
       <?php include cargarVista('fichas/socioeconomica/form.php'); ?>
 
     <div id="finfor" class="my-3">
       <div class="alert alert-info mb-3">
         Al terminar y enviar la ficha usted ya no podra modificarla, unicamente envie su ficha si esta lleno toda la informacion requerida.
+        <hr>
+        La ficha no sera enviada si no esta llena toda la informacion solicitada!
       </div>
       <button id="enviarficha" type="submit" class="btn btn-blue d-block w-50 mx-auto mb-3">Terminar y Enviar</button>
     </div>
     </form>
   </div>
+
 
   <div class="row" id="btnsnav">
 
@@ -68,4 +71,5 @@ $act = true;
 <?php
 require 'src/vista/templates/copy.php';
 ?>
+
 <script type="text/javascript" src="<?php echo constant('URL'); ?>public/js/navficha.js"></script>

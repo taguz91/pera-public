@@ -15,7 +15,7 @@ class PersonaFichaAPI {
       if($res != null){
         JSON::confirmacion('Permiso ingreso ficha concedido.');
       } else {
-        JSON::error('No tenemos permiso de ingresar esta ficha');
+        JSON::error('No tenemos permiso de ingresar esta ficha ' . $idPer);
       }
     }else{
       JSON::error('No debe enviar parametros vacios.');

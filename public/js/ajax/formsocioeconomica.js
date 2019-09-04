@@ -1,11 +1,7 @@
-//Es necesario tener las URL que se usan declaradas antes
-const BTNSMASTXT = document.querySelectorAll('.btn-mas-txt');
-var vclick = 0;
-BTNSMASTXT.forEach(b => {
-  b.onclick = agregarOtroTxtResMul;
-});
+// Es necesario tener las URL que se usan declaradas antes
 
 function agregarOtroTxtResMul(){
+
   vclick++;
   let FROMRESMUL = document.querySelectorAll('.form-res-mul');
 
@@ -74,6 +70,8 @@ function valirdarTodosLlenos(clase){
       });
 
     });
+  } else {
+    console.log('No podemoss!!!!');
   }
 }
 

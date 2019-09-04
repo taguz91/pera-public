@@ -30,7 +30,7 @@ abstract class SeccionBD {
     			pregunta_ficha_ayuda,
     			pregunta_ficha_tipo,
     			pregunta_ficha_respuesta_tipo,
-
+          pregunta_ficha_respuesta_campo,
 
     			(
     				 SELECT array_to_json(

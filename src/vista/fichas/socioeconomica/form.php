@@ -1,11 +1,12 @@
 <?php if (isset($act)): ?>
 <!--Iniciamos las constantes-->
 <script type="text/javascript">
-  const URLACT = '<?php echo constant('URL').'api/v1/ficha/guardar/?socioeconomica=asas'?>';
-  const URLGURDAR = '<?php echo constant('URL').'api/v1/ficha/guardar'; ?>';
+  const URLACT = '<?php echo constant('URL')?>api/v1/ficha/guardar/?socioeconomica=asas';
+  const URLGURDAR = '<?php echo constant('URL'); ?>api/v1/ficha/guardar';
 </script>
 
-<script type="text/javascript" src="<?php echo constant('URL') ?>public/js/ajax/formsocioeconomica.js"></script>
+<script type="text/javascript" src="<?php echo constant('URL') ?>public/js/ajax/formsocioeconomica.js?v=122">
+</script>
 
 <?php endif; ?>
 
@@ -53,7 +54,8 @@ require_once 'src/vista/fichas/socioeconomica/respuestas.php';
                       $p['actualizar'],
                       $p['respuesta'],
                       $p['id_pregunta_ficha'],
-                      $r['id_respuesta_ficha'], $r['respuesta_ficha']
+                      $r['id_respuesta_ficha'],
+                      $r['respuesta_ficha']
                     );
                   }
                   ?>
@@ -70,7 +72,8 @@ require_once 'src/vista/fichas/socioeconomica/respuestas.php';
                   $ks,
                   $ks,
                   $p['id_pregunta_ficha'],
-                  isset($p['respuesta_libre']) ? $p['respuesta_libre'] : null
+                  isset($p['respuesta_libre']) ? $p['respuesta_libre'] : null,
+                  $p['pregunta_ficha_respuesta_campo']
                 );
               }
 
@@ -78,7 +81,8 @@ require_once 'src/vista/fichas/socioeconomica/respuestas.php';
                 formRespuestaLibreMultiple(
                   isset($act) ? $act : false,
                   $p['id_pregunta_ficha'],
-                  isset($p['respuesta_libre']) ? $p['respuesta_libre'] : null
+                  isset($p['respuesta_libre']) ? $p['respuesta_libre'] : null,
+                  $p['pregunta_ficha_respuesta_campo']
                 );
               }
               ?>
@@ -96,3 +100,12 @@ require_once 'src/vista/fichas/socioeconomica/respuestas.php';
   <?php endif; ?>
 
 <?php endforeach; ?>
+
+
+<script type="text/javascript">
+  const BTNSMASTXT = document.querySelectorAll('.btn-mas-txt');
+  var vclick = 0;
+  BTNSMASTXT.forEach(b => {
+    b.onclick = agregarOtroTxtResMul;
+  });
+</script>

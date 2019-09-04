@@ -27,6 +27,16 @@ abstract class PersonaFichaBD {
     ]);
   }
 
+  static function actualizarFecha($idPersonaFicha) {
+    $sql = '
+    UPDATE public."PersonaFicha"
+    SET persona_ficha_fecha_ingreso = now()
+    WHERE id_persona_ficha = :id;';
+    return executeSQL($sql, [
+      'id' => $idPersonaFicha
+    ]);
+  }
+
   static function getFinalizados() {
     $sql = '';
     return getArrayFromSQL($sql , []);

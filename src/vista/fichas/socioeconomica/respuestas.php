@@ -4,7 +4,7 @@ function formRespuestaUnica($act, $vp, $vr, $idActualizar, $idRespuesta,
 $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 
   <div class="custom-control custom-radio">
-   <input onchange=<?php
+   <input required onchange=<?php
    if($act){
      echo '"'."actualizar('" . $idActualizar . "', '". $idRespuestaFicha."')".'"';
    }else{
@@ -25,14 +25,15 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 <?php } ?>
 
 
-<?php function formRespuestaLibreUnica($act, $ks, $kp, $id, $respuestas){ ?>
+<?php function formRespuestaLibreUnica($act, $ks, $kp, $id, $respuestas, $tipo){ ?>
 
 <?php if ($respuestas != null): ?>
   <?php foreach ($respuestas as $kr => $r): ?>
 
     <div class="form-group">
-      <input class="form-control rlu-<?php echo $ks.'-'.$kp.$kr ; ?> "
-      type="text" name="" value="<?php echo $r['alumno_fs_libre']; ?>"
+      <input required class="form-control rlu-<?php echo $ks.'-'.$kp.$kr ; ?> "
+      type="<?php echo $tipo ?>"
+      value="<?php echo $r['alumno_fs_libre']; ?>"
       id="reslibre-<?php echo $r['id_almn_respuesta_libre_fs']; ?>"
       onblur="<?php
       if($act){
@@ -47,8 +48,8 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 <?php else: ?>
 
   <div class="form-group">
-    <input class="form-control rlu-<?php echo $ks.'-'.$kp ; ?> "
-    type="text" name="" value="" id="<?php echo $id; ?>"
+    <input required class="form-control rlu-<?php echo $ks.'-'.$kp ; ?> "
+    type="<?php echo $tipo ?>" id="<?php echo $id; ?>"
     onblur="<?php
     if($act){
       echo "valirdarTodosLlenos('rlu-$ks-$kp"."')" ;
@@ -64,7 +65,7 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 
 
 
-<?php function formRespuestaLibreMultiple($act, $id, $respuestas){ ?>
+<?php function formRespuestaLibreMultiple($act, $id, $respuestas, $tipo){ ?>
 
 <?php if ($respuestas != null): ?>
 
@@ -74,7 +75,7 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
       <div class="form-row">
         <div class="col-12">
           <div class="form-group">
-            <input id="reslibre-<?php echo $r['id_almn_respuesta_libre_fs']; ?>"
+            <input required id="reslibre-<?php echo $r['id_almn_respuesta_libre_fs']; ?>"
             class="form-control res-mul"
             onblur="<?php
             if($act){
@@ -84,7 +85,7 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
             }
             ?>"
             value="<?php echo $r['alumno_fs_libre']; ?>"
-            type="text" name="">
+            type="<?php echo $tipo ?>">
           </div>
         </div>
       </div>
@@ -107,7 +108,8 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
     <div class="form-row">
       <div class="col-12">
         <div class="form-group">
-          <input id="<?php echo $id; ?>" class="form-control res-mul" type="text">
+          <input required id="<?php echo $id; ?>" class="form-control res-mul"
+          type="<?php echo $tipo ?>">
         </div>
       </div>
     </div>

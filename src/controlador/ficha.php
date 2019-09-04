@@ -56,7 +56,8 @@ class FichaCTR extends CTR implements DCTR {
     if($idPersonaFicha != 0){
       $res = PersonaFichaBD::finalizar($idPersonaFicha);
       if($res != null){
-        $this->inicio(getInfoMsg('Finalizamos correctamente su ficha.'));
+        $this->inicio(getInfoMsg('Finalizamos correctamente su ficha.
+        <a href="http://35.192.7.211/home" target="_blank">Ingresar Ficha Salud</a>'));
       } else {
         $this->inicio(getErrorMsg('En este momento no pudimos finalizar su ficha, por favor vuelva a intentarlo mas tarde.'));
       }
@@ -74,9 +75,12 @@ class FichaCTR extends CTR implements DCTR {
         $idPer,
         $pass
       );
+      PersonaFichaBD::actualizarFecha($idPersonaFicha);
       $_SESSION['id_persona_ficha'] = $idPersonaFicha;
       $secciones = $this->getFS($idPersonaFicha);
       require_once cargarVista('fichas/socioeconomica/ingresar.php');
+    } else {
+      $this->inicio(getErrorMsg('Debe ingresar su contrasena nuevamente.'));
     }
   }
 

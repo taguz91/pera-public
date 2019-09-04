@@ -115,10 +115,13 @@ for ($i=1; $i <= $total; $i++) {
 
       <div class="card-foot-ficha">
         <a href="<?php echo constant('URL'); ?>ficha/verficha/<?php echo $f['id_persona_ficha']; ?>" class="card-link">Ver ficha</a>
+        <a class="card-link" href="http://35.192.7.211/home" target="_blank">
+          Ingresar Ficha Salud
+        </a>
         <?php
         $fa = strtotime(strftime("%d-%m-%Y"));
         $ff = strtotime($f['permiso_ingreso_fecha_fin']);
-        if($fa < $ff){
+        if($fa < $ff && $f['persona_ficha_finalizada'] != true){
          ?>
          <button class="btn btn-link"
          type="button" data-toggle="collapse" data-target="#ingresar<?php echo $i; ?>">Ingresar</button>
@@ -157,7 +160,7 @@ require 'src/vista/templates/copy.php';
  ?>
 
  <script type="text/javascript">
-   URLLOGINPF = '<?php echo constant('URL') ?>api/v1/personaficha/login';
+   const URLLOGINPF = '<?php echo constant('URL') ?>api/v1/personaficha/login';
  </script>
 
  <script type="text/javascript" src="<?php echo constant('URL') ?>public/js/ajax/loginpf.js"> </script>
