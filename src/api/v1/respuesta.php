@@ -1,5 +1,6 @@
 <?php
 require_once 'src/modelo/respuesta/resfs.php';
+require_once 'src/modelo/persona/personafichabd.php';
 
 class RespuestaAPI {
 
@@ -13,14 +14,26 @@ class RespuestaAPI {
   function fs($ver = 'todos'){
     switch ($ver) {
       case 'todos':
-        $res = ResFSBD::getAll();
+        $res = PersonaFichaBD::getFinalizados();
         JSON::muestraJSON($res);
         break;
       default:
         JSON::error('El parametro envio no se encontro');
         break;
     }
+  }
 
+  function reporte($tipo = 'todos') {
+    switch ($tipo) {
+      case 'todos':
+        $res = ResFSBD::getAll();
+        $personas = json_decode($res['personas'], true);
+        JSON::muestraJSON($personas);
+        break;
+      default:
+        JSON::error('Debe indicarnos un parametro valido');
+        break;
+    }
   }
 
 }
