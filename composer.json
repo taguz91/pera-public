@@ -1,0 +1,13 @@
+{
+    "name": "gus/pera-public",
+    "description": "Fichas Socioenomicas alumnos ISTA",
+    "require": {
+        "mpdf/mpdf": "^8.0"
+    },
+    "authors": [
+        {
+            "name": "Johnny",
+            "email": "johnnygar98@hotmail.com"
+        }
+    ]
+}
