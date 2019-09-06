@@ -96,23 +96,60 @@ class FichaCTR extends CTR implements DCTR {
 
   function json(){
     $res = SeccionBD::getJSON();
-    var_dump($res);
-    /*
-    $secciones = json_decode($res['secciones'], true);
-    foreach ($secciones as $s) {
-      echo "<h1>".$s['seccion_ficha_nombre']."</h1>";
-      foreach ($s['preguntas'] as $p) {
-        echo "<h4>".$p['pregunta_ficha']."</h4>";
-        if (isset($p['respuestas'])) {
-          foreach ($p['respuestas'] as $r) {
-            echo "<p>".$r['respuesta_ficha']."</p>";
+    //var_dump($res);
+    $res  = json_decode($res['alumnos'], true);
+    //var_dump($res);
+    $alumno = $res[0];
+    //var_dump($alumno);
+    echo "<hr>";
+    $this->impr($alumno['id_persona']);
+    $this->impr($alumno['pais_nacimiento']);
+    echo "<hr>";
+    $this->impr('Ficha');
+    $ficha = $alumno['ficha'];
+    $ficha = $ficha[0];
+    //var_dump($ficha);
+    $this->impr($ficha['tipo_ficha']);
+    $this->impr($ficha['tipo_ficha_descripcion']);
+    echo "<hr>";
+    $secciones = $alumno['secciones'];
+    foreach ($secciones as $value) {
+      $s = $value;
+      //var_dump($s);
+      $this->impr($s['seccion_ficha_nombre']);
+      $preguntas = $s['preguntas'];
+      foreach ($preguntas as $pre) {
+          $this->impr($pre['pregunta_ficha']);
+          //var_dump($pre);
+          $r = $pre['respuesta'];
+          $rl = $pre['respuesta_libre'];
+          if($r != null){
+            foreach ($r as $res) {
+              $this->ru($res['respuesta_ficha']);
+            }
           }
-        }
 
-        echo "<hr>";
+          if($rl != null){
+            foreach ($rl as $resl) {
+              $this->rl($resl['alumno_fs_libre']);
+            }
+          }
       }
+      echo "<hr>";
     }
-    */
+
+  }
+
+  function impr($val){
+    echo "<h1>$val</h1>";
+  }
+
+  function rl($val){
+    echo "<h5>$val</h5>";
+  }
+
+  function ru($val){
+    echo "<h3>$val</h3>";
   }
 
 }

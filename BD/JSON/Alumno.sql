@@ -67,14 +67,18 @@ SELECT array_to_json(
           SELECT
           pregunta_ficha,
           pregunta_ficha_tipo, (
-            SELECT
-            respuesta_ficha
-            FROM
-            public."AlumnoRespuestaFS" arfs
-            JOIN public."RespuestaFicha" rfs ON
-            arfs.id_respuesta_ficha = rfs.id_respuesta_ficha
-            WHERE arfs.id_pregunta_ficha = pf.id_pregunta_ficha
-          ) AS respuesta, (
+            SELECT array_to_json(
+              array_agg(rl.*)
+            ) respuesta FROM (
+              SELECT
+              respuesta_ficha
+              FROM
+              public."AlumnoRespuestaFS" arfs
+              JOIN public."RespuestaFicha" rfs ON
+              arfs.id_respuesta_ficha = rfs.id_respuesta_ficha
+              WHERE arfs.id_pregunta_ficha = pf.id_pregunta_ficha
+            ) AS rl
+          ) , (
             SELECT array_to_json(
               array_agg(rl.*)
             ) AS respuesta_libre FROM (
