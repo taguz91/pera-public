@@ -94,6 +94,11 @@ class FichaCTR extends CTR implements DCTR {
     return json_decode($res['secciones'], true);
   }
 
+  function rep(){
+    $res = SeccionBD::getRep();
+    var_dump($res);
+  }
+
   function json(){
     $res = SeccionBD::getJSON();
     //var_dump($res);

@@ -26,12 +26,28 @@ SELECT array_to_json (
           persona_ficha_fecha_modificacion,
 
           (
-            SELECT id_respuesta_ficha
-            FROM public."AlumnoRespuestaFS" arfs
-            JOIN public."RespuestaFicha" rfs ON arfs.id_respuesta_ficha = rfs.id_respuesta_ficha
-            WHERE id_pregunta_ficha = pf.id_pregunta_ficha AND
-            id_persona_ficha = perf.id_persona_ficha
-          ) AS respuesta,
+            SELECT array_to_json(
+              array_agg(ru.*)
+            ) AS respuesta FROM (
+              SELECT respuesta_ficha
+              FROM public."AlumnoRespuestaFS" arfs
+              JOIN public."RespuestaFicha" rfs ON
+              arfs.id_respuesta_ficha = rfs.id_respuesta_ficha
+              WHERE
+              id_persona_ficha = perf.id_persona_ficha
+            ) AS ru
+
+          ), (
+            SELECT array_to_json(
+                array_agg(rl.*)
+            ) AS respuestas FROM (
+              SELECT
+              alumno_fs_libre
+              FROM public."AlumnoRespuestaLibreFS"
+              arlfs
+              WHERE arlfs.id_persona_ficha = perf.id_persona_ficha
+            ) AS rl
+          )
 
           FROM
           public."Personas" pe
@@ -50,15 +66,17 @@ SELECT array_to_json (
     FROM public."PreguntasFicha"
     WHERE id_seccion_ficha = sf.id_seccion_ficha
 
-  ) AS preg
+    ) AS preg
+  )
 
   FROM public."SeccionesFicha" sf
   WHERE seccion_ficha_activa = true AND
   sf.id_tipo_ficha = (
-    SELECT id_tipo_ficha
+    SELECT DISTINCT id_tipo_ficha
     FROM public."PermisoIngresoFichas" pif
     JOIN public."PersonaFicha" prf ON
     pif.id_permiso_ingreso_ficha = prf.id_permiso_ingreso_ficha
-    WHERE persona_ficha_finalizada = true
+    WHERE persona_ficha_finalizada = true AND
+    id_prd_lectivo = 21
   )
 ) AS s;
