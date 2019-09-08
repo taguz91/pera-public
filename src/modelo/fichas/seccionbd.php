@@ -305,7 +305,48 @@ abstract class SeccionBD {
           array_agg(res.*)
         ) AS respuestas FROM (
           SELECT
+          per.id_persona,
+          consultar_pais(id_lugar_natal) AS pais_nacimiento,
+          consultar_provincia(id_lugar_natal) AS provincia_nacimiento,
+          consultar_ciudad(id_lugar_natal) AS ciudad_nacimiento,
+          consultar_parroquia(id_lugar_natal) AS parroquia_nacimiento,
+          consultar_pais(id_lugar_residencia) AS pais_residencia,
+          consultar_provincia(id_lugar_residencia) AS
+          provincia_residencia,
+          consultar_ciudad(id_lugar_residencia) AS
+          ciudad_residencia,
+          consultar_parroquia(id_lugar_residencia) AS
+          parroquia_residencia,
+          persona_identificacion,
+          persona_primer_apellido,
+          persona_segundo_apellido,
           persona_primer_nombre,
+          persona_segundo_nombre,
+          persona_genero,
+          persona_sexo,
+          persona_estado_civil,
+          persona_etnia,
+          persona_idioma_raiz,
+          persona_tipo_sangre,
+          persona_telefono,
+          persona_celular,
+          persona_correo,
+          persona_fecha_registro,
+          persona_discapacidad,
+          persona_tipo_discapacidad,
+          persona_porcenta_discapacidad, persona_carnet_conadis,
+          persona_calle_principal,
+          persona_numero_casa,
+          persona_calle_secundaria,
+          persona_referencia,
+          persona_sector,
+          persona_idioma,
+          persona_tipo_residencia,
+          persona_fecha_nacimiento,
+          persona_activa,
+          persona_categoria_migratoria,
+          persona_ficha_fecha_ingreso,
+          persona_ficha_fecha_modificacion,
 
           (
             SELECT array_to_json(
@@ -331,6 +372,21 @@ abstract class SeccionBD {
               GROUP BY
               alpl.id_pregunta_ficha
             ) AS pl
+          ),
+
+          (
+            SELECT array_to_json(
+              array_agg(ru.*)
+            ) AS pre_unica FROM (
+              SELECT
+              arfs.id_pregunta_ficha,
+              respuesta_ficha
+              FROM public."AlumnoRespuestaFS" arfs
+              JOIN public."RespuestaFicha" rfs ON
+              arfs.id_respuesta_ficha = rfs.id_respuesta_ficha
+              WHERE arfs.id_persona_ficha =
+              perfi.id_persona_ficha
+            ) AS ru
           )
 
           FROM public."PersonaFicha" perfi

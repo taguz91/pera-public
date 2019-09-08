@@ -27,7 +27,7 @@ class RespuestaAPI {
     switch ($tipo) {
       case 'todos':
         $res = ResFSBD::getAll();
-        $personas = json_decode($res['personas'], true);
+        $personas = json_decode($res['reportes'], true);
         JSON::muestraJSON($personas);
         break;
       default:
