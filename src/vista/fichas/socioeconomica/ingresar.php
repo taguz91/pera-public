@@ -53,7 +53,7 @@ $act = true;
     </form>
   </div>
 
-
+<!--
   <div class="row" id="btnsnav">
 
     <div class="col-6 mx-auto" id="finant">
@@ -65,11 +65,13 @@ $act = true;
     </div>
 
   </div>
+-->
 
 </div>
 
 <?php
 require 'src/vista/templates/copy.php';
 ?>
-
-<script type="text/javascript" src="<?php echo constant('URL'); ?>public/js/navficha.js"></script>
+<!---
+<script type="text/javascript" src="<?php //echo constant('URL'); ?>public/js/navficha.js"></script>
+-->

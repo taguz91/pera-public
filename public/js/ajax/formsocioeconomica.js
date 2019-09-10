@@ -1,10 +1,11 @@
 // Es necesario tener las URL que se usan declaradas antes
 
-function agregarOtroTxtResMul(){
+function agregarOtroTxtResMul(clase){
 
   vclick++;
-  let FROMRESMUL = document.querySelectorAll('.form-res-mul');
-
+  let FROMRESMUL = document.querySelectorAll('.' + clase);
+  console.log('Click: ' + vclick);
+  console.log('Numero de preguntas: ' + FROMRESMUL.length);
   FROMRESMUL.forEach(f => {
     let D1 = document.createElement('div');
     let D2 = document.createElement('div');
@@ -17,6 +18,7 @@ function agregarOtroTxtResMul(){
     I.classList.add('form-control', 'res-mul'+vclick);
 
     I.id = f.id;
+    I.type = f.dataset.tipo;
 
     D3.appendChild(I);
     D2.appendChild(D3);
@@ -71,7 +73,7 @@ function valirdarTodosLlenos(clase){
 
     });
   } else {
-    console.log('No podemoss!!!!');
+    console.log('No tenemos todos llenos, ' + I.length);
   }
 }
 

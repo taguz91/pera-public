@@ -142,7 +142,7 @@ class ResFSBD {
         )
         FROM public."PermisoIngresoFichas" pifi
         WHERE permiso_ingreso_activo = true AND
-        id_permiso_ingreso_ficha = 6
+        id_permiso_ingreso_ficha = 2
       ) AS r;';
       return getOneFromSQL($sql, []);
     }
