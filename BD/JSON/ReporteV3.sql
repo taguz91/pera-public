@@ -89,63 +89,13 @@ SELECT array_to_json (
           persona_activa = true
         ) AS iper
 
-      ),
-
-      (
-        SELECT array_to_json(
-          array_agg(pa.*)
-        ) AS preguntas FROM (
-          SELECT
-          id_pregunta_ficha,
-
-          (
-            SELECT array_to_json (
-              array_agg(rl.*)
-            ) AS res_libre FROM (
-              SELECT
-              alumno_fs_libre
-              FROM
-              public."AlumnoRespuestaLibreFS" alrl
-              WHERE alrl.id_persona_ficha = perfi.id_persona_ficha AND
-              alrl.id_pregunta_ficha = pfpa.id_pregunta_ficha
-            ) AS rl
-          ),
-
-          (
-            SELECT array_to_json(
-              array_agg(ru.*)
-            ) AS pre_unica FROM (
-              SELECT
-              respuesta_ficha
-              FROM public."AlumnoRespuestaFS" arfs
-              JOIN public."RespuestaFicha" rfs ON
-              arfs.id_respuesta_ficha = rfs.id_respuesta_ficha
-              WHERE arfs.id_persona_ficha =
-              perfi.id_persona_ficha AND
-              arfs.id_pregunta_ficha = pfpa.id_pregunta_ficha
-
-            ) AS ru
-          )
-
-
-          FROM public."SeccionesFicha" sfpa
-          JOIN public."PreguntasFicha" pfpa ON
-          sfpa.id_seccion_ficha = pfpa.id_seccion_ficha
-          WHERE sfpa.id_tipo_ficha = pifi.id_tipo_ficha AND
-          sfpa.seccion_ficha_activa = true AND
-          pfpa.pregunta_ficha_activa = true
-          ORDER BY
-          seccion_ficha_posicion,
-          pregunta_ficha_posicion
-        ) AS pa
       )
 
       FROM public."PersonaFicha" perfi
       JOIN public."Personas" per ON
       per.id_persona = perfi.id_persona
       WHERE
-      perfi.id_permiso_ingreso_ficha = pifi.id_permiso_ingreso_ficha  AND
-      persona_ficha_finalizada = true
+      perfi.id_permiso_ingreso_ficha = pifi.id_permiso_ingreso_ficha
       ORDER BY persona_primer_apellido,
       persona_segundo_apellido,
       persona_primer_nombre,

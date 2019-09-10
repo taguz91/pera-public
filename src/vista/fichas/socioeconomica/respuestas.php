@@ -98,7 +98,7 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 
   <?php if ($act): ?>
     <div class="row">
-      <div class="col-2">
+      <div class="col-6 col-md-2">
         <button class="btn btn-success btn-block btn-mas-txt"
         onclick="<?php echo "agregarOtroTxtResMul('form-res-mul$idS')" ?>"
         type="button" name="button">Mas</button>
@@ -124,7 +124,7 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 
   <?php if ($act): ?>
     <div class="row">
-      <div class="col-2">
+      <div class="col-6 col-md-2">
         <button class="btn btn-success btn-block btn-mas-txt"
         onclick="<?php echo "agregarOtroTxtResMul('form-res-mul$idS')" ?>"
         type="button">Mas</button>

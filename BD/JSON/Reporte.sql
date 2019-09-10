@@ -22,11 +22,14 @@ SELECT array_to_json (
           FROM public."PreguntasFicha" pfi
           WHERE pfi.pregunta_ficha_activa = true AND
           pfi.id_seccion_ficha = sfi.id_seccion_ficha
+          ORDER BY pregunta_ficha_posicion
         ) AS rf
       )
 
       FROM public."SeccionesFicha" sfi
-      WHERE seccion_ficha_activa = true
+      WHERE seccion_ficha_activa = true AND
+      sfi.id_tipo_ficha = pifi.id_tipo_ficha
+      ORDER BY seccion_ficha_posicion
     ) AS sf
   ),
 
@@ -94,7 +97,9 @@ SELECT array_to_json (
         ) AS pre_libre FROM (
 
           SELECT
-          alpl.id_pregunta_ficha, (
+          alpl.id_pregunta_ficha,
+          seccion_ficha_posicion,
+          pregunta_ficha_posicion,(
             SELECT array_to_json (
               array_agg(rl.*)
             ) AS res_libre FROM (
@@ -108,9 +113,18 @@ SELECT array_to_json (
           )
           FROM
           public."AlumnoRespuestaLibreFS" alpl
+          JOIN public."PreguntasFicha" pfs ON
+          pfs.id_pregunta_ficha = alpl.id_pregunta_ficha
+          JOIN public."SeccionesFicha" sfs ON
+          sfs.id_seccion_ficha = pfs.id_seccion_ficha
           WHERE alpl.id_persona_ficha = perfi.id_persona_ficha
           GROUP BY
-          alpl.id_pregunta_ficha
+          alpl.id_pregunta_ficha,
+          seccion_ficha_posicion,
+          pregunta_ficha_posicion
+          ORDER BY
+          seccion_ficha_posicion,
+          pregunta_ficha_posicion
         ) AS pl
       ),
 
@@ -124,17 +138,30 @@ SELECT array_to_json (
           FROM public."AlumnoRespuestaFS" arfs
           JOIN public."RespuestaFicha" rfs ON
           arfs.id_respuesta_ficha = rfs.id_respuesta_ficha
+          JOIN public."PreguntasFicha" pfs ON
+          pfs.id_pregunta_ficha = rfs.id_pregunta_ficha
+          JOIN public."SeccionesFicha" sfs ON
+          sfs.id_seccion_ficha = pfs.id_seccion_ficha
           WHERE arfs.id_persona_ficha =
           perfi.id_persona_ficha
+          ORDER BY
+          seccion_ficha_posicion,
+          pregunta_ficha_posicion
         ) AS ru
       )
 
       FROM public."PersonaFicha" perfi
+      JOIN public."Personas" per ON
+      per.id_persona = perfi.id_persona
       WHERE
       perfi.id_permiso_ingreso_ficha = pifi.id_permiso_ingreso_ficha
+      ORDER BY persona_primer_apellido,
+      persona_segundo_apellido,
+      persona_primer_nombre,
+      persona_segundo_nombre
     ) AS res
   )
   FROM public."PermisoIngresoFichas" pifi
   WHERE permiso_ingreso_activo = true AND
-  id_permiso_ingreso_ficha = 6
+  id_permiso_ingreso_ficha = 2
 ) AS r;

@@ -130,7 +130,6 @@
   function getInfoMsg($msg){
     return '
     <div class="alert alert-info alert-dismissible fade show mx-auto" role="alert">
-      <h5 class="alert-heading">Error</h5>
       <p> ' . $msg . ' </p>
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
