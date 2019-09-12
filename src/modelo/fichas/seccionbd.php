@@ -197,6 +197,7 @@ abstract class SeccionBD {
           array_agg(f.*)
         ) AS ficha FROM (
           SELECT
+          
           tipo_ficha,
           tipo_ficha_descripcion
           FROM public."TipoFicha" tf
@@ -204,7 +205,7 @@ abstract class SeccionBD {
           pif.id_tipo_ficha = tf.id_tipo_ficha
           JOIN public."PersonaFicha" prf ON
           pif.id_permiso_ingreso_ficha = prf.id_permiso_ingreso_ficha
-          WHERE prf.id_persona_ficha = 10
+          WHERE prf.id_persona_ficha = 489
         ) AS f
       ), (
         SELECT array_to_json (
@@ -253,14 +254,14 @@ abstract class SeccionBD {
           JOIN public."PersonaFicha" prf ON
           pif.id_permiso_ingreso_ficha = prf.id_permiso_ingreso_ficha
           WHERE seccion_ficha_activa = true AND
-          prf.id_persona_ficha = 10
+          prf.id_persona_ficha = 489
         ) as s
       )
       FROM public."Personas" per
       JOIN public."Alumnos" alu ON
       alu.id_persona =  per.id_persona
       WHERE persona_activa = true AND
-      per.id_persona = 548
+      per.id_persona = 501
     ) AS a;
 ';
     $idPersonaFicha = 14;
