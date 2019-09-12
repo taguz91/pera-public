@@ -5,7 +5,7 @@
   const URLGURDAR = '<?php echo constant('URL'); ?>api/v1/ficha/guardar';
 </script>
 
-<script type="text/javascript" src="<?php echo constant('URL') ?>public/js/ajax/formsocioeconomica.js?v=122">
+<script type="text/javascript" src="<?php echo constant('URL') ?>public/js/ajax/formsocioeconomica.js?v=11">
 </script>
 
 <?php endif; ?>
@@ -41,12 +41,12 @@ require_once 'src/vista/fichas/socioeconomica/respuestas.php';
 
             <div class="card-body">
 
-              <?php if (isset($p['respuestas'])): ?>
+              <?php if (isset($p['respuestas']) && $p['pregunta_ficha_respuesta_tipo'] == 1): ?>
 
                 <?php foreach ($p['respuestas'] as $vr => $r): ?>
 
                   <?php
-                  if($p['pregunta_ficha_respuesta_tipo'] == 1){
+                  /*if($p['pregunta_ficha_respuesta_tipo'] == 1){*/
                     formRespuestaUnica(
                       isset($act) ? $act : false,
                       $vp,
@@ -57,7 +57,7 @@ require_once 'src/vista/fichas/socioeconomica/respuestas.php';
                       $r['id_respuesta_ficha'],
                       $r['respuesta_ficha']
                     );
-                  }
+                  //}
                   ?>
 
 
@@ -87,6 +87,20 @@ require_once 'src/vista/fichas/socioeconomica/respuestas.php';
                 );
               }
               ?>
+
+              <?php if (isset($p['respuestas']) && $p['pregunta_ficha_respuesta_tipo'] == 5): ?>
+
+                <?php
+                formRespuestaSeleccion(
+                  isset($act) ? $act : false,
+                  $p['id_pregunta_ficha'],
+                  $p['respuestas'],
+                  isset($p['respuesta_libre']) ? $p['respuesta_libre'] : null,
+                  $s['id_seccion_ficha']
+                );
+                 ?>
+
+              <?php endif; ?>
 
             </div>
 

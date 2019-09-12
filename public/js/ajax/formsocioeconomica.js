@@ -1,33 +1,77 @@
 // Es necesario tener las URL que se usan declaradas antes
 
 function agregarOtroTxtResMul(clase){
-
   vclick++;
   let FROMRESMUL = document.querySelectorAll('.' + clase);
   console.log('Click: ' + vclick);
   console.log('Numero de preguntas: ' + FROMRESMUL.length);
   FROMRESMUL.forEach(f => {
-    let D1 = document.createElement('div');
-    let D2 = document.createElement('div');
-    let D3 = document.createElement('div');
-    let I = document.createElement('input');
+    let tipo = f.dataset.tipo;
+    console.log('Tipo: '+tipo);
+    if(tipo == 'select'){
+      let opts = document.querySelectorAll('.select-'+f.id);
+      let D1 = document.createElement('div');
+      let D2 = document.createElement('div');
+      let D3 = document.createElement('div');
+      let S = document.createElement('select');
+      let OUNO = document.createElement('option');
+      OUNO.value = "";
+      OUNO.appendChild(
+        document.createTextNode('Seleccione')
+      );
 
-    D1.classList.add('form-row', 'c'+vclick);
-    D2.classList.add('col-12');
-    D3.classList.add('form-group');
-    I.classList.add('form-control', 'res-mul'+vclick);
+      D1.classList.add('form-row', 'c'+vclick);
+      D2.classList.add('col-12');
+      D3.classList.add('form-group');
+      S.classList.add('form-control', 'res-mul'+vclick);
+      S.id = f.id;
+      S.appendChild(OUNO);
+      let opciones = '';
+      opts.forEach(o => {
+        if(!opciones.includes(o.value)){
+          console.log('Opt: '+o.value);
+          opciones += o.value;
+          let O = document.createElement('option');
+          O.value = o.value;
+          O.appendChild(
+            document.createTextNode(o.value)
+          );
+          S.appendChild(O);
+        }
+      });
 
-    I.id = f.id;
-    I.type = f.dataset.tipo;
+      D3.appendChild(S);
+      D2.appendChild(D3);
+      D1.appendChild(D2);
 
-    D3.appendChild(I);
-    D2.appendChild(D3);
-    D1.appendChild(D2);
-
-    f.appendChild(D1);
-
+      f.appendChild(D1);
+      console.log('Todo bien todo correcto');
+    } else {
+      agregarTxt(f, vclick);
+    }
   });
   agregarVal('res-mul'+vclick)
+}
+
+function agregarTxt(f, vclick){
+  let D1 = document.createElement('div');
+  let D2 = document.createElement('div');
+  let D3 = document.createElement('div');
+  let I = document.createElement('input');
+
+  D1.classList.add('form-row', 'c'+vclick);
+  D2.classList.add('col-12');
+  D3.classList.add('form-group');
+  I.classList.add('form-control', 'res-mul'+vclick);
+
+  I.id = f.id;
+  I.type = f.dataset.tipo;
+
+  D3.appendChild(I);
+  D2.appendChild(D3);
+  D1.appendChild(D2);
+
+  f.appendChild(D1);
 }
 
 function agregarVal(clase){
@@ -100,8 +144,12 @@ function actualizarRespuestaLibre(id){
       .catch(e => {
         console.log('Error: ' + e);
       });
+    } else {
+      console.log('No tenemos valor');
     }
 
+  } else {
+    console.log('No tenemos el valor');
   }
 
 }
