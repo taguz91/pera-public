@@ -1,9 +1,12 @@
 <?php
 
-function reporteFS($alumno){
+function reporteFS($alumno, $idPersonaFicha){
   $ficha = $alumno['ficha'];
   $ficha = $ficha[0];
   $secciones = $alumno['secciones'];
+  $carrera = $alumno['carrera_actual'];
+  $carrera = $carrera[0];
+
 
   $mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf']);
 
@@ -139,16 +142,16 @@ function reporteFS($alumno){
   <table border="1"  width="100%">
   <tr>
       <th>Carrera:</th>
-      <td> TDS </td>
+      <td> '.$carrera['carrera_nombre'].' </td>
   </tr>';
 
   $html.='<tr>
       <th WIDTH="200">Nivel que cursa:</th>
-      <td>'.'0'.'</td>
+      <td>'.$carrera['prd_lectivo_nombre'].'</td>
   </tr>';
   $html.='<tr>
       <th WIDTH="200">Ciclo académico:</th>
-      <td>'.'6'.'</td>
+      <td>'.$carrera['curso_ciclo'].'</td>
   </tr>';
   $html.='</table>';
   $html.='<h4>CONTACTO:</h4>
@@ -199,15 +202,15 @@ function reporteFS($alumno){
   </tr>
   <tr>
       <th WIDTH="200">Nombre de contacto de emergencia:</th>
-      <td>'.'n/a'.'</td>
+      <td>'.$alumno['alumno_nombre_contacto_emergencia'].'</td>
   </tr>
   <tr>
       <th WIDTH="200">Teléfono:</th>
-      <td>'.'n/a'.'</td>
+      <td>'.$alumno['alumno_numero_contacto'].'</td>
   </tr>
   <tr>
       <th WIDTH="200">E-mail:</th>
-      <td>'.'n/a'.'</td>
+      <td>'.' '.'</td>
   </tr>
   </table>
   ';
@@ -259,9 +262,7 @@ function reporteFS($alumno){
   .'  Acepto y declaro que: la información proporcionada en el presente formulario es real y puede ser utilizada para los fines pertinentes, autorizo que el Instituto Superior Tecnológico del Azuay - ISTA a realizar las verificaciones que crean oportunas sobre  la información detallada en el presente documento.'.'</p>';
   $html.='<caption><h2>_________________________________</h2></caption> </html> ';
 
-  $variable='soy un footer';
-
-  $mpdf->SetHTMLHeader(reportHead($variable));
+  $mpdf->SetHTMLHeader(reportHead($idPersonaFicha));
   $mpdf->setFooter("{PAGENO}");
   $mpdf->WriteHTML($html);
   $mpdf->Output();

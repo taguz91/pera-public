@@ -35,7 +35,12 @@ class ReporteFicha {
       persona_celular,
       persona_correo,
       persona_fecha_registro,
-      persona_discapacidad,
+      CASE persona_discapacidad
+        WHEN persona_discapacidad = true THEN
+          \'Si\'
+        ELSE
+          \'No\'
+      END AS persona_discapacidad,
       persona_tipo_discapacidad,
       persona_porcenta_discapacidad, persona_carnet_conadis,
       persona_calle_principal,
@@ -47,7 +52,33 @@ class ReporteFicha {
       persona_tipo_residencia,
       persona_fecha_nacimiento,
       persona_activa,
-      persona_categoria_migratoria, (
+      persona_categoria_migratoria,
+      alumno_nombre_contacto_emergencia,
+      alumno_numero_contacto,
+
+      (
+        SELECT array_to_json(
+          array_agg(c.*)
+        ) AS carrera_actual FROM (
+          SELECT
+          carrera_nombre,
+          prd_lectivo_nombre,
+          curso_ciclo
+          FROM public."AlumnoCurso" ac
+          JOIN public."Cursos" c ON
+          c.id_curso = ac.id_curso
+          JOIN public."PeriodoLectivo" pl ON
+          pl.id_prd_lectivo = c.id_prd_lectivo
+          JOIN public."Carreras" cr ON
+          cr.id_carrera = pl.id_carrera
+          WHERE id_alumno = alu.id_alumno AND
+          almn_curso_activo = true
+          ORDER BY curso_ciclo DESC
+          LIMIT 1
+        ) AS c
+      ),
+
+      (
         SELECT array_to_json (
           array_agg(f.*)
         ) AS ficha FROM (
@@ -126,5 +157,5 @@ class ReporteFicha {
     ]);
   }
 
-  
+
 }

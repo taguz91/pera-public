@@ -8,7 +8,7 @@ class Ficha {
     $res = ReporteFicha::getReporteFS($idPersona, $idPersonaFicha);
     $res  = json_decode($res['alumnos'], true);
     require_once 'src/reporte/ficha/socioeconomica.php';
-    reporteFS($res[0]);
+    reporteFS($res[0], $idPersonaFicha);
   }
 
   static function FO($idPersonaFicha){
@@ -19,7 +19,8 @@ class Ficha {
 
 function reportHead($var){
   $footer='
-  <p align="right">'.$var.' | '.
+  <p align="right">
+  <strong>'.$var.' </strong> | '.
     strftime("%d-%m-%Y")
   .'</p>';
   return $footer;
