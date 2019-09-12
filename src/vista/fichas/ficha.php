@@ -116,6 +116,8 @@ for ($i=1; $i <= $total; $i++) {
       <div class="card-foot-ficha">
         <a href="<?php echo constant('URL'); ?>ficha/verficha/<?php echo $f['id_persona_ficha']; ?>" class="card-link">Ver ficha</a>
 
+        <a href="<?php echo constant('URL'); ?>ficha/reporte/<?php echo $f['id_persona_ficha']; ?>" class="card-link" target="_blank">Imprimir Reporte</a>
+
         <?php
         $fa = strtotime(strftime("%d-%m-%Y"));
         $ff = strtotime($f['permiso_ingreso_fecha_fin']);
