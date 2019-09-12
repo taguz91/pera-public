@@ -16,6 +16,7 @@ $act = true;
       <div class="card">
         <div class="card-body">
           <h3 class="card-title">Indicaciones Generales</h3>
+          <hr>
           <p class="card-text"> <strong>1.</strong> Sr./Srta. estudiante, LEA detenidamente el formulario y complemente TODOS los casilleros con la información solicitada.</p>
           <p class="card-text"> <strong>2.</strong> Deberá complementar la presente ficha con datos CLAROS y PRECISOS. La información personal proporcionada en este formulario, tendrá el carácter de información CONFIDENCIAL y será sujeta a VERIFICACIÓN. La comprobación en la FALSEDAD de la misma, determinará la ELIMINACIÓN de los futuros procesos a los que pueda solicitar o postular.</p>
         </div>
@@ -25,11 +26,12 @@ $act = true;
 
   <div class="row my-2 sticky-top">
 
-    <div class="alert alert-info alert-dismissible fade show mx-auto" role="alert">
-      <h5 class="alert-heading">Importante!!!</h5>
-      Las respuestas de opcion se guardan automaticamente.
+    <div class="alert alert-info alert-dismissible fade show mx-auto my-3" role="alert">
+      <h4 class="alert-heading">¡Importante!</h4>
       <hr>
-      La seccion con preguntas libres sera guardada automaticamente,al estar llenas todos los campos.
+      <p>Las preguntas de opción se guardan automáticamente al seleccionar una respuesta.</p>
+      <p>La sección con preguntas libres será guardada automáticamente, al terminar de llenar todos los campos correspondientes a la misma.</p>
+      <p>Se deben llenar todas las preguntas, si una de las preguntas no aplica con usted por favor escribir <strong>NA</strong>.</p>
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -48,22 +50,12 @@ $act = true;
         <hr>
         La ficha no sera enviada si no esta llena toda la informacion solicitada!
       </div>
-      <button id="enviarficha" type="submit" class="btn btn-blue d-block w-50 mx-auto mb-3">Terminar y Enviar</button>
+      <button id="enviarficha" type="submit"
+      class="btn btn-blue d-block w-50 mx-auto mb-3 text-white h3">
+        Terminar y Enviar
+      </button>
     </div>
     </form>
-  </div>
-
-
-  <div class="row" id="btnsnav">
-
-    <div class="col-6 mx-auto" id="finant">
-      <button id="anteriorsec" class="btn btn-info w-50 d-block mx-auto" type="button" name="button" onclick="clickAt()">Anterior</button>
-    </div>
-
-    <div class="col-6 mx-auto" id="finsig">
-      <button id="seguientesec" class="btn btn-info w-50 d-block mx-auto" type="button" name="button" onclick="clickSg()">Siguiente</button>
-    </div>
-
   </div>
 
 </div>
@@ -71,5 +63,3 @@ $act = true;
 <?php
 require 'src/vista/templates/copy.php';
 ?>
-
-<script type="text/javascript" src="<?php echo constant('URL'); ?>public/js/navficha.js"></script>

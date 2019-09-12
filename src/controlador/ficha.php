@@ -31,7 +31,7 @@ class FichaCTR extends CTR implements DCTR {
         echo "NO TENEMOS EL FORMULARIO OCUPACIONAL, ESTA EN DESARROLLO";
         break;
       default:
-        $this->inicio(getErrorMsg('Debe indicar la consena para llenar la ficha.'));
+        $this->inicio(getErrorMsg('No tenemos ninguna ficha disponible para usted.'));
         break;
     }
   }
@@ -55,14 +55,15 @@ class FichaCTR extends CTR implements DCTR {
     $idPersonaFicha = isset($_SESSION['id_persona_ficha']) ? $_SESSION['id_persona_ficha'] : 0;
     if($idPersonaFicha != 0){
       $res = PersonaFichaBD::finalizar($idPersonaFicha);
+      PersonaFichaBD::actualizarFecha($idPersonaFicha);
       if($res != null){
-        $this->inicio(getInfoMsg('Finalizamos correctamente su ficha.
+        $this->inicio(getInfoMsg('Guardamos correctamente su ficha.
         <a href="http://35.192.7.211/home" target="_blank">Ingresar Ficha Salud</a>'));
       } else {
-        $this->inicio(getErrorMsg('En este momento no pudimos finalizar su ficha, por favor vuelva a intentarlo mas tarde.'));
+        $this->inicio(getErrorMsg('En este momento no pudimos finalizar su ficha, por favor vuelva a intentarlo más tarde.'));
       }
     } else {
-      $this->inicio(getErrorMsg('No pudimos finalizar su ficha, porque no indico que ficha finalizara.'));
+      $this->inicio(getErrorMsg('No pudimos finalizar su ficha, porque no tenemos el ID.'));
     }
   }
 
@@ -80,7 +81,7 @@ class FichaCTR extends CTR implements DCTR {
       $secciones = $this->getFS($idPersonaFicha);
       require_once cargarVista('fichas/socioeconomica/ingresar.php');
     } else {
-      $this->inicio(getErrorMsg('Debe ingresar su contrasena nuevamente.'));
+      $this->inicio(getErrorMsg('Debe ingresar su contraseña nuevamente.'));
     }
   }
 

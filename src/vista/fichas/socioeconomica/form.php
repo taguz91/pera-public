@@ -82,7 +82,8 @@ require_once 'src/vista/fichas/socioeconomica/respuestas.php';
                   isset($act) ? $act : false,
                   $p['id_pregunta_ficha'],
                   isset($p['respuesta_libre']) ? $p['respuesta_libre'] : null,
-                  $p['pregunta_ficha_respuesta_campo']
+                  $p['pregunta_ficha_respuesta_campo'],
+                  $s['id_seccion_ficha']
                 );
               }
               ?>
@@ -103,9 +104,10 @@ require_once 'src/vista/fichas/socioeconomica/respuestas.php';
 
 
 <script type="text/javascript">
-  const BTNSMASTXT = document.querySelectorAll('.btn-mas-txt');
   var vclick = 0;
+  /*const BTNSMASTXT = document.querySelectorAll('.btn-mas-txt');
+
   BTNSMASTXT.forEach(b => {
     b.onclick = agregarOtroTxtResMul;
-  });
+  });*/
 </script>

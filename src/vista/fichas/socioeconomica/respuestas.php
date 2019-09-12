@@ -65,11 +65,13 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 
 
 
-<?php function formRespuestaLibreMultiple($act, $id, $respuestas, $tipo){ ?>
+<?php function formRespuestaLibreMultiple($act, $id, $respuestas, $tipo, $idS){ ?>
 
 <?php if ($respuestas != null): ?>
 
-  <div class="form-horizontal form-res-mul" id="<?php echo $id; ?>">
+  <div class="form-horizontal form-res-mul<?php echo $idS; ?> "
+    data-tipo="<?php echo $tipo; ?>"
+    id="<?php echo $id; ?>">
 
   <?php foreach ($respuestas as $kr => $r): ?>
       <div class="form-row">
@@ -96,19 +98,24 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 
   <?php if ($act): ?>
     <div class="row">
-      <div class="col-2">
-        <button class="btn btn-success btn-block btn-mas-txt" type="button" name="button">Mas</button>
+      <div class="col-6 col-md-2">
+        <button class="btn btn-success btn-block btn-mas-txt"
+        onclick="<?php echo "agregarOtroTxtResMul('form-res-mul$idS')" ?>"
+        type="button" name="button">Mas</button>
       </div>
     </div>
   <?php endif; ?>
 
 <?php else: ?>
 
-  <div class="form-horizontal form-res-mul" id="<?php echo $id; ?>" >
+  <div class="form-horizontal form-res-mul<?php echo $idS; ?>"
+    data-tipo="<?php echo $tipo; ?>"
+    id="<?php echo $id; ?>" >
     <div class="form-row">
       <div class="col-12">
         <div class="form-group">
-          <input required id="<?php echo $id; ?>" class="form-control res-mul"
+          <input required id="<?php echo $id; ?>"
+          class="form-control res-mul<?php echo $idS; ?>"
           type="<?php echo $tipo ?>">
         </div>
       </div>
@@ -117,13 +124,15 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
 
   <?php if ($act): ?>
     <div class="row">
-      <div class="col-2">
-        <button class="btn btn-success btn-block btn-mas-txt" type="button">Mas</button>
+      <div class="col-6 col-md-2">
+        <button class="btn btn-success btn-block btn-mas-txt"
+        onclick="<?php echo "agregarOtroTxtResMul('form-res-mul$idS')" ?>"
+        type="button">Mas</button>
       </div>
     </div>
 
     <script type="text/javascript">
-      agregarVal('res-mul');
+      agregarVal('res-mul<?php echo $idS ?>');
     </script>
   <?php endif; ?>
 

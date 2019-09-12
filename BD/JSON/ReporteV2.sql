@@ -93,13 +93,12 @@ SELECT array_to_json (
 
       (
         SELECT array_to_json(
-          array_agg(pl.*)
-        ) AS pre_libre FROM (
-
+          array_agg(pa.*)
+        ) AS preguntas FROM (
           SELECT
-          alpl.id_pregunta_ficha,
-          seccion_ficha_posicion,
-          pregunta_ficha_posicion,(
+          id_pregunta_ficha,
+
+          (
             SELECT array_to_json (
               array_agg(rl.*)
             ) AS res_libre FROM (
@@ -108,53 +107,45 @@ SELECT array_to_json (
               FROM
               public."AlumnoRespuestaLibreFS" alrl
               WHERE alrl.id_persona_ficha = perfi.id_persona_ficha AND
-              alrl.id_pregunta_ficha = alpl.id_pregunta_ficha
+              alrl.id_pregunta_ficha = pfpa.id_pregunta_ficha
             ) AS rl
-          )
-          FROM
-          public."AlumnoRespuestaLibreFS" alpl
-          JOIN public."PreguntasFicha" pfs ON
-          pfs.id_pregunta_ficha = alpl.id_pregunta_ficha
-          JOIN public."SeccionesFicha" sfs ON
-          sfs.id_seccion_ficha = pfs.id_seccion_ficha
-          WHERE alpl.id_persona_ficha = perfi.id_persona_ficha
-          GROUP BY
-          alpl.id_pregunta_ficha,
-          seccion_ficha_posicion,
-          pregunta_ficha_posicion
-          ORDER BY
-          seccion_ficha_posicion,
-          pregunta_ficha_posicion
-        ) AS pl
-      ),
+          ),
 
-      (
-        SELECT array_to_json(
-          array_agg(ru.*)
-        ) AS pre_unica FROM (
-          SELECT
-          arfs.id_pregunta_ficha,
-          respuesta_ficha
-          FROM public."AlumnoRespuestaFS" arfs
-          JOIN public."RespuestaFicha" rfs ON
-          arfs.id_respuesta_ficha = rfs.id_respuesta_ficha
-          JOIN public."PreguntasFicha" pfs ON
-          pfs.id_pregunta_ficha = rfs.id_pregunta_ficha
-          JOIN public."SeccionesFicha" sfs ON
-          sfs.id_seccion_ficha = pfs.id_seccion_ficha
-          WHERE arfs.id_persona_ficha =
-          perfi.id_persona_ficha
+          (
+            SELECT array_to_json(
+              array_agg(ru.*)
+            ) AS pre_unica FROM (
+              SELECT
+              respuesta_ficha
+              FROM public."AlumnoRespuestaFS" arfs
+              JOIN public."RespuestaFicha" rfs ON
+              arfs.id_respuesta_ficha = rfs.id_respuesta_ficha
+              WHERE arfs.id_persona_ficha =
+              perfi.id_persona_ficha AND
+              arfs.id_pregunta_ficha = pfpa.id_pregunta_ficha
+
+            ) AS ru
+          )
+
+
+          FROM public."SeccionesFicha" sfpa
+          JOIN public."PreguntasFicha" pfpa ON
+          sfpa.id_seccion_ficha = pfpa.id_seccion_ficha
+          WHERE sfpa.id_tipo_ficha = pifi.id_tipo_ficha AND
+          sfpa.seccion_ficha_activa = true AND
+          pfpa.pregunta_ficha_activa = true
           ORDER BY
           seccion_ficha_posicion,
           pregunta_ficha_posicion
-        ) AS ru
+        ) AS pa
       )
 
       FROM public."PersonaFicha" perfi
       JOIN public."Personas" per ON
       per.id_persona = perfi.id_persona
       WHERE
-      perfi.id_permiso_ingreso_ficha = pifi.id_permiso_ingreso_ficha
+      perfi.id_permiso_ingreso_ficha = pifi.id_permiso_ingreso_ficha  AND
+      persona_ficha_finalizada = true
       ORDER BY persona_primer_apellido,
       persona_segundo_apellido,
       persona_primer_nombre,

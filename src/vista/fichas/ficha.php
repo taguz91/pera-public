@@ -115,16 +115,16 @@ for ($i=1; $i <= $total; $i++) {
 
       <div class="card-foot-ficha">
         <a href="<?php echo constant('URL'); ?>ficha/verficha/<?php echo $f['id_persona_ficha']; ?>" class="card-link">Ver ficha</a>
-        <a class="card-link" href="http://35.192.7.211/home" target="_blank">
-          Ingresar Ficha Salud
-        </a>
+
         <?php
         $fa = strtotime(strftime("%d-%m-%Y"));
         $ff = strtotime($f['permiso_ingreso_fecha_fin']);
-        if($fa < $ff && $f['persona_ficha_finalizada'] != true){
-         ?>
+        ?>
+
+         <?php if ($fa < $ff && $f['persona_ficha_finalizada'] != true): ?>
+
          <button class="btn btn-link"
-         type="button" data-toggle="collapse" data-target="#ingresar<?php echo $i; ?>">Ingresar</button>
+         type="button" data-toggle="collapse" data-target="#ingresar<?php echo $i; ?>">Ingresar Ficha</button>
          <div id="ingresar<?php echo $i; ?>" class="collapse">
 
             <form class="form-inline my-2" action="<?php echo constant('URL'); ?>ficha/ingresar" method="post"
@@ -147,7 +147,13 @@ for ($i=1; $i <= $total; $i++) {
             <a href="#" class="badge">Ayuda</a>
          </div>
 
-        <?php } ?>
+         <?php else: ?>
+
+            <a class="card-link" href="http://35.192.7.211/home" target="_blank">
+              Ingresar Ficha Salud
+            </a>
+
+        <?php endif; ?>
       </div>
 
     </div>

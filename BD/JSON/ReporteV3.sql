@@ -89,65 +89,6 @@ SELECT array_to_json (
           persona_activa = true
         ) AS iper
 
-      ),
-
-      (
-        SELECT array_to_json(
-          array_agg(pl.*)
-        ) AS pre_libre FROM (
-
-          SELECT
-          alpl.id_pregunta_ficha,
-          seccion_ficha_posicion,
-          pregunta_ficha_posicion,(
-            SELECT array_to_json (
-              array_agg(rl.*)
-            ) AS res_libre FROM (
-              SELECT
-              alumno_fs_libre
-              FROM
-              public."AlumnoRespuestaLibreFS" alrl
-              WHERE alrl.id_persona_ficha = perfi.id_persona_ficha AND
-              alrl.id_pregunta_ficha = alpl.id_pregunta_ficha
-            ) AS rl
-          )
-          FROM
-          public."AlumnoRespuestaLibreFS" alpl
-          JOIN public."PreguntasFicha" pfs ON
-          pfs.id_pregunta_ficha = alpl.id_pregunta_ficha
-          JOIN public."SeccionesFicha" sfs ON
-          sfs.id_seccion_ficha = pfs.id_seccion_ficha
-          WHERE alpl.id_persona_ficha = perfi.id_persona_ficha
-          GROUP BY
-          alpl.id_pregunta_ficha,
-          seccion_ficha_posicion,
-          pregunta_ficha_posicion
-          ORDER BY
-          seccion_ficha_posicion,
-          pregunta_ficha_posicion
-        ) AS pl
-      ),
-
-      (
-        SELECT array_to_json(
-          array_agg(ru.*)
-        ) AS pre_unica FROM (
-          SELECT
-          arfs.id_pregunta_ficha,
-          respuesta_ficha
-          FROM public."AlumnoRespuestaFS" arfs
-          JOIN public."RespuestaFicha" rfs ON
-          arfs.id_respuesta_ficha = rfs.id_respuesta_ficha
-          JOIN public."PreguntasFicha" pfs ON
-          pfs.id_pregunta_ficha = rfs.id_pregunta_ficha
-          JOIN public."SeccionesFicha" sfs ON
-          sfs.id_seccion_ficha = pfs.id_seccion_ficha
-          WHERE arfs.id_persona_ficha =
-          perfi.id_persona_ficha
-          ORDER BY
-          seccion_ficha_posicion,
-          pregunta_ficha_posicion
-        ) AS ru
       )
 
       FROM public."PersonaFicha" perfi
