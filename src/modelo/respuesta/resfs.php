@@ -2,7 +2,7 @@
 
 class ResFSBD {
 
-    static function getAll() {
+    static function getAll($idPermiso) {
       $sql = '
       SELECT array_to_json (
         array_agg(r.*)
@@ -160,9 +160,11 @@ class ResFSBD {
         )
         FROM public."PermisoIngresoFichas" pifi
         WHERE permiso_ingreso_activo = true AND
-        id_permiso_ingreso_ficha = 2
+        id_permiso_ingreso_ficha = :idPermiso
       ) AS r;';
-      return getOneFromSQL($sql, []);
+      return getOneFromSQL($sql, [
+        'idPermiso' => $idPermiso
+      ]);
     }
 
 

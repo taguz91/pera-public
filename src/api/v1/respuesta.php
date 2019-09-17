@@ -24,9 +24,10 @@ class RespuestaAPI {
   }
 
   function reporte($tipo = 'todos') {
+    $idPermiso  = isset($_GET['id_permiso'])? $_GET['id_permiso'] : 0;
     switch ($tipo) {
       case 'todos':
-        $res = ResFSBD::getAll();
+        $res = ResFSBD::getAll($idPermiso);
         $personas = json_decode($res['reportes'], true);
         JSON::muestraJSON($personas);
         break;

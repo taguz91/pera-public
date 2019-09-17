@@ -24,7 +24,6 @@ class FichaCTR extends CTR implements DCTR {
     global $U;
     switch ($U->tipo) {
       case 'A':
-        //Cargamos la ficha socioeconomica
         $this->ingresarFS();
         break;
       case 'D':
@@ -40,7 +39,7 @@ class FichaCTR extends CTR implements DCTR {
     global $U;
     switch ($U->tipo) {
       case 'A':
-        $this->verfichaFS($idPersonaFicha);
+        $this->verfichaFS($U->idPersona, $idPersonaFicha);
         break;
       case 'D':
         echo "NO TENEMOS EL FORMULARIO OCUPACIONAL, ESTA EN DESARROLLO";
@@ -63,7 +62,7 @@ class FichaCTR extends CTR implements DCTR {
           echo "NO TENEMOS EL REPORTE DE DOCENTES, ESTA EN DESARROLLO";
           break;
         default:
-          echo "NO TENEMOS UNA FICHA PARA MOSTRARLA";
+          $this->inicio(getErrorMsg('No tenemos fichas para usted, debido a que no lo tenemos registrado como alumno ni docente.'));
           break;
       }
     }
@@ -80,8 +79,6 @@ class FichaCTR extends CTR implements DCTR {
       } else {
         $this->inicio(getErrorMsg('En este momento no pudimos finalizar su ficha, por favor vuelva a intentarlo más tarde.'));
       }
-    } else {
-      $this->inicio(getErrorMsg('No pudimos finalizar su ficha, porque no tenemos el ID.'));
     }
   }
 
@@ -96,20 +93,20 @@ class FichaCTR extends CTR implements DCTR {
       );
       PersonaFichaBD::actualizarFecha($idPersonaFicha);
       $_SESSION['id_persona_ficha'] = $idPersonaFicha;
-      $secciones = $this->getFS($idPersonaFicha);
+      $secciones = $this->getFS($idPer, $idPersonaFicha);
       require_once cargarVista('fichas/socioeconomica/ingresar.php');
     } else {
       $this->inicio(getErrorMsg('Debe ingresar su contraseña nuevamente.'));
     }
   }
 
-  private function verfichaFS($idPersonaFicha){
-    $secciones = $this->getFS($idPersonaFicha);
+  private function verfichaFS($idPersona, $idPersonaFicha){
+    $secciones = $this->getFS($idPersona, $idPersonaFicha);
     require_once cargarVista('fichas/socioeconomica/ver.php');
   }
 
-  private function getFS($idPersonaFicha){
-    $res = SeccionBD::getFSPorIDPersonaFicha($idPersonaFicha);
+  private function getFS($idPersona, $idPersonaFicha){
+    $res = SeccionBD::getFSPorIDPersonaFicha($idPersona, $idPersonaFicha);
     return json_decode($res['secciones'], true);
   }
 

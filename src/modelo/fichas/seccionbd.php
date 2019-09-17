@@ -12,7 +12,7 @@ abstract class SeccionBD {
   WHERE
   seccion_ficha_activa = true';
 
-  static function getFSPorIDPersonaFicha($idPersonaFicha){
+  static function getFSPorIDPersonaFicha($idPersona, $idPersonaFicha){
     $sql = '
     SELECT array_to_json(
       array_agg(s.*)
@@ -42,6 +42,7 @@ abstract class SeccionBD {
     					 FROM public."AlumnoRespuestaLibreFS" arl
     					 WHERE id_pregunta_ficha = pf.id_pregunta_ficha AND
     					 id_persona_ficha = :idPersonaFicha4
+               ORDER BY alumno_fs_fecha_ingreso
     				 ) AS rl
     			),
 
@@ -65,6 +66,8 @@ abstract class SeccionBD {
               FROM public."RespuestaFicha"
               WHERE id_pregunta_ficha = pf.id_pregunta_ficha AND
               respuesta_ficha_activa = true
+              ORDER BY
+              respuesta_ficha_puntaje
             ) AS r
           )
           FROM public."PreguntasFicha" pf
@@ -80,7 +83,8 @@ abstract class SeccionBD {
         FROM public."PermisoIngresoFichas" pif,
         public."PersonaFicha" prf
         WHERE id_persona_ficha = :idPersonaFicha3 AND
-        pif.id_permiso_ingreso_ficha = prf.id_permiso_ingreso_ficha
+        pif.id_permiso_ingreso_ficha = prf.id_permiso_ingreso_ficha AND
+        prf.id_persona = :idPersona
       )
       ORDER BY seccion_ficha_posicion
     ) AS s;';
@@ -88,7 +92,8 @@ abstract class SeccionBD {
       'idPersonaFicha1' => $idPersonaFicha,
       'idPersonaFicha2' => $idPersonaFicha,
       'idPersonaFicha3' => $idPersonaFicha,
-      'idPersonaFicha4' => $idPersonaFicha
+      'idPersonaFicha4' => $idPersonaFicha,
+      'idPersona' => $idPersona
     ]);
   }
 
