@@ -93,6 +93,27 @@ SELECT array_to_json (
 
       (
         SELECT array_to_json(
+          array_agg(gs.*)
+        ) AS gruposocioeconomico FROM (
+          SELECT grupo_socioeconomico,
+          puntaje_minimo, puntaje_maximo, (
+            SELECT SUM(respuesta_almn_puntaje)
+            FROM public."AlumnoRespuestaFS"
+            WHERE id_persona_ficha = 10
+          ) AS puntaje_alumno
+          FROM public."GrupoSocioeconomico"
+          WHERE puntaje_minimo >= (
+            SELECT SUM(respuesta_almn_puntaje)
+            FROM public."AlumnoRespuestaFS"
+            WHERE id_persona_ficha = 10
+          )
+          ORDER BY puntaje_maximo
+          LIMIT 1
+        ) AS gs
+      ),
+
+      (
+        SELECT array_to_json(
           array_agg(pl.*)
         ) AS pre_libre FROM (
 
@@ -109,6 +130,7 @@ SELECT array_to_json (
               public."AlumnoRespuestaLibreFS" alrl
               WHERE alrl.id_persona_ficha = perfi.id_persona_ficha AND
               alrl.id_pregunta_ficha = alpl.id_pregunta_ficha
+              ORDER BY alumno_fs_fecha_ingreso
             ) AS rl
           )
           FROM

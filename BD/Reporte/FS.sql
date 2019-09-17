@@ -1,3 +1,15 @@
+/* Consultamos en que nivel de gruposocioeconomico estan */
+SELECT grupo_socioeconomico
+FROM public."GrupoSocioeconomico"
+WHERE puntaje_minimo >= (
+  SELECT SUM(respuesta_almn_puntaje)
+  FROM public."AlumnoRespuestaFS"
+  WHERE id_persona_ficha = 10
+)
+ORDER BY puntaje_maximo
+LIMIT 1
+
+/* Consulta completa para el reporte del final */
 SELECT array_to_json(
   array_agg(a.*)
 ) AS alumnos FROM (
@@ -49,6 +61,23 @@ SELECT array_to_json(
   persona_categoria_migratoria,
   alumno_nombre_contacto_emergencia,
   alumno_numero_contacto,
+  alumno_parentesco_contacto,
+
+  (
+    SELECT array_to_json(
+      array_agg(gs.*)
+    ) AS grupo_socioeconomico FROM (
+      SELECT grupo_socioeconomico
+      FROM public."GrupoSocioeconomico"
+      WHERE puntaje_minimo >= (
+        SELECT SUM(respuesta_almn_puntaje)
+        FROM public."AlumnoRespuestaFS"
+        WHERE id_persona_ficha = 605
+      )
+      ORDER BY puntaje_maximo
+      LIMIT 1
+    ) AS gs
+  ),
 
   (
     SELECT array_to_json(
@@ -121,11 +150,13 @@ SELECT array_to_json(
               WHERE
               arlfs.id_pregunta_ficha = pf.id_pregunta_ficha  AND
               arlfs.id_persona_ficha = prf.id_persona_ficha
+              ORDER BY alumno_fs_fecha_ingreso
             ) AS rl
           )
           FROM public."PreguntasFicha" pf
           WHERE id_seccion_ficha = sf.id_seccion_ficha AND
           pregunta_ficha_activa = true
+          ORDER BY pregunta_ficha_posicion
         ) AS p
       )
       FROM public."SeccionesFicha" sf
@@ -135,6 +166,7 @@ SELECT array_to_json(
       pif.id_permiso_ingreso_ficha = prf.id_permiso_ingreso_ficha
       WHERE seccion_ficha_activa = true AND
       prf.id_persona_ficha = 605
+      ORDER BY seccion_ficha_posicion
     ) as s
   )
   FROM public."Personas" per

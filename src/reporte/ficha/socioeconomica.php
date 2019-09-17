@@ -48,13 +48,8 @@ function reporteFS($alumno, $idPersonaFicha){
   </tr>';
   $html.='
   <tr>
-      <th WIDTH="200">Número de identificación:</th>
+      <th WIDTH="200">Número de cedula / pasaporte:</th>
       <td>'.$alumno['persona_identificacion'].'</td>
-  </tr>';
-  $html.='
-  <tr>
-      <th WIDTH="200">Pasaporte:</th>
-      <td></td>
   </tr>';
   $html.='
   <tr>
@@ -205,6 +200,10 @@ function reporteFS($alumno, $idPersonaFicha){
       <td>'.$alumno['alumno_nombre_contacto_emergencia'].'</td>
   </tr>
   <tr>
+      <th WIDTH="200">Parentesco contacto de emergencia:</th>
+      <td>'.$alumno['alumno_parentesco_contacto'].'</td>
+  </tr>
+  <tr>
       <th WIDTH="200">Teléfono:</th>
       <td>'.$alumno['alumno_numero_contacto'].'</td>
   </tr>
@@ -260,13 +259,22 @@ function reporteFS($alumno, $idPersonaFicha){
   .$alumno['persona_primer_apellido'].' '
   .$alumno['persona_segundo_apellido'].' '
   .'  Acepto y declaro que: la información proporcionada en el presente formulario es real y puede ser utilizada para los fines pertinentes, autorizo que el Instituto Superior Tecnológico del Azuay - ISTA a realizar las verificaciones que crean oportunas sobre  la información detallada en el presente documento.'.'</p>';
-  $html.='<caption><h2>_________________________________</h2></caption> </html> ';
+  $html.='<caption><h2>_________________________________</h2></caption> ';
+
+  $html.='
+  <br>
+  <hr>
+  <table>
+    <tr>
+      <th WIDTH="200">Nivel Socioeconómico</th>
+      <td>'.$alumno['grupo_socioeconomico'][0]['grupo_socioeconomico'].'</td>
+    </tr>
+  </table>';
+  $html.= '</html> ';
 
   $mpdf->SetHTMLHeader(reportHead($idPersonaFicha));
   $mpdf->setFooter("{PAGENO}");
   $mpdf->WriteHTML($html);
   $mpdf->Output();
 }
-
-
  ?>

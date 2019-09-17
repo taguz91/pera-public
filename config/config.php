@@ -17,7 +17,7 @@ define('DB', 'BDnotas');
 define('PORT', '5432');
 define('USER', 'fichasphpubi');
 define('PASS', 'fichasubiphp2019');
-define('CHARSET', 'utf8mb4');
-*/
+define('CHARSET', 'utf8mb4');*/
+
 
 ?>
