@@ -62,6 +62,45 @@ class AlumnoBD {
     ]);
   }
 
+  // Para actualizar la informacion de un alumno
+  static function actualizarDato($idAlumno, $valor, $columna){
+    $sql = '
+    UPDATE public."Alumnos"
+    SET '.$columna.' = :valor 
+    WHERE id_alumno = :id;';
+    return executeSQL($sql, [
+      'valor' => $valor,
+      'id' => $idAlumno
+    ]);
+  }
+
+  // Informacion de alumno
+  static function getPorId($idPersona){
+    $sql = '
+    SELECT
+    id_alumno,
+    alumno_tipo_colegio,
+    alumno_tipo_bachillerato,
+    alumno_anio_graduacion,
+    alumno_educacion_superior,
+    alumno_titulo_superior,
+    alumno_nivel_academico,
+    alumno_pension,
+    alumno_ocupacion,
+    alumno_trabaja,
+    alumno_nivel_formacion_padre,
+    alumno_nivel_formacion_madre,
+    alumno_nombre_contacto_emergencia,
+    alumno_parentesco_contacto,
+    alumno_numero_contacto
+    FROM public."Alumnos"
+    WHERE alumno_activo = true AND
+    id_persona = :id;';
+    return getOneFromSQL($sql, [
+      'id' => $idPersona
+    ]);
+  }
+
 }
 
 ?>

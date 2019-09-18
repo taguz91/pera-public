@@ -1,5 +1,6 @@
 <?php
 require_once 'src/modelo/persona/personabd.php';
+require_once 'src/modelo/alumno/alumnobd.php';
 
 class PerfilCTR extends CTR implements DCTR {
 
@@ -19,6 +20,7 @@ class PerfilCTR extends CTR implements DCTR {
   function editar() {
     global $U;
     $persona = PersonaBD::getPorId($U->idPersona);
+    $alumno = AlumnoBD::getPorId($U->idPersona);
     include cargarVista('persona/form.php');
   }
 

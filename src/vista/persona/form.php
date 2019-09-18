@@ -2,6 +2,64 @@
 require 'src/vista/templates/nav.php';
 require_once 'src/datos/persona.php';
  ?>
+
+<script type="text/javascript">
+
+ function accionesCMB(url, cmb){
+   if(cmb != null){
+     cmb.forEach(c => {
+       c.addEventListener('change', function(){
+         if(c.value != 'Seleccione' && c.value != ''){
+           editarInfo(url, c.name, c.value);
+         }
+       });
+     })
+   }
+ }
+
+ function accionesTXT(url, txt){
+   if(txt != null){
+     txt.forEach(i => {
+       i.onblur =  function(){
+         if(this.value.length > 0){
+           editarInfo(url, i.name, i.value);
+         }
+       }
+     });
+   }
+ }
+
+ function accionesCBX(url, cbx){
+   if(cbx != null){
+     cbx.forEach(c => {
+       c.addEventListener('change', function(){
+         if(c.select){
+           editarInfo(url, c.name, c.value);
+         }
+       });
+     });
+   }
+ }
+
+ function editarInfo(url, col, val){
+   var data = new FormData();
+   data.append('actualizar', 'true');
+   data.append('valor', val);
+   data.append('columna', col);
+
+   fetch(url, {
+     method: 'POST',
+     body: data
+   })
+   .then(res => res.json())
+   .then(data => {
+     console.log(data);
+   }).catch(err => {
+     console.log('Obtuvimos un error: '+err);
+   });;
+ }
+</script>
+
 <div class="container my-4">
 
   <div class="row">
@@ -309,6 +367,13 @@ require_once 'src/datos/persona.php';
 
       </div>
 
+      <?php if (isset($alumno)): ?>
+        <!-- FORMULARIO ALUMNO -->
+        <hr>
+        <?php include 'src/vista/persona/almn.php' ?>
+      <?php endif; ?>
+
+
     </form>
   </div>
 </div>
@@ -319,45 +384,12 @@ require 'src/vista/templates/copy.php';
 
 
 <script type="text/javascript">
-  const URLPER = '<?php echo constant('URL').'api/v1/persona/actualizar/548'; ?>';
+
+  const URLPER = '<?php echo constant('URL').'api/v1/persona/actualizar/'.$U->idPersona; ?>';
 
   const TXTSPER = document.querySelectorAll('.txt');
-  TXTSPER.forEach(i => {
-    //console.log(i.name + ' | ' + i.value);
-    i.onblur =  function(){
-      if(this.value.length > 0){
-        editarPersona(i.name, i.value);
-      }else{
-        console.log('Esta vacio');
-      }
-    }
-  });
-
   const COLSPER = document.querySelectorAll('.cmb');
-  COLSPER.forEach(c => {
-    c.addEventListener('change', function(){
-      if(c.value != 'Seleccione' && c.value != ''){
-        console.log(c.value + ' | ' + c.name);
-        editarPersona(c.name, c.value);
-      }
-    });
-  })
+  accionesTXT(URLPER, TXTSPER);
+  accionesCMB(URLPER, COLSPER);
 
-  function editarPersona(col, val){
-    var data = new FormData();
-    data.append('actualizar', 'true');
-    data.append('valor', val);
-    data.append('columna', col);
-
-    fetch(URLPER, {
-      method: 'POST',
-      body: data
-    })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-    }).catch(err => {
-      console.log('Obtuvimos un error: '+err);
-    });;
-  }
 </script>

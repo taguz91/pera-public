@@ -37,11 +37,11 @@ abstract class PersonaBD {
   static function actualizarDato($idPersona, $valor, $columna){
     $sql = '
     UPDATE public."Personas"
-    SET '.$columna.'= :valor
+    SET '.$columna.' = :valor
     WHERE id_persona = :id;';
     return executeSQL($sql, [
       'valor' => $valor,
-      'id' => $idPersona
+      ':id' => $idPersona
     ]);
   }
 
