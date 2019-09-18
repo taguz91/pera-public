@@ -60,7 +60,7 @@
     </div>
   </div>
 
-  <div class="col-12">
+  <div class="col-12" id="frm-titulo-superior">
     <div class="form-group">
       <label for="" class="control-label">Titulo superior:</label>
       <input class="form-control txt-al" type="text" name="alumno_titulo_superior"
@@ -127,7 +127,7 @@
     </div>
   </div>
 
-  <div class="col-12">
+  <div class="col-12" id="frm-ocupacion">
     <div class="form-group">
       <label for="" class="control-label">Ocupación:</label>
       <input class="form-control txt-al" type="text" name="alumno_ocupacion"
@@ -192,7 +192,6 @@
 
 
 <script type="text/javascript">
-
   const URLALM = '<?php echo constant('URL').'api/v1/alumno/actualizar/'.$alumno['id_alumno']; ?>';
 
   const TXTALM = document.querySelectorAll('.txt-al');
@@ -202,5 +201,53 @@
   accionesTXT(URLALM, TXTALM);
   accionesCMB(URLALM, COLSALM);
   accionesCBX(URLALM, CBXALM);
+
+  /* TITULO SUPERIOR */
+  const FRMTITULO_SUPERIOR = document.querySelector('#frm-titulo-superior');
+  const CBXTITULO_SUPERIOR_SI = document.querySelector('#cr-educacion-superior-si');
+  const CBXTITULO_SUPERIOR_NO = document.querySelector('#cr-educacion-superior-no');
+
+  CBXTITULO_SUPERIOR_SI.addEventListener('change', function(){
+    mostrarTxtTituloSuperior();
+  });
+
+  CBXTITULO_SUPERIOR_NO.addEventListener('change', function(){
+    mostrarTxtTituloSuperior();
+  });
+
+  mostrarTxtTituloSuperior();
+
+  function mostrarTxtTituloSuperior(){
+    if(CBXTITULO_SUPERIOR_SI.checked){
+      FRMTITULO_SUPERIOR.style.display = 'block';
+      console.log('Seleccionado si ');
+    }
+
+    if(CBXTITULO_SUPERIOR_NO.checked){
+      console.log('Seleccionado no ');
+      FRMTITULO_SUPERIOR.style.display = 'none';
+    }
+  }
+
+  /* OCUPACION */
+  const FRMOCUPACION = document.querySelector('#frm-ocupacion');
+  const CBXOCUPACION_SI = document.querySelector('#cr-trabaja-si');
+  const CBXOCUPACION_NO = document.querySelector('#cr-trabaja-no');
+
+  CBXOCUPACION_SI.addEventListener('change', function(){
+    mostrarTxtOcupacion();
+  });
+  CBXOCUPACION_NO.addEventListener('change', function(){
+    mostrarTxtOcupacion();
+  });
+
+  function mostrarTxtOcupacion(){
+    if(CBXOCUPACION_SI.checked){
+      FRMOCUPACION.style.display = 'block';
+    }
+    if(CBXOCUPACION_NO.checked){
+      FRMOCUPACION.style.display = 'none';
+    }
+  }
 
 </script>

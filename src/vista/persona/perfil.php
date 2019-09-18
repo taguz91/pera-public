@@ -6,7 +6,7 @@ require 'src/vista/templates/nav.php';
   <div class="container">
     <div class="row py-4">
 
-      <div class="col-md-4 mx-center">
+      <div class="col-lg-4 mx-center">
         <img src="<?php echo constant('URL'); ?>perfil/foto" alt="" width="250px" height="200px" class="d-block rounded mx-auto">
 
         <div class="my-2">
@@ -16,7 +16,7 @@ require 'src/vista/templates/nav.php';
 
       </div>
 
-      <div class="col-md-8">
+      <div class="col-lg-8">
 
         <div class="text-white">
           <h1>

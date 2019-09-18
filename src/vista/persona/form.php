@@ -58,6 +58,15 @@ require_once 'src/datos/persona.php';
      console.log('Obtuvimos un error: '+err);
    });;
  }
+
+ function mostrarFrm(frm, cbxsi, cbxno){
+   if(cbxsi.checked){
+     frm.style.display = 'block';
+   }
+   if(cbxno.checked){
+     frm.style.display = 'none';
+   }
+ }
 </script>
 
 <div class="container my-4">
@@ -275,37 +284,70 @@ require_once 'src/datos/persona.php';
 
       </div>
 
-      <?php if (isset($persona['persona_discapacidad']) ? $persona['persona_discapacidad'] : false): ?>
-        <div class="form-row mt-3 mt-md-0">
+<!-- PERSONA DISCPACIDAD -->
+      <div class="form-row mt-3 mt-md-0">
 
-          <div class="col">
-            <label for="" class="control-label">Tipo de Discapacidad:</label>
+        <div class="col-12">
+          <div class="form-group">
 
-            <select class="form-control cmb" name="persona_tipo_residencia">
-              <?php echo llenarCmb($cmbTipoDiscapacidad,
-              isset($persona['persona_tipo_residencia']) ? $persona['persona_tipo_residencia'] : '');?>
-            </select>
+            <label for="" class="control-label d-block">Tiene discapacidad:</label>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="cr-discapacidad-si" name="persona_discapacidad" class="custom-control-input cbx" value="true"
+              <?php
+              if($persona['persona_discapacidad']){echo "checked";}
+              ?>>
+              <label class="custom-control-label" for="cr-discapacidad-si">Si</label>
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="cr-discapacidad-no" name="persona_discapacidad" class="custom-control-input cbx" value="false"
+              <?php
+              if(!$persona['persona_discapacidad']){echo "checked";}
+              ?>>
+              <label class="custom-control-label" for="cr-discapacidad-no">No</label>
+            </div>
+
 
           </div>
+        </div>
 
-          <div class="col">
-            <div class="form-group">
-              <label for="" class="control-label">Porcentaje de Discapacidad</label>
-              <input class="form-control txt" type="text" name="persona_porcenta_discapacidad"
-              value="<?php echo isset($persona['persona_porcenta_discapacidad']) ? $persona['persona_porcenta_discapacidad'] : ''; ?>">
-            </div>
-          </div>
 
-          <div class="col">
-            <div class="form-group">
-              <label for="" class="control-label">Carnet Conadis:</label>
-              <input class="form-control txt" type="text" name="persona_carnet_conadis"
-              value="<?php echo isset($persona['persona_carnet_conadis']) ? $persona['persona_carnet_conadis'] : ''; ?>">
+        <div class="col-12" id="frm-discapacidad">
+
+          <div class="row">
+            <div class="col-4">
+              <label for="" class="control-label">Tipo de Discapacidad:</label>
+
+              <select class="form-control cmb" name="persona_tipo_residencia">
+                <?php echo llenarCmb($cmbTipoDiscapacidad,
+                isset($persona['persona_tipo_residencia']) ? $persona['persona_tipo_residencia'] : '');?>
+              </select>
+
             </div>
+
+            <div class="col-4">
+              <div class="form-group">
+                <label for="" class="control-label">Porcentaje de Discapacidad</label>
+                <input class="form-control txt" type="text" name="persona_porcenta_discapacidad"
+                value="<?php echo isset($persona['persona_porcenta_discapacidad']) ? $persona['persona_porcenta_discapacidad'] : ''; ?>">
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="form-group">
+                <label for="" class="control-label">Carnet Conadis:</label>
+                <input class="form-control txt" type="text" name="persona_carnet_conadis"
+                value="<?php echo isset($persona['persona_carnet_conadis']) ? $persona['persona_carnet_conadis'] : ''; ?>">
+              </div>
+            </div>
+
           </div>
 
         </div>
-      <?php endif; ?>
+
+      </div>
+<!-- /PERSONA DISCPACIDAD -->
 
       <div class="form-row mt-3 mt-md-0">
 
@@ -389,7 +431,23 @@ require 'src/vista/templates/copy.php';
 
   const TXTSPER = document.querySelectorAll('.txt');
   const COLSPER = document.querySelectorAll('.cmb');
+  const CBXPER = document.querySelectorAll('.cbx');
   accionesTXT(URLPER, TXTSPER);
   accionesCMB(URLPER, COLSPER);
+  accionesCBX(URLPER, CBXPER);
+
+  /* DISCAPACIDAD */
+
+  const FRMDISCAPACIDAD = document.querySelector('#frm-discapacidad');
+  const CBXDISCAPACIDAD_SI = document.querySelector('#cr-discapacidad-si');
+  const CBXDISCAPACIDAD_NO = document.querySelector('#cr-discapacidad-no');
+  mostrarFrm(FRMDISCAPACIDAD, CBXOCUPACION_SI, CBXDISCAPACIDAD_NO);
+
+  CBXDISCAPACIDAD_SI.addEventListener('change', function(){
+    mostrarFrm(FRMDISCAPACIDAD, CBXOCUPACION_SI, CBXDISCAPACIDAD_NO);
+  });
+  CBXDISCAPACIDAD_NO.addEventListener('change', function(){
+    mostrarFrm(FRMDISCAPACIDAD, CBXOCUPACION_SI, CBXDISCAPACIDAD_NO);
+  });
 
 </script>
