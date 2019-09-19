@@ -35,14 +35,15 @@ class ReporteFicha {
       persona_celular,
       persona_correo,
       persona_fecha_registro,
-      CASE persona_discapacidad
-        WHEN persona_discapacidad = true THEN
+      CASE 
+        WHEN persona_discapacidad THEN
           \'Si\'
         ELSE
           \'No\'
       END AS persona_discapacidad,
       persona_tipo_discapacidad,
-      persona_porcenta_discapacidad, persona_carnet_conadis,
+      persona_porcenta_discapacidad,
+      persona_carnet_conadis,
       persona_calle_principal,
       persona_numero_casa,
       persona_calle_secundaria,

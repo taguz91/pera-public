@@ -63,6 +63,8 @@ require_once 'src/datos/persona.php';
    if(cbxsi.checked){
      frm.style.display = 'block';
    }
+   console.log('DISCPACIDAD');
+
    if(cbxno.checked){
      frm.style.display = 'none';
    }
@@ -444,10 +446,10 @@ require 'src/vista/templates/copy.php';
   mostrarFrm(FRMDISCAPACIDAD, CBXOCUPACION_SI, CBXDISCAPACIDAD_NO);
 
   CBXDISCAPACIDAD_SI.addEventListener('change', function(){
-    mostrarFrm(FRMDISCAPACIDAD, CBXOCUPACION_SI, CBXDISCAPACIDAD_NO);
+    mostrarFrm(FRMDISCAPACIDAD, CBXDISCAPACIDAD_SI, CBXDISCAPACIDAD_NO);
   });
   CBXDISCAPACIDAD_NO.addEventListener('change', function(){
-    mostrarFrm(FRMDISCAPACIDAD, CBXOCUPACION_SI, CBXDISCAPACIDAD_NO);
+    mostrarFrm(FRMDISCAPACIDAD, CBXDISCAPACIDAD_SI, CBXDISCAPACIDAD_NO);
   });
 
 </script>
