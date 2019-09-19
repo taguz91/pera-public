@@ -22,7 +22,7 @@ require_once 'src/vista/fichas/socioeconomica/respuestas.php';
 
       <div class="bg-blue py-1">
         <h2 class="text-center text-white my-3 border-bottom pb-2">
-          <?php echo $s['seccion_ficha_nombre']; ?>
+          <?php echo ($ks + 1) . '. ' . $s['seccion_ficha_nombre']; ?>
         </h2>
       </div>
 
