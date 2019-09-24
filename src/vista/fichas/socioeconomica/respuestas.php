@@ -31,32 +31,60 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
   <?php foreach ($respuestas as $kr => $r): ?>
 
     <div class="form-group">
-      <input required class="form-control rlu-<?php echo $ks.'-'.$kp.$kr ; ?> "
-      type="<?php echo $tipo ?>"
-      value="<?php echo $r['alumno_fs_libre']; ?>"
-      id="reslibre-<?php echo $r['id_almn_respuesta_libre_fs']; ?>"
-      onblur="<?php
-      if($act){
-        echo "actualizarRespuestaLibre('reslibre-".$r['id_almn_respuesta_libre_fs']."')" ;
-      }else {
-        echo "";
-      }
-      ?>">
+
+      <div class="input-group">
+
+        <input required class="form-control rlu-<?php echo $ks.'-'.$kp.$kr ; ?> "
+        type="<?php echo getTipoCampo($tipo, $r['alumno_fs_libre']); ?>"
+        value="<?php echo $r['alumno_fs_libre']; ?>"
+        id="reslibre-<?php echo $r['id_almn_respuesta_libre_fs']; ?>"
+        onblur="<?php
+        if($act){
+          echo "actualizarRespuestaLibre('reslibre-".$r['id_almn_respuesta_libre_fs']."')" ;
+        }?>">
+
+        <?php if ($act): ?>
+          <div class="input-group-append">
+            <button class="btn btn-outline-primary  btn-na"
+            type="button" value="reslibre-<?php
+            echo $r['id_almn_respuesta_libre_fs']; ?>">
+            NA
+            </button>
+          </div>
+        <?php endif; ?>
+
+      </div>
+
+
     </div>
 
   <?php endforeach; ?>
 <?php else: ?>
 
   <div class="form-group">
-    <input required class="form-control rlu-<?php echo $ks.'-'.$kp ; ?> "
-    type="<?php echo $tipo ?>" id="<?php echo $id; ?>"
-    onblur="<?php
-    if($act){
-      echo "valirdarTodosLlenos('rlu-$ks-$kp"."')" ;
-    }else{
-      echo "";
-    }
-    ?>">
+
+    <div class="input-group ">
+
+      <input required class="form-control rlu-<?php echo $ks.'-'.$kp ; ?> "
+      type="<?php echo $tipo ?>" id="<?php echo $id; ?>"
+      onblur="<?php
+      if($act){
+        echo "valirdarTodosLlenos('rlu-$ks-$kp"."')" ;
+      }else{
+        echo "";
+      }
+      ?>">
+
+      <?php if ($act): ?>
+        <div class="input-group-append">
+          <button class="btn btn-outline-primary btn-na"
+          type="button" value="<?php echo $id; ?>">
+          </button>
+        </div>
+      <?php endif; ?>
+
+    </div>
+
   </div>
 
 <?php endif; ?>
@@ -77,17 +105,29 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
       <div class="form-row">
         <div class="col-12">
           <div class="form-group">
-            <input required id="reslibre-<?php echo $r['id_almn_respuesta_libre_fs']; ?>"
-            class="form-control res-mul"
-            onblur="<?php
-            if($act){
-              echo "actualizarRespuestaLibre('reslibre-".$r['id_almn_respuesta_libre_fs']."')";
-            }else{
-              echo "";
-            }
-            ?>"
-            value="<?php echo $r['alumno_fs_libre']; ?>"
-            type="<?php echo $tipo ?>">
+
+            <div class="input-group">
+              <input required id="reslibre-<?php echo $r['id_almn_respuesta_libre_fs']; ?>"
+              class="form-control res-mul"
+              onblur="<?php
+              if($act){
+                echo "actualizarRespuestaLibre('reslibre-".$r['id_almn_respuesta_libre_fs']."')";
+              }?>"
+              value="<?php echo $r['alumno_fs_libre']; ?>"
+              type="<?php echo getTipoCampo($tipo, $r['alumno_fs_libre']); ?>">
+
+
+              <?php if ($act): ?>
+                <div class="input-group-append">
+                  <button class="btn btn-outline-primary btn-na" type="button"
+                  value="reslibre-<?php echo $r['id_almn_respuesta_libre_fs']; ?>">
+                    NA
+                  </button>
+                </div>
+              <?php endif; ?>
+
+            </div>
+
           </div>
         </div>
       </div>
@@ -114,9 +154,24 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
     <div class="form-row">
       <div class="col-12">
         <div class="form-group">
-          <input required id="<?php echo $id; ?>"
-          class="form-control res-mul<?php echo $idS; ?>"
-          type="<?php echo $tipo ?>">
+
+          <div class="input-group">
+            <input required id="<?php echo $id; ?>"
+            class="form-control res-mul<?php echo $idS; ?>"
+            type="<?php echo $tipo ?>">
+
+            <?php if ($act): ?>
+              <div class="input-group-append">
+                <button class="btn btn-outline-primary btn-na"
+                type="button"
+                value="<?php echo $id; ?>">
+                NA
+                </button>
+              </div>
+            <?php endif; ?>
+
+          </div>
+
         </div>
       </div>
     </div>

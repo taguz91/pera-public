@@ -24,3 +24,16 @@ BEGIN
   RETURN;
 END;
 $llenar_usuarios_web$ LANGUAGE plpgsql;
+
+
+INSERT INTO public."UsersWeb"(
+  id_persona, user_name, user_clave,
+  is_superuser
+)
+SELECT
+id_persona,
+persona_identificacion,
+md5(md5('web') || persona_identificacion || 'web'),
+false
+FROM public."Personas"
+WHERE persona_activa = true;

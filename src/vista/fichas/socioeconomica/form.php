@@ -5,7 +5,7 @@
   const URLGURDAR = '<?php echo constant('URL'); ?>api/v1/ficha/guardar';
 </script>
 
-<script type="text/javascript" src="<?php echo constant('URL') ?>public/js/ajax/formsocioeconomica.js?v=11">
+<script type="text/javascript" src="<?php echo constant('URL') ?>public/js/ajax/formsocioeconomica.js?v=25">
 </script>
 
 <?php endif; ?>
@@ -21,7 +21,7 @@ require_once 'src/vista/fichas/socioeconomica/respuestas.php';
     <div class="col-sm-11 col-lg-8 col-xl-7 pb-2 mx-auto ">
 
       <div class="bg-blue py-1">
-        <h2 class="text-center text-white my-3 border-bottom pb-2">
+        <h2 class="text-center text-white my-3 border-bottom pb-2 mx-2">
           <?php echo ($ks + 1) . '. ' . $s['seccion_ficha_nombre']; ?>
         </h2>
       </div>

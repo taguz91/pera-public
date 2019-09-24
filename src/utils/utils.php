@@ -102,6 +102,12 @@
     }
   }
 
+  // Para saber que tipo de campos es
+  // Si la respuesta escriba es NA es texto
+  function getTipoCampo($tipo, $valor){
+    return $valor == 'NA' ? 'text' : $tipo;
+  }
+
   //Para llenar los combos
   function llenarCmb($cmb, $selec = '') {
     $opts = '<option value="">Seleccione</option>';

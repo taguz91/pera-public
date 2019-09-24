@@ -72,7 +72,7 @@ class FichaAPI {
         $respuesta
       );
       if(is_bool($res)){
-        JSON::confirmacion('Editamos correctamente la respuesta libre. ' . $idAlmnResLibre);
+        JSON::confirmacion('Editamos correctamente la respuesta libre. ' . $idAlmnResLibre . ' Valor: '. $respuesta);
       }else{
         JSON::error('No pudimos editar la respuesta libre: ' . $res);
       }

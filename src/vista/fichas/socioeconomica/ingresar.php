@@ -60,6 +60,18 @@ $act = true;
 
 </div>
 
+
+<script type="text/javascript">
+  const BTNS_NA = document.querySelectorAll('.btn-na');
+  BTNS_NA.forEach(btn => {
+    btn.addEventListener('click', function(){
+      clickNA(btn);
+    });
+  });
+
+</script>
+
+
 <?php
 require 'src/vista/templates/copy.php';
 ?>

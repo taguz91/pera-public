@@ -57,17 +57,36 @@ function agregarTxt(f, vclick){
   let D1 = document.createElement('div');
   let D2 = document.createElement('div');
   let D3 = document.createElement('div');
+  let D4 = document.createElement('div');
+  let D5 = document.createElement('div');
   let I = document.createElement('input');
+  let B = document.createElement('button');
+  let NA = document.createTextNode('NA');
 
   D1.classList.add('form-row', 'c'+vclick);
   D2.classList.add('col-12');
   D3.classList.add('form-group');
+  D4.classList.add('input-group');
+  D5.classList.add('input-group-append');
   I.classList.add('form-control', 'res-mul'+vclick);
+  B.classList.add('btn', 'btn-outline-primary', 'btn-na');
 
-  I.id = f.id;
+  let IDS = 'resl' + vclick+'--'+f.id;
+  //B.value = 'inp' + vclick + '??' + f.id;
+  B.value = IDS;
+  B.appendChild(NA);
+  B.type = 'button';
+  B.addEventListener('click', function(){
+    clickNA(B);
+  });
+
+  //I.id = 'inp' + vclick + '??' + f.id;
+  I.id = IDS;
   I.type = f.dataset.tipo;
-
-  D3.appendChild(I);
+  D4.appendChild(I);
+  D5.appendChild(B);
+  D4.appendChild(D5)
+  D3.appendChild(D4);
   D2.appendChild(D3);
   D1.appendChild(D2);
 
@@ -95,8 +114,15 @@ function valirdarTodosLlenos(clase){
   if(llenos){
     let URL = URLGURDAR + '?guardarlibre=true';
     I.forEach(i => {
+      let idr = i.id;
+
+      if(idr.includes('--')){
+        idr = idr.split('--');
+        idr = idr[1];
+      }
+
       let data = new FormData();
-      data.append('id_pregunta_ficha', i.id);
+      data.append('id_pregunta_ficha', idr);
       data.append('respuesta', i.value);
 
       fetch(URL, {
@@ -172,4 +198,17 @@ function actualizar(idActualizar, idRespuesta){
   .catch(e => {
     console.log('Error: ' + e);
   })
+}
+
+// Si le da click a NA automaticamente se le cambia el tipo de texto al text y se guarda y bloquea el campo.
+function clickNA(btn){
+  let inp = document.querySelector('#' + btn.value);
+  if(inp != null){
+    inp.type = 'text';
+    inp.value = 'NA';
+    inp.focus();
+    inp.disabled = true;
+    btn.disabled = true;
+    inp.disabled = false;
+  }
 }
