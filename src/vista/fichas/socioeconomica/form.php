@@ -20,7 +20,7 @@ require_once 'src/vista/fichas/socioeconomica/respuestas.php';
 
     <div class="col-sm-11 col-lg-8 col-xl-7 pb-2 mx-auto ">
 
-      <div class="bg-blue py-1">
+      <div class="bg-blue py-1 rounded-lg shadow">
         <h2 class="text-center text-white my-3 border-bottom pb-2 mx-2">
           <?php echo ($ks + 1) . '. ' . $s['seccion_ficha_nombre']; ?>
         </h2>
@@ -30,8 +30,8 @@ require_once 'src/vista/fichas/socioeconomica/respuestas.php';
 
           <?php foreach ($s['preguntas'] as $vp => $p): ?>
 
-          <div class="card m-3 mb-4 border-0 ">
-            <div class="card-header-blue">
+          <div class="card m-3 mb-4 border-0">
+            <div class="card-header-blue rounded-lg">
               <h5 class="card-title"><?php echo $p['pregunta_ficha']; ?></h5>
               <h6 class="card-subtitle text-white"><?php echo $p['pregunta_ficha_ayuda']; ?></h6>
               <?php if (isset($act) && $p['pregunta_ficha_tipo'] == 1): ?>

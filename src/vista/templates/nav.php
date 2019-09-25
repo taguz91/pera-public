@@ -2,7 +2,7 @@
 require_once 'src/vista/templates/header.php';
 ?>
 
-<div class="bg-blue">
+<div class="bg-blue shadow">
 
   <div class="container">
     <nav class="navbar navbar-expand-md navbar-dark">
