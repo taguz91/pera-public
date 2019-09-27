@@ -66,7 +66,7 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
     <div class="input-group ">
 
       <input required class="form-control rlu-<?php echo $ks.'-'.$kp ; ?> "
-      type="<?php echo $tipo ?>" id="<?php echo $id; ?>"
+      type="<?php echo $tipo ?>" id="<?php echo 'rsc--'.$id; ?>"
       onblur="<?php
       if($act){
         echo "valirdarTodosLlenos('rlu-$ks-$kp"."')" ;
@@ -78,7 +78,8 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
       <?php if ($act): ?>
         <div class="input-group-append">
           <button class="btn btn-outline-primary btn-na"
-          type="button" value="<?php echo $id; ?>">
+          type="button" value="<?php echo 'rsc--'.$id; ?>">
+          NA
           </button>
         </div>
       <?php endif; ?>
@@ -156,7 +157,7 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
         <div class="form-group">
 
           <div class="input-group">
-            <input required id="<?php echo $id; ?>"
+            <input required id="<?php echo 'rsc--'.$id; ?>"
             class="form-control res-mul<?php echo $idS; ?>"
             type="<?php echo $tipo ?>">
 
@@ -164,7 +165,7 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
               <div class="input-group-append">
                 <button class="btn btn-outline-primary btn-na"
                 type="button"
-                value="<?php echo $id; ?>">
+                value="<?php echo 'rsc--'.$id; ?>">
                 NA
                 </button>
               </div>
@@ -214,19 +215,19 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
         );
       }
     ?>
+  <?php else: ?>
 
-  <?php endif; ?>
-
-  <?php if ($opciones != null): ?>
-    <?php
-      llenarCmbFormFS(
-        $opciones,
-        "",
-        $id,
-        $idS,
-        ""
-      );
-    ?>
+    <?php if ($opciones != null): ?>
+      <?php
+        llenarCmbFormFS(
+          $opciones,
+          "",
+          $id,
+          $idS,
+          ""
+        );
+      ?>
+    <?php endif; ?>
 
   <?php endif; ?>
 
