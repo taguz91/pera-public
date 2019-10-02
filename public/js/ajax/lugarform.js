@@ -48,6 +48,14 @@
   }
 
   function llenarCmbLugar(cmb, items){
+    while (cmb.firstChild) {
+      cmb.removeChild(cmb.firstChild);
+    }
+    let SEL = document.createElement('option');
+    let VS = document.createTextNode('Seleccione');
+    SEL.appendChild(VS);
+    cmb.appendChild(SEL);
+
     items.forEach(p => {
       let OPT = document.createElement('option');
       let V = document.createTextNode(p.lugar_nombre)
