@@ -130,7 +130,7 @@ function reporteFS($alumno, $idPersonaFicha){
   </tr>';
   $html.='<tr>
       <th WIDTH="200">Auto percepción de clase social</th>
-      <td>'.$alumno['persona_tipo_residencia'].'</td>
+      <td>'.$alumno['alumno_clase_social'].'</td>
   </tr>';
   $html.='</table>';
   $html.='<h4>NIVEL ACADÉMICO</h4>
@@ -209,7 +209,7 @@ function reporteFS($alumno, $idPersonaFicha){
   </tr>
   <tr>
       <th WIDTH="200">E-mail:</th>
-      <td>'.' '.'</td>
+      <td>'.$alumno['alumno_email_cotacto_emergencia'].'</td>
   </tr>
   </table>
   ';

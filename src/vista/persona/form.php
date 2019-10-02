@@ -254,7 +254,7 @@ require_once 'src/datos/persona.php';
       <div class="form-row">
         <div class="col-12 col-md-4">
           <div class="form-group">
-            <label for="" class="control-label">Etnia:</label>
+            <label for="" class="control-label">Étnia:</label>
 
             <select class="form-control cmb" name="persona_etnia">
               <?php echo llenarCmb($cmbEtnia,
@@ -375,7 +375,7 @@ require_once 'src/datos/persona.php';
 
         <div class="col-5 col-md-3">
           <div class="form-group">
-            <label for="" class="control-label">Numero Casa:</label>
+            <label for="" class="control-label">Número Casa:</label>
             <input class="form-control txt" type="text" name="persona_numero_casa"
             value="<?php echo isset($persona['persona_numero_casa']) ? $persona['persona_numero_casa'] : ''; ?>">
           </div>

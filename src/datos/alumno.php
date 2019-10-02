@@ -38,4 +38,12 @@ $cmbParentesco = [
   'OTRO'
 ];
 
+$cmbClaseSocial = [
+  'A(Alto)',
+  'B(Medio alto)',
+  'C+(Medio típico)',
+  'C-(Medio bajo)',
+  'D(Bajo)'
+];
+
  ?>

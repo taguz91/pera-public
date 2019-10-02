@@ -61,7 +61,7 @@ function agregarTxt(f, vclick){
   let D5 = document.createElement('div');
   let I = document.createElement('input');
   let B = document.createElement('button');
-  let NA = document.createTextNode('NA');
+  let NA = document.createTextNode('N/A');
 
   D1.classList.add('form-row', 'c'+vclick);
   D2.classList.add('col-12');
@@ -205,7 +205,7 @@ function clickNA(btn){
   let inp = document.querySelector('#' + btn.value);
   if(inp != null){
     inp.type = 'text';
-    inp.value = 'NA';
+    inp.value = 'N/A';
     inp.focus();
     inp.disabled = true;
     btn.disabled = true;

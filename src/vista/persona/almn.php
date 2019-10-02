@@ -62,7 +62,7 @@
 
   <div class="col-12" id="frm-titulo-superior">
     <div class="form-group">
-      <label for="" class="control-label">Titulo superior:</label>
+      <label for="" class="control-label">Título superior:</label>
       <input class="form-control txt-al" type="text" name="alumno_titulo_superior"
       value="<?php echo isset($alumno['alumno_titulo_superior']) ? $alumno['alumno_titulo_superior'] : ''; ?>">
     </div>
@@ -187,7 +187,32 @@
       value="<?php echo isset($alumno['alumno_numero_contacto']) ? $alumno['alumno_numero_contacto'] : ''; ?>">
     </div>
   </div>
+
+  <div class="col-12">
+    <div class="form-group">
+      <label for="" class="control-label">Correo contacto de emergencia:</label>
+      <input class="form-control txt-al" type="email" name="alumno_email_cotacto_emergencia"
+      value="<?php echo isset($alumno['alumno_email_cotacto_emergencia']) ? $alumno['alumno_email_cotacto_emergencia'] : ''; ?>">
+    </div>
+  </div>
+
 </div>
+
+
+<!-- CLASE SOCIAL -->
+<div class="form-row">
+
+  <div class="col-md-6">
+    <label for="" class="control-label">Percepción de clase social:</label>
+    <select class="form-control cmb-al" name="alumno_clase_social">
+      <?php echo llenarCmb($cmbClaseSocial,
+      isset($alumno['alumno_clase_social']) ? $alumno['alumno_clase_social'] : ''); ?>
+    </select>
+  </div>
+
+</div>
+
+
 
 
 
@@ -233,6 +258,8 @@
   const FRMOCUPACION = document.querySelector('#frm-ocupacion');
   const CBXOCUPACION_SI = document.querySelector('#cr-trabaja-si');
   const CBXOCUPACION_NO = document.querySelector('#cr-trabaja-no');
+
+  mostrarTxtOcupacion();
 
   CBXOCUPACION_SI.addEventListener('change', function(){
     mostrarTxtOcupacion();

@@ -48,7 +48,7 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
             <button class="btn btn-outline-primary  btn-na"
             type="button" value="reslibre-<?php
             echo $r['id_almn_respuesta_libre_fs']; ?>">
-            NA
+            N/A
             </button>
           </div>
         <?php endif; ?>
@@ -79,7 +79,7 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
         <div class="input-group-append">
           <button class="btn btn-outline-primary btn-na"
           type="button" value="<?php echo 'rsc--'.$id; ?>">
-          NA
+          N/A
           </button>
         </div>
       <?php endif; ?>
@@ -122,7 +122,7 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
                 <div class="input-group-append">
                   <button class="btn btn-outline-primary btn-na" type="button"
                   value="reslibre-<?php echo $r['id_almn_respuesta_libre_fs']; ?>">
-                    NA
+                    N/A
                   </button>
                 </div>
               <?php endif; ?>
@@ -166,7 +166,7 @@ $idPreguntaFicha, $idRespuestaFicha, $respuesta){ ?>
                 <button class="btn btn-outline-primary btn-na"
                 type="button"
                 value="<?php echo 'rsc--'.$id; ?>">
-                NA
+                N/A
                 </button>
               </div>
             <?php endif; ?>

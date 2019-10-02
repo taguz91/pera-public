@@ -35,7 +35,7 @@ class ReporteFicha {
       persona_celular,
       persona_correo,
       persona_fecha_registro,
-      CASE 
+      CASE
         WHEN persona_discapacidad THEN
           \'Si\'
         ELSE
@@ -57,7 +57,9 @@ class ReporteFicha {
       alumno_nombre_contacto_emergencia,
       alumno_numero_contacto,
       alumno_parentesco_contacto,
-
+      alumno_clase_social,
+      alumno_email_cotacto_emergencia,
+      
       (
         SELECT array_to_json(
           array_agg(gs.*)
