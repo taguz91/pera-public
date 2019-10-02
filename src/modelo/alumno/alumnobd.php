@@ -66,7 +66,7 @@ class AlumnoBD {
   static function actualizarDato($idAlumno, $valor, $columna){
     $sql = '
     UPDATE public."Alumnos"
-    SET '.$columna.' = :valor 
+    SET '.$columna.' = :valor
     WHERE id_alumno = :id;';
     return executeSQL($sql, [
       'valor' => $valor,
@@ -92,7 +92,9 @@ class AlumnoBD {
     alumno_nivel_formacion_madre,
     alumno_nombre_contacto_emergencia,
     alumno_parentesco_contacto,
-    alumno_numero_contacto
+    alumno_numero_contacto,
+    alumno_email_cotacto_emergencia,
+    alumno_clase_social
     FROM public."Alumnos"
     WHERE alumno_activo = true AND
     id_persona = :id;';

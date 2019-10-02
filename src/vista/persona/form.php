@@ -5,6 +5,8 @@ require_once 'src/datos/persona.php';
 
 <script type="text/javascript">
 
+  const BURL = '<?php echo constant('URL'); ?>';
+
  function accionesCMB(url, cmb){
    if(cmb != null){
      cmb.forEach(c => {
@@ -351,7 +353,120 @@ require_once 'src/datos/persona.php';
       </div>
 <!-- /PERSONA DISCPACIDAD -->
 
+
+      <div class="row">
+        <div class="col-12 mx-auto">
+          <div class="alert alert-primary" role="alert">
+            Para seleccionar los siguientes combos debera hacerlo siguien este orden:
+            <ol>
+              <li>Pais</li>
+              <li>Provincia</li>
+              <li>Ciudad</li>
+              <li>Parroquia</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- LUGAR DE NACIMINETO -->
+
       <div class="form-row mt-3 mt-md-0">
+        <div class="col-md-6">
+          <label for="" class="control-label">Pais de nacimiento:</label>
+
+          <select id="pais-nacimiento" class="form-control cmb" name="id_lugar_natal">
+            <option value="">Seleccione</option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mt-2 mt-md-0">
+
+          <label for="" class="control-label">Provincia de nacimiento:</label>
+
+          <select id="provincia-nacimiento" class="form-control cmb" name="id_lugar_natal">
+            <option value="">Seleccione</option>
+          </select>
+
+        </div>
+
+
+        <div class="col-md-6 mt-2">
+
+          <label for="" class="control-label">Ciudad de nacimiento:</label>
+
+          <select id="ciudad-nacimiento" class="form-control cmb" name="id_lugar_natal">
+            <option value="">Seleccione</option>
+          </select>
+
+        </div>
+
+
+        <div class="col-md-6 mt-2">
+
+          <label for="" class="control-label">Parroquia de nacimiento:</label>
+
+          <select id="parroquia-nacimiento" class="form-control cmb" name="id_lugar_natal">
+            <option value="">Seleccione</option>
+          </select>
+
+        </div>
+
+      </div>
+
+      <!--/ LUGAR DE NACIMINETO -->
+
+      <hr>
+
+      <!-- LUGAR DE RESIDENCIA -->
+      <div class="form-row mt-3">
+        <div class="col-md-6">
+          <label for="" class="control-label">Pais de residencia:</label>
+
+          <select id="pais-residencia" class="form-control cmb" name="id_lugar_residencia">
+            <option value="">Seleccione</option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mt-2 mt-md-0">
+
+          <label for="" class="control-label">Provincia de residencia:</label>
+
+          <select id="provincia-residencia" class="form-control cmb" name="id_lugar_residencia">
+            <option value="">Seleccione</option>
+          </select>
+
+        </div>
+
+
+        <div class="col-md-6 mt-2">
+
+          <label for="" class="control-label">Ciudad de residencia:</label>
+
+          <select id="ciudad-residencia" class="form-control cmb" name="id_lugar_residencia">
+            <option value="">Seleccione</option>
+          </select>
+
+        </div>
+
+
+        <div class="col-md-6 mt-2">
+
+          <label for="" class="control-label">Parroquia de residencia:</label>
+
+          <select id="parroquia-residencia" class="form-control cmb" name="id_lugar_residencia">
+            <option value="">Seleccione</option>
+          </select>
+
+        </div>
+
+      </div>
+
+      <!-- /LUGAR DE RESIDENCIA -->
+
+      <hr>
+
+      <div class="form-row mt-3">
 
         <div class="col-md-6">
           <div class="form-group">
@@ -411,6 +526,8 @@ require_once 'src/datos/persona.php';
 
       </div>
 
+
+
       <?php if (isset($alumno)): ?>
         <!-- FORMULARIO ALUMNO -->
         <hr>
@@ -452,4 +569,82 @@ require 'src/vista/templates/copy.php';
     mostrarFrm(FRMDISCAPACIDAD, CBXDISCAPACIDAD_SI, CBXDISCAPACIDAD_NO);
   });
 
+</script>
+
+
+<script type="text/javascript">
+
+  const URLLUGAR = BURL + 'api/v1/lugar/';
+  // Todos los combos de nacimiento
+  const CMBPAISN = document.querySelector('#pais-nacimiento');
+  const CMBPROVINCIAN = document.querySelector('#provincia-nacimiento');
+  const CMBCIUDADN = document.querySelector('#ciudad-nacimiento');
+  const CMBPARROQUIASN = document.querySelector('#parroquia-nacimiento');
+
+  // Agregamos los eventos para los combos de nacimiento
+  agregarEventoLugar(CMBPAISN, CMBPROVINCIAN);
+  agregarEventoLugar(CMBPROVINCIAN, CMBCIUDADN);
+  agregarEventoLugar(CMBCIUDADN, CMBPARROQUIASN);
+
+  // Todos los combos de residencia
+  const CMBPAISR = document.querySelector('#pais-residencia');
+  const CMBPROVINCIAR = document.querySelector('#provincia-residencia');
+  const CMBCIUDADR = document.querySelector('#ciudad-residencia');
+  const CMBPARROQUIASR = document.querySelector('#parroquia-residencia');
+
+  // Agregamos los enventos para los combos de residencia
+  agregarEventoLugar(CMBPAISR, CMBPROVINCIAR);
+  agregarEventoLugar(CMBPROVINCIAR, CMBCIUDADR);
+  agregarEventoLugar(CMBCIUDADR, CMBPARROQUIASR);
+
+  // Llenamos los paises
+  consultarPaises(URLLUGAR + 'paises', CMBPAISN, CMBPAISR);
+
+  function agregarEventoLugar(cmb, cmbTarget) {
+    cmb.addEventListener('change', function() {
+      if(cmb.value != 'Seleccione' && cmb.value != ''){
+        consultarLugar(URLLUGAR + 'referencia/' + cmb.value , cmbTarget);
+      }
+    });
+  }
+
+  function consultarLugar(url, cmb){
+    fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      if(data.statuscode  == 200){
+        llenarCmbLugar(cmb, data.items);
+      } else {
+        console.log('Error: ' + data.mensaje);
+      }
+    }).catch(e => {
+      console.log('Error al cargar los paises ' + error);
+    });
+  }
+
+  function llenarCmbLugar(cmb, items){
+    items.forEach(p => {
+      let OPT = document.createElement('option');
+      let V = document.createTextNode(p.lugar_nombre)
+      OPT.value = p.id_lugar;
+      OPT.appendChild(V);
+      cmb.appendChild(OPT);
+    });
+  }
+
+
+  function consultarPaises(url, cmbn, cmbr){
+    fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      if(data.statuscode  == 200){
+        llenarCmbLugar(cmbn, data.items);
+        llenarCmbLugar(cmbr, data.items);
+      } else {
+        console.log('Error: ' + data.mensaje);
+      }
+    }).catch(e => {
+      console.log('Error al cargar los paises ' + error);
+    });
+  }
 </script>
