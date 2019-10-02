@@ -21,6 +21,7 @@ class PerfilCTR extends CTR implements DCTR {
     global $U;
     $persona = PersonaBD::getPorId($U->idPersona);
     $alumno = AlumnoBD::getPorId($U->idPersona);
+    PersonaBD::actualizarFecha($U->idPersona);
     include cargarVista('persona/form.php');
   }
 

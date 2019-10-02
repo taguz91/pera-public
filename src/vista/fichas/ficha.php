@@ -1,50 +1,66 @@
 <?php
 require 'src/vista/templates/nav.php';
-$total = count($fichas);
  ?>
 
 <div class="container my-4">
 
-<?php if ($total == 0): ?>
-  <div class="mx-3">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Mensaje</h5>
-        <p class="card-text">No cuenta con fichas actualmente, por favor debe pedir que le envien su ficha al correo.</p>
-      </div>
-    </div>
-  </div>
-  <?php else: ?>
-    <div class="mx-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Como llenar la ficha</h5>
-          <p class="card-text">Para llenar la ficha, deberá revisar su correo electrónico ahí puede encontrar la contraseña asignada para el ingreso de su ficha.</p>
+  <?php if (isset($fichas)): $total = count($fichas); ?>
+
+    <?php if ($total == 0): ?>
+      <div class="mx-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Mensaje</h5>
+            <p class="card-text">No cuenta con fichas actualmente, por favor debe pedir que le envien su ficha al correo.</p>
+          </div>
         </div>
       </div>
-    </div>
-<?php endif; ?>
+      <?php else: ?>
+        <div class="mx-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Como llenar la ficha</h5>
+              <p class="card-text">Para llenar la ficha, deberá revisar su correo electrónico ahí puede encontrar la contraseña asignada para el ingreso de su ficha.</p>
+            </div>
+          </div>
+        </div>
+    <?php endif; ?>
 
-<?php if (isset($msg)): ?>
-  <div class="row my-2">
-    <?php echo $msg ?>
-  </div>
-<?php endif; ?>
+    <?php if (isset($msg)): ?>
+      <div class="row my-2">
+        <?php echo $msg ?>
+      </div>
+    <?php endif; ?>
 
-<?php
-for ($i=1; $i <= $total; $i++) {
- ?>
-<?php
-  if($i % 2 != 0 OR $i == 0){
-   echo ' <div class="row m-3">';
-  }
-  agregarFicha($fichas[$i-1], $i, $U->idPersona);
-  if($i % 2 == 0 OR $i == $total){
-    echo "</div>";
-  }
- ?>
+    <?php
+    for ($i=1; $i <= $total; $i++) {
+     ?>
+    <?php
+      if($i % 2 != 0 OR $i == 0){
+       echo ' <div class="row m-3">';
+      }
+      agregarFicha($fichas[$i-1], $i, $U->idPersona);
+      if($i % 2 == 0 OR $i == $total){
+        echo "</div>";
+      }
+     ?>
 
-<?php } ?>
+    <?php } ?>
+
+
+  <?php else: ?>
+
+      <div class="mx-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Mensaje</h5>
+            <p class="card-text">Es necesario que actualice su informacion personal antes de llenar una ficha, puede hacerlo aqui:
+              <a href="<?php echo constant('URL'); ?>perfil/editar">Perfil</a> .</p>
+          </div>
+        </div>
+      </div>
+
+  <?php endif; ?>
 
 </div>
 

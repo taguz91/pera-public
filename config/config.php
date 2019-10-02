@@ -11,8 +11,8 @@ define('PASS', 'Holapostgres');
 define('CHARSET', 'utf8mb4');
 
 // Conexion a BDNotas
-
-/*define('HOST', '35.192.7.211');
+/*
+define('HOST', '35.192.7.211');
 define('DB', 'BDnotas');
 define('PORT', '5432');
 define('USER', 'fichasphpubi');

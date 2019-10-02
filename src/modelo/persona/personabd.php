@@ -34,6 +34,26 @@ abstract class PersonaBD {
     return $res['foto'];
   }
 
+  static function actualizarFecha($idPersona) {
+    $sql = '
+    UPDATE public."Personas"
+    SET persona_fecha_actualizacion = now()
+    WHERE id_persona = :id';
+    return executeSQL($sql, [
+      ':id' => $idPersona
+    ]);
+  }
+
+  static function getFechaActualizacion($idPersona) {
+    $sql = '
+    SELECT persona_fecha_actualizacion
+    FROM public."Personas"
+    WHERE id_persona = :id;';
+    return getOneFromSQL($sql , [
+      'id' => $idPersona
+    ]);
+  }
+
   static function actualizarDato($idPersona, $valor, $columna){
     $sql = '
     UPDATE public."Personas"

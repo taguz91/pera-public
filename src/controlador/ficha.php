@@ -4,6 +4,7 @@ require_once 'src/controlador/ocupacional.php';
 require_once 'src/modelo/fichas/fichabd.php';
 require_once 'src/modelo/fichas/seccionbd.php';
 require_once 'src/modelo/persona/personafichabd.php';
+require_once 'src/modelo/persona/personabd.php';
 
 class FichaCTR extends CTR implements DCTR {
 
@@ -16,7 +17,19 @@ class FichaCTR extends CTR implements DCTR {
     if(isset($_SESSION['id_persona_ficha'])){
       unset($_SESSION['id_persona_ficha']);
     }
-    $fichas = FichaBD::getPorPersona($U->idPersona);
+    $fichas = null;
+    // Consultamos la ultima fecha en la que actualizamos la informacion
+    $fechaActualizacion = PersonaBD::getFechaActualizacion($U->idPersona);
+
+    if(isset($fechaActualizacion)){
+      $fma = strtotime("-1 week");
+      $fms = strtotime($fechaActualizacion['persona_fecha_actualizacion']);
+      // Si la fecha en la que actualizamos es superior a una semana actualizamos
+      if($fms > $fma){
+        $fichas = FichaBD::getPorPersona($U->idPersona);
+      }
+    }
+
     require_once cargarVista('fichas/ficha.php');
   }
 
