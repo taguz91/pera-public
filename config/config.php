@@ -1,6 +1,6 @@
 <?php
 //Path de nuestra WEB
-define('URL', 'http://localhost/pera-public/');
+define('URL', 'http://ubi.tecazuay.edu.ec/');
 
 //Constantes de conexion a la base de datos
 /*define('HOST', 'localhost');

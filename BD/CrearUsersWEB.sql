@@ -37,3 +37,21 @@ md5(md5('web') || persona_identificacion || 'web'),
 false
 FROM public."Personas"
 WHERE persona_activa = true;
+
+
+INSERT INTO public."UsersWeb"(
+  id_persona, user_name, user_clave,
+  is_superuser
+)
+SELECT
+p.id_persona,
+persona_identificacion,
+md5(md5('web') || persona_identificacion || 'web'),
+false
+FROM public."Personas" p
+WHERE persona_activa = true AND
+p.id_persona NOT IN (
+ SELECT id_persona
+ FROM public."UsersWeb"
+ WHERE id_persona IS NOT NULL
+);

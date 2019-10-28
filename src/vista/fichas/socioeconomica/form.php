@@ -5,7 +5,7 @@
   const URLGURDAR = '<?php echo constant('URL'); ?>api/v1/ficha/guardar';
 </script>
 
-<script type="text/javascript" src="<?php echo constant('URL') ?>public/js/ajax/formsocioeconomica.js?v=12">
+<script type="text/javascript" src="<?php echo constant('URL') ?>public/js/ajax/formsocioeconomica.js?v=21">
 </script>
 
 <?php endif; ?>

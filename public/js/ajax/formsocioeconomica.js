@@ -135,6 +135,8 @@ function valirdarTodosLlenos(clase){
           i.onblur = '';
           i.disabled = true;
           console.log(data);
+        } else {
+          console.log(data);
         }
       })
       .catch(e => {
