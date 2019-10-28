@@ -13,7 +13,7 @@ define('CHARSET', 'utf8mb4');
 // Conexion a BDNotas
 
 define('HOST', '35.192.7.211');
-define('DB', 'BDnotas');
+define('DB', 'BDinsta');
 define('PORT', '5432');
 define('USER', 'fichasphpubi');
 define('PASS', 'fichasubiphp2019');

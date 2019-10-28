@@ -46,9 +46,6 @@ BEGIN
 END;
 $iniciar_ficha_alumno$ LANGUAGE plpgsql;
 
---Para generar las respuestas automaticamente
-DROP TRIGGER ficha_alumno ON public."PersonaFicha";
-
 CREATE TRIGGER ficha_alumno
 AFTER INSERT ON public."PersonaFicha" FOR EACH ROW
 EXECUTE PROCEDURE iniciar_ficha_alumno();
@@ -72,3 +69,7 @@ CREATE TRIGGER actualiza_fecha
 BEFORE UPDATE OF persona_ficha_fecha_ingreso
 ON public."PersonaFicha" FOR EACH ROW
 EXECUTE PROCEDURE fecha_persona_ficha();
+
+
+--Para generar las respuestas automaticamente
+DROP TRIGGER ficha_alumno ON public."PersonaFicha";

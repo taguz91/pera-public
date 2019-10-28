@@ -7,7 +7,7 @@ class UsuarioBD {
   static function login($user, $pass){
     $sql = '
     SELECT
-    id_user_web, id_persona,
+    id_persona,
     user_name
     FROM public."UsersWeb"
     WHERE user_name = :user AND '
@@ -30,7 +30,6 @@ class UsuarioBD {
   static function getPorUserAndPass($user, $pass){
     $sql = '
     SELECT
-    uw.id_user_web,
     uw.user_name,
     p.id_persona,
     p.persona_primer_nombre,
