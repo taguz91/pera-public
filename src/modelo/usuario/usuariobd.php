@@ -59,6 +59,24 @@ class UsuarioBD {
     }
   }
 
+  static function admin($usuario, $pass) {
+    $sql = '
+    SELECT
+    u.usu_username
+    FROM
+    public."Usuarios" u
+    WHERE
+    usu_username = :user AND
+    usu_password = set_byte( MD5(:pass) :: bytea, 4, 64 ) AND
+    usu_estado = TRUE;
+    ';
+
+    return getOneFromSQL($sql, [
+      'user' => $usuario,
+      'pass' => $pass
+    ]);
+  }
+
 }
 
  ?>

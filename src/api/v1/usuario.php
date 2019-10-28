@@ -22,7 +22,22 @@ class UsuarioAPI {
     }
   }
 
-}
+  function admin(){
+    $user = isset($_POST['txtUsuario']) ?  $_POST['txtUsuario'] : '';
+    $pass = isset($_POST['txtPass']) ?  $_POST['txtPass'] : '';
+    if($user != '' && $pass != ''){
+      $res = UsuarioBD::admin($user, $pass);
+      if(isset($res['usu_username'])){
+        JSON::confirmacion('Usuario encontrado, puede loguearse.');
+      }else{
+        JSON::error('Usuario o contrasena incorrectos.');
+      }
+    }else{
+      JSON::error('No indico usuario ni contrasena.');
+    }
+  }
 
+
+}
 
  ?>
