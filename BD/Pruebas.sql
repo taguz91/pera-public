@@ -61,3 +61,25 @@ WHERE id_persona IN (
 	FROM public."PersonaFicha" pf
 	WHERE pf.id_permiso_ingreso_ficha = 1
 );
+
+-- Personas ficha de EDTS 32 Permiso 2 
+
+INSERT INTO public."PersonaFicha"(
+  id_permiso_ingreso_ficha,
+  id_persona,
+  persona_ficha_clave)
+SELECT 2, id_persona, set_byte(MD5('321') :: bytea, 4, 64)
+FROM public."Personas"
+WHERE id_persona IN (
+  SELECT id_persona
+  FROM public."Alumnos"
+  WHERE id_alumno IN (
+    SELECT id_alumno
+    FROM public."Matricula"
+    WHERE id_prd_lectivo = 32
+  )
+) AND id_persona NOT IN (
+	SELECT id_persona
+	FROM public."PersonaFicha" pf
+	WHERE pf.id_permiso_ingreso_ficha = 2
+);
