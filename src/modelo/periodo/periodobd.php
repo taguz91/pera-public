@@ -6,15 +6,13 @@ class PeriodoBD {
   id_prd_lectivo,
   prd_lectivo_nombre
   FROM public."PeriodoLectivo"
-  WHERE
+  WHERE ';
 
-  ';
   static private $ENDQUERY = '
   prd_lectivo_activo = true
   ORDER BY
   prd_lectivo_nombre,
-  prd_lectivo_fecha_fin DESC;
-  ';
+  prd_lectivo_fecha_fin DESC;';
 
   static function cargarTodos() {
     $sql = self::$BASEQUERY . ' ' . self::$ENDQUERY;
@@ -48,19 +46,21 @@ class PeriodoBD {
     ]);
   }
 
-  static function getCiclos($idPeriodo) {
+  static function getCiclosByPermiso($idPermiso) {
     $sql = '
     SELECT
     DISTINCT curso_ciclo AS ciclo
     FROM public."Cursos" c
     WHERE c.curso_activo = true
-    AND c.id_prd_lectivo = :idPeriodo
-    ORDER BY c.curso_ciclo; ';
+    AND c.id_prd_lectivo = (
+      SELECT DISTINCT id_prd_lectivo
+      FROM public."PermisoIngresoFichas"
+      WHERE id_permiso_ingreso_ficha = :idPermiso
+    ) ORDER BY c.curso_ciclo; ';
     return getArrayFromSQL($sql , [
-      'idPeriodo' => $idPeriodo
+      'idPermiso' => $idPermiso
     ]);
   }
 
 }
-
 ?>

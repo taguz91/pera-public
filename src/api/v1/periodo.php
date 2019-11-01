@@ -3,9 +3,9 @@ require_once 'src/modelo/periodo/periodobd.php';
 
 class PeriodoAPI {
 
-  function ciclos($idPeriodo = 0) {
-    if ($idPeriodo != 0) {
-      $items = PeriodoBD::getCiclos($idPeriodo);
+  function ciclos($idPermiso = 0) {
+    if ($idPermiso != 0) {
+      $items = PeriodoBD::getCiclosByPermiso($idPermiso);
       JSON::muestraJSON($items);
     } else {
       JSON::error('Debe especificarnos el id del periodo a consultar.');
