@@ -10,12 +10,20 @@ class App {
       $url = explode('/', $url);
 
       if(isset($url[0])){
-        if($url[0] == 'api'){
-          require 'src/api/api.php';
-          $AP = new Api();
-          $AP->obtenerUrl();
-        }else{
-          $this->cargarClase($url);
+        switch ($url[0]) {
+          case 'api':
+            require 'src/api/api.php';
+            $AP = new Api();
+            $AP->obtenerUrl();
+            break;
+          case 'miad':
+            require 'src/admin/admin.php';
+            $ADM = new Admin();
+            $ADM->obtenerUrl();
+            break;
+          default:
+            $this->cargarClase($url);
+            break;
         }
       }
 
