@@ -110,3 +110,34 @@
   /*border-top: 1px solid rgba(0, 0, 0, 0.125);*/
   border-bottom: 5px solid rgba(10, 61, 98, 0.125);
 }
+
+/* Para el estilo de admin */
+
+.bg-ista-blue {
+  background-color: #546de5;
+}
+
+.bg-ista-yellow {
+  background-color: #fed330;
+}
+
+.text-ista-blue {
+  color: #546de5;
+}
+
+.text-ista-yellow {
+  color: #fed330;
+}
+
+.titulo-gigante {
+  font-size: 5.0em;
+  font-family: 'Fira Code', monospace;
+}
+
+
+.bg-gradient-blue {
+  background-color: #0a3d62;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(100%, #0a3d62), to(#60a3bc));
+  background-image: linear-gradient(180deg, #0a3d62 100%, #60a3bc 100%);
+  background-size: cover;
+}

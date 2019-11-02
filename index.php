@@ -13,6 +13,12 @@ if(isset($_SESSION['U'])){
   $U = $_SESSION['U'];
 }
 
+// Para administracion en este usamos cookies
+$usuario = null;
+if(isset($_COOKIE['userperadmin'])){
+  $usuario = unserialize($_COOKIE['userperadmin']);
+}
+
 $A = new App();
 $A->obtenerUrl();
 

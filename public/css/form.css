@@ -1,0 +1,46 @@
+.ctn-form {
+  margin: 3% 6%;
+  padding: 3% 4%;
+  border: solid 3px #0101;
+  border-radius: 5px;
+}
+
+.f-x2 {
+  margin: 3% 12%;
+}
+
+.f-x3 {
+  margin: 3% 18%;
+}
+
+.f-x4 {
+  margin: 3% 24%;
+}
+
+.titulo-form {
+  width: 100%;
+  text-align: center;
+  padding: 1% 0%;
+  border: solid 1px pink;
+}
+
+.text-area-form {
+  width: 100%;
+}
+
+.ctn-input {
+  width: 100%;
+  border: solid 1px grey;
+}
+
+.input-form {
+  margin: 1% 0%;
+  width: 100%;
+  height: 30px;
+}
+
+.formulario {
+  margin: auto 10%;
+  width: 80%;
+  border: solid 1px pink;
+}

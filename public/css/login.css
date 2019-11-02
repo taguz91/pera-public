@@ -1,0 +1,25 @@
+html, body {
+  height: 100%;
+}
+
+.sombra-login {
+  box-shadow: 4px 12px 20px 4px rgba(119, 139, 235, 0.6);
+  z-index: 1;
+}
+
+.titulo-login {
+  font-size: 3.0em;
+  font-family: 'Fira Code', monospace;
+}
+
+/*Clase de bootstrap dandole un estilo */
+.input-group-text {
+  background: #fed330 !important;
+  color: white !important;
+  border: 0 !important;
+  border-radius: 0.25rem 0 0 0.25rem !important;
+}
+
+.fondo-login {
+  background: rgba(84, 109, 229, 0.9);
+}

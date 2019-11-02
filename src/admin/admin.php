@@ -1,4 +1,6 @@
 <?php
+require_once 'src/admin/utils/error.php';
+require_once 'src/utils/json.php';
 
 class Admin {
 
@@ -9,24 +11,31 @@ class Admin {
       $url = rtrim($url, '/');
       $url = explode('/', $url);
 
-      if(isset($url[0])){
+      if(isset($url[1])){
         $this->cargarClase($url);
+      } else {
+        $this->existeUsuario();
       }
     }else{
-      global $U;
-      if($U != null){
-        include cargarVista('static/home.php');
-      } else {
-        Page::login();
-      }
+      $this->existeUsuario();
+    }
+  }
+
+  function existeUsuario() {
+    global $usuario;
+    //Si ya tenemos el usuario lo enviamos al home
+    if($usuario != null){
+      require 'src/admin/vista/static/home.php';
+    }else{
+        header("Location: ".constant('URL')."miad/login");
     }
   }
 
   function cargarClase($url){
-    global $U;
+    global $usuario;
     //Nombre de la clase que llamaremos
-    $nombre = $url[0];
-    $dir = 'src/admin/'.$nombre.'.php';
+    $nombre = $url[1];
+    $dir = 'src/admin/controlador/'.$nombre.'.php';
 
     if(file_exists($dir)){
       require_once $dir;
@@ -35,24 +44,29 @@ class Admin {
       //Creamos el objeto
       $modelo = new $nombre();
 
-      if($U != null OR (isset($_POST['user']) AND isset($_POST['pass'])) ){
-        if(isset($url[1])){
+      if(
+        $usuario != null OR
+        (
+          isset($_POST['txtUsuario']) AND isset($_POST['txtPass'])
+        )
+      ){
+        if(isset($url[2])){
           $this->llamarMetodo($url, $modelo);
         }else{
           $modelo->inicio();
         }
       }else{
-        Page::login('Debe ingresar un usuario y una contrasena.');
+        require_once 'src/admin/vista/static/login.php';
       }
     }else{
-        echo "No tenemos la pagina";
+        Errores::error404();
     }
   }
 
   function llamarMetodo($url, $modelo){
-    $metodo = $url[1];
+    $metodo = $url[2];
     if(method_exists($modelo, $metodo)){
-      if(isset($url[2])){
+      if(isset($url[3])){
         $this->llamarMetodoConParametro($url, $modelo);
       }else{
         $modelo->{$metodo}();
@@ -63,8 +77,8 @@ class Admin {
   }
 
   function llamarMetodoConParametro($url, $modelo){
-    $metodo = $url[1];
-    $parametro = $url[2];
+    $metodo = $url[2];
+    $parametro = $url[3];
     //Preguntamos si existe mas de un parametro
     if (strpos($parametro, '-') !== false) {
       $parametro = explode('-', $parametro);

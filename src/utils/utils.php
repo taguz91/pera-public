@@ -92,13 +92,39 @@
     }
   }
 
+  function deleteById($sql, $id = 0){
+    if ($id != 0) {
+      $res = execute($sql, [
+        'id' => $id
+      ]);
+
+      if($res){
+          JSON::confirmacion('Eliminamos correctamente.');
+      } else {
+        JSON::error('No pudimos eliminarlo');
+      }
+    } else {
+      JSON::error('No tenemos el id para eliminar.');
+    }
+  }
+
   function cargarVista($file){
     $dirVista = 'src/vista/';
     $file = $dirVista.$file;
     if(file_exists($file)){
       return $file;
-    }else {
-      return 'src/vista/static/errores/404php';
+    } else {
+      return 'src/vista/static/errores/404.php';
+    }
+  }
+
+  function cargarVistaAdmin($file){
+    $dirVista = 'src/admin/vista/';
+    $file = $dirVista.$file;
+    if(file_exists($file)){
+      return $file;
+    } else {
+      return 'src/admin/vista/static/errores/404.php';
     }
   }
 
