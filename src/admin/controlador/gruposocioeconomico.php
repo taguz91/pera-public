@@ -8,12 +8,17 @@ class GrupoSocioeconomicoCTR extends CTR implements DCTR {
     parent::__construct('admin');
   }
 
-  public function inicio ($mensaje = null){
+  function inicio ($mensaje = null){
     $gruposocioeconomico = GrupoSocioEconomicoBD::getAll();
     require cargarVistaAdmin('gruposocioeconomico/index.php');
   }
 
-  public function guardar(){
+  function nuevo() {
+    $tipofichas = TipoFichaBD::getParaCombo();
+    require cargarVistaAdmin('gruposocioeconomico/guardar.php');
+  }
+
+  function guardar(){
     if(isset($_POST['guardar'])){
       $gS = $this->grupoSocionomicoPOST();
       if($gS != null){
@@ -21,15 +26,14 @@ class GrupoSocioeconomicoCTR extends CTR implements DCTR {
         $mensaje = $res ? 'Guardamos correctamente.' : 'No pudimos guardarlo.';
         $this->inicio($mensaje);
       } else {
-        $this->inicio('No tenemos datos para guardar');
+        $this->inicio('No tenemos datos para guardar.');
       }
     } else {
-      $tipofichas = TipoFichaBD::getParaCombo();
-      require cargarVistaAdmin('gruposocioeconomico/guardar.php');
+      $this->inicio('No indicamos que guardaremos.');
     }
   }
 
-  public function editar(){
+  function editar(){
 
     if(isset($_GET['id'])){
       $gs = GrupoSocioEconomicoBD::getPorId($_GET['id']);
@@ -55,7 +59,7 @@ class GrupoSocioeconomicoCTR extends CTR implements DCTR {
     }
   }
 
-  public function eliminar(){
+  function eliminar(){
     GrupoSocioEconomicoBD::eliminar(isset($_GET['id']) ? $_GET['id'] : 0);
   }
 

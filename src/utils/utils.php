@@ -128,6 +128,10 @@
     }
   }
 
+  function getRandomPass(){
+    return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 6);
+  }
+
   // Para saber que tipo de campos es
   // Si la respuesta escriba es NA es texto
   function getTipoCampo($tipo, $valor){

@@ -22,6 +22,9 @@
   <!-- Mensajes para JavaScript -->
   <script  type="text/javascript" src="<?php echo constant('URL');?>public/js/msg.js"></script>
 
+  <!-- URL DE LA API -->
+  <script  type="text/javascript" src="<?php echo constant('URL');?>public/js/main.js"></script>
+
 </head>
 <body id="page-top">
 
@@ -65,7 +68,7 @@
       <div id="collapseTI" class="collapse"  data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/tipo/">Lista</a>
-          <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/tipo/guardar/">Ingresar</a>
+          <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/tipo/nuevo/">Ingresar</a>
         </div>
       </div>
     </li>
@@ -79,7 +82,7 @@
       <div id="collapsePI" class="collapse"  data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/permiso/">Lista</a>
-          <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/permiso/guardar">Ingresar</a>
+          <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/permiso/nuevo">Ingresar</a>
         </div>
       </div>
     </li>
@@ -110,7 +113,7 @@
       <div id="collapseGS" class="collapse"  data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/gruposocioeconomico/">Lista</a>
-          <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/gruposocioeconomico/guardar">Ingresar</a>
+          <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/gruposocioeconomico/nuevo">Ingresar</a>
         </div>
       </div>
     </li>
@@ -132,8 +135,10 @@
       <div id="collapsePF" class="collapse"  data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/persona/">Todas</a>
+          <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/persona/alumno/">Alumnos</a>
+          <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/persona/docente/">Docentes</a>
           <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/correo/">Lista enviados</a>
-          <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/correo/guardar/">Ingresar</a>
+          <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/correo/nuevo/">Ingresar</a>
         </div>
       </div>
     </li>

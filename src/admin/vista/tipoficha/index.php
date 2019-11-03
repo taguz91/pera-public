@@ -13,7 +13,7 @@ require 'src/admin/vista/templates/header.php';
         </h6>
       </div>
       <div class="col-4 col-lg-2">
-        <a href="<?php echo constant('URL'); ?>tipoficha/guardar"
+        <a href="<?php echo constant('URL'); ?>miad/tipo/nuevo"
         class="btn btn-success btn-block">
           Ingresar
         </a>
@@ -54,7 +54,7 @@ require 'src/admin/vista/templates/header.php';
                 <td><?php echo $tf['id_tipo_ficha']; ?></td>
                 <td><?php echo $tf['tipo_ficha']; ?></td>
                 <td><?php echo $tf['tipo_ficha_descripcion']; ?></td>
-                <td> <a href="<?php echo constant('URL').'tipoficha/editar/?editar='.$tf['id_tipo_ficha']; ?>"> Editar </a> </td>
+                <td> <a href="<?php echo constant('URL').'miad/tipo/editar/?editar='.$tf['id_tipo_ficha']; ?>"> Editar </a> </td>
               </tr>
             <?php endforeach; ?>
             <?php }else{

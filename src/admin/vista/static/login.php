@@ -31,7 +31,7 @@ require_once 'src/admin/vista/templates/headersp.php';
               <div class="col-sm-7">
 
                   <form class="form-horizontal mr-4 mt-3"
-                  action="<?php echo constant('URL'); ?>login/ingresar"
+                  action="<?php echo constant('URL'); ?>miad/login/ingresar"
                   method="post" id="loginform">
 
                     <div class="form-group">
@@ -69,7 +69,7 @@ require_once 'src/admin/vista/templates/headersp.php';
                         <button type="submit" class="btn btn-warning btn-block text-white bg-ista-yellow"
                         name="ingresar"
                         id="pera-ingresar"
-                        onclick="loguear('<?php echo constant('URLAPI').'api/v1/usuario/admin/' ?>')">
+                        onclick="loguear('<?php echo constant('URL').'api/v1/usuario/admin/'; ?>')">
                             Ingresar
                         </button>
 

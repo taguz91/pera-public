@@ -11,7 +11,7 @@ require 'src/admin/vista/templates/header.php';
 
         <div id="ctn-msg"></div>
 
-        <form class="form-horizontal" action="<?php echo constant('URL'); ?>permisoficha/guardar" method="post"  id="form-permiso">
+        <form class="form-horizontal" action="<?php echo constant('URL'); ?>miad/permiso/guardar" method="post"  id="form-permiso">
 
             <div class="form-group">
                 <label for="periodo" class="control-label">Seleccione un periodo:</label>
@@ -79,7 +79,7 @@ require 'src/admin/vista/templates/footer.php';
 <script type="text/javascript">
 
   const FORM_PERMISO = document.querySelector('#form-permiso');
-  const URLPG = '<?php echo constant('URL'); ?>permisoficha/guardar';
+  const URLPG = '<?php echo constant('URL'); ?>miad/permiso/guardar';
 
   /*const CTN_MSG = document.querySelector('#ctn-msg');*/
 
@@ -98,17 +98,19 @@ require 'src/admin/vista/templates/footer.php';
         method: 'POST',
         body: formdata
       })
-      .then(res => res)
+      .then(res => res.json())
       .then(data => {
-        msgSuccess('Guardamos correctamente');
-        FORM_PERMISO.querySelector('select[name="periodo"]').value = 0;
-        FORM_PERMISO.querySelector('select[name="tipoficha"]').value = 0;
-        FORM_PERMISO.querySelector('input[name="fechaInicio"]').value = '';
-        FORM_PERMISO.querySelector('input[name="fechaFin"]').value = '';
+        console.log(data);
+        if (data.statuscode == 200) {
+          msgSuccess('Guardamos correctamente');
+          FORM_PERMISO.querySelector('select[name="periodo"]').value = 0;
+          FORM_PERMISO.querySelector('select[name="tipoficha"]').value = 0;
+          FORM_PERMISO.querySelector('input[name="fechaInicio"]').value = '';
+          FORM_PERMISO.querySelector('input[name="fechaFin"]').value = '';
+        }
       })
       .catch(e =>{
-        console.log('Errores: ' + e);
-        msgError('Error al guardar el formulario');
+        msgError('Error al guardar el formulario. \n' + e);
       });
 
     }

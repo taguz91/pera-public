@@ -52,7 +52,7 @@ require 'src/admin/vista/templates/header.php';
                 echo "<td>".$r['tipo_ficha']."</td>";
                 echo "<td>".$r['num_personas']."</td>";
                 echo "<td>".$r['num_terminados']."</td>";
-                echo '<td> <a target="_blank"  href="'.constant('URL').'respuesta/reporte?idPermiso='.$r['id_permiso_ingreso_ficha'].'">Ver</a> </td>';
+                echo '<td> <a target="_blank"  href="'.constant('URL').'miad/respuesta/reporte?idPermiso='.$r['id_permiso_ingreso_ficha'].'">Ver</a> </td>';
               }
             }else{
               Errores::errorBuscar("No encontramos tipos de fichas");

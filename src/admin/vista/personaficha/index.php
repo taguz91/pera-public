@@ -14,7 +14,7 @@ require 'src/admin/vista/templates/header.php';
       </div>
 
       <div class="col-4 col-lg-2">
-        <a href="<?php echo constant('URL') ?>personaficha/guardarpersona" class="btn btn-success btn-block">Ingresar </a>
+        <a href="<?php echo constant('URL') ?>miad/correo/masivo" class="btn btn-success btn-block">Ingresar </a>
       </div>
 
     </div>
@@ -60,8 +60,8 @@ require 'src/admin/vista/templates/header.php';
               echo "<td>".$pf['persona_primer_nombre']."  ".$pf['persona_primer_apellido']."</td>";
               echo "<td>".$pf['persona_ficha_fecha_ingreso']."</td>";
               echo "<td>".$pf['persona_ficha_fecha_modificacion']."</td>";
-              echo '<td> <a href="'.constant('URL').'personaficha/reenviar?id='.$pf['id_persona_ficha'].'">Reenviar</a> </td>';
-              echo '<td> <a href="'.constant('URL').'personaficha/eliminar?id='.$pf['id_persona_ficha'].'">Eliminar</a> </td>';
+              echo '<td> <a href="'.constant('URL').'miad/correo/reenviar?id='.$pf['id_persona_ficha'].'">Reenviar</a> </td>';
+              echo '<td> <a href="'.constant('URL').'miad/correo/eliminar?id='.$pf['id_persona_ficha'].'">Eliminar</a> </td>';
               echo "</tr>";
             }
           }else{

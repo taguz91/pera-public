@@ -9,7 +9,7 @@
           </button>
         </div>
         <div class="modal-body">
-        <form method="post" action="<?php echo constant('URL'); ?>preguntaficha/actualizar" >
+        <form method="post" action="<?php echo constant('URL'); ?>miad/pregunta/actualizar" >
               <input type="hidden" name="idPregunta" id="idPreguntaA">
               <div class="form-group">
               <label for="tipoSeccion">Sección de la Pregunta:</label>
@@ -32,10 +32,10 @@
               <input type="text" class="form-control" id="preguntaA" name="pregunta" placeholder="Ingrese una pregunta...">
               </div>
 
-              <div class="form-group"> 
+              <div class="form-group">
               <label for="posicionSeccion">Posición de la Pregunta:</label>
               <input type="number" class="form-control"  name="posicionPregunta" id="posicionPreguntaA"  min="1">
-              </div>  
+              </div>
 
               <div class="form-group">
                 <label for="ayudaPregunta">Descripción para la Pregunta:</label>

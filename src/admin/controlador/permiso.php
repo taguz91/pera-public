@@ -9,33 +9,43 @@ class PermisoCTR extends CTR implements DCTR {
     parent::__construct('admin');
   }
 
-  public function inicio($mensaje = null){
+  function inicio($mensaje = null){
     $permisoingresos =PermisoIngresoBD::getAll();
     require cargarVistaAdmin('permisoingreso/index.php');
   }
 
-  public function guardar(){
+  function nuevo() {
+    // Cargamos el formulario
+    $periodos = PeriodoBD::getParaCombo();
+    $tipofichas = TipoFichaBD::getParaCombo();
+    require cargarVistaAdmin('permisoingreso/guardar.php');
+  }
+
+  function guardar(){
     //Validarrrr
     if(isset($_POST['guardar'])){
       $pf = $this->permisoFichaPOST();
 
       if($pf != null){
         $res = PermisoIngresoBD::guardar($pf);
-        $mensaje = $res ? 'Guardamos correctamente.' : 'No pudimos guardarlo.';
-        $this->inicio($mensaje);
+        //$this->inicio($mensaje);
+        if (is_bool($res)) {
+          JSON::confirmacion('Guardamos correctamente.');
+        } else {
+          JSON::error('Error: ' . $res);
+        }
+
       }else{
-        Errores::errorVariableNoEncontrada();
+        //$this->inicio('No tenemos datos que guardar.');
+        JSON::error('No tenemos todos los datos.');
       }
     }else{
-      // Cargamos el formulario
-      $periodos = PeriodoLectivoBD::getParaCombo();
-      $tipofichas = TipoFichaBD::getParaCombo();
-      require cargarVistaAdmin('permisoingreso/guardar.php');
+      //$this->inicio('No indico que guardaremos.');
+      JSON::error('No indico que guardaremos.');
     }
-
   }
 
-  public function editar(){
+  function editar(){
     if(isset($_GET['id'])){
 
       $pi = PermisoIngresoBD::getPorId($_GET['id']);

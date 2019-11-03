@@ -10,7 +10,7 @@ require 'src/admin/vista/templates/header.php';
      <h3 class="text-center my-3">
        Edicion de grupo socieconómico
      </h3>
-     <form class="form-horizontal" action="<?php echo constant('URL'); ?>gruposocioeconomico/editar" method="post">
+     <form class="form-horizontal" action="<?php echo constant('URL'); ?>miad/gruposocioeconomico/editar" method="post">
 
        <input type="hidden" name="id" value="<?php echo $gs['id_grupo_socioeconomico']; ?>">
 

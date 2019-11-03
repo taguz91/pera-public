@@ -11,7 +11,7 @@ require 'src/admin/vista/templates/header.php';
       Ingreso de un grupo socieconómico
     </h3>
 
-    <form class="form-horizontal" id="form-gp" action="<?php echo constant('URL'); ?>gruposocioeconomico/guardar" method="post">
+    <form class="form-horizontal" id="form-gp" action="<?php echo constant('URL'); ?>miad/gruposocioeconomico/guardar" method="post">
 
       <div class="form-group">
 

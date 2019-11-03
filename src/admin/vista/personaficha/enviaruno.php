@@ -8,7 +8,7 @@ require 'src/admin/vista/templates/header.php';
     <h3 class="text-center my-3">
       Enviar correo
     </h3>
-    <form class="form-horizontal" action="<?php echo constant('URL'); ?>personaficha/enviarcorreo/" method="post">
+    <form class="form-horizontal" action="<?php echo constant('URL'); ?>miad/correo/solo/" method="post">
 
       <input type="hidden" name="idpersona" value="<?php echo $_GET['idpersona']; ?>">
 

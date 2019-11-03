@@ -8,7 +8,7 @@
           </button>
         </div>
         <div class="modal-body">
-        <form method="post" action="<?php echo constant('URL'); ?>preguntaficha/eliminar" >
+        <form method="post" action="<?php echo constant('URL'); ?>miad/pregunta/eliminar" >
               <input type="hidden" name="idPregunta" id="idPreguntaE">
               <div class="form-group">
               <label for="tipoSeccion">Sección de la Pregunta:</label>

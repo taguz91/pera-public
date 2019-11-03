@@ -3,14 +3,14 @@
 abstract class TipoFichaBD{
 
   static function guardar($tf) {
-    return execute(self::$INSERT, [
+    return executeSQL(self::$INSERT, [
       'tipoFicha' => $tf['tipo_ficha'],
       'descripcion' => $tf['tipo_ficha_descripcion']
     ]);
   }
 
   static function editar($tf) {
-    return execute(self::$UPDATE, [
+    return executeSQL(self::$UPDATE, [
       'id' => $tf['id_tipo_ficha'],
       'tipoFicha' => $tf['tipo_ficha'],
       'descripcion' => $tf['tipo_ficha_descripcion']

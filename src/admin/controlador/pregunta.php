@@ -10,18 +10,18 @@ class PreguntaCTR extends CTR implements DCTR {
 
     private $seccionesFicha;
 
-    public function __construct() {
+    function __construct() {
         parent::__construct('admin');
     }
 
-    public function inicio($mensaje = null) {
+    function inicio($mensaje = null) {
       $seccionesFicha = SeccionFichaBD::seleccionarSeccionFicha(null, 0);
       $preguntas = PreguntaFichaBD::seleccionarPreguntaFicha(null, 0);
 
       require cargarVistaAdmin('pregunta/index.php');
     }
 
-    public function insertar(){
+    function insertar(){
 
         if ($_POST) {
             $seccion = (int) $_POST['seccionPregunta'];
@@ -83,7 +83,7 @@ class PreguntaCTR extends CTR implements DCTR {
 
     }
 
-    public function actualizar()
+    function actualizar()
     {
 
         if ($_POST) {
@@ -165,7 +165,7 @@ class PreguntaCTR extends CTR implements DCTR {
 
     }
 
-    public function buscar(){
+    function buscar(){
 
         if ($_GET){
 
@@ -185,7 +185,7 @@ class PreguntaCTR extends CTR implements DCTR {
     }
 
 
-    public function eliminar(){
+    function eliminar(){
         if ($_POST){
           $id = (int) $_POST["idPregunta"];
 

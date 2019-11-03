@@ -86,7 +86,7 @@ require 'src/admin/vista/templates/header.php';
  <script type="text/javascript">
 
    const FORM_PERMISO = document.querySelector('#form-permiso');
-   const URLPG = '<?php echo constant('URL'); ?>permisoficha/editar';
+   const URLPG = '<?php echo constant('URL'); ?>miad/permiso/editar';
    const CTN_MSG = document.querySelector('#ctn-msg');
 
    FORM_PERMISO.addEventListener('submit', (e) => {

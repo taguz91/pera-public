@@ -11,14 +11,14 @@ class SeccionCTR extends CTR implements DCTR {
       parent::__construct('admin');
     }
 
-    public function inicio($mensaje = null){
+    function inicio($mensaje = null){
       $tiposSeccion = TipoFichaBD::getAll();
       $secciones = SeccionFichaBD::seleccionarSeccionFicha(null,0);
       require cargarVistaAdmin('seccion/index.php');
     }
 
 
-    public function buscar(){
+    function buscar(){
       if ($_GET){
         $key =$_GET["key"];
         $tiposSeccion = TipoFichaBD::getAll();
@@ -28,7 +28,7 @@ class SeccionCTR extends CTR implements DCTR {
       }
     }
 
-  public function insertar(){
+  function insertar(){
 
      if ($_POST){
 
@@ -47,7 +47,7 @@ class SeccionCTR extends CTR implements DCTR {
   }
 
 
-    public function actualizar(){
+    function actualizar(){
        if ($_POST){
           $id=(int)$_POST["idSeccion"];
           $tipo=(int)$_POST['tipoSeccion'];
@@ -62,7 +62,7 @@ class SeccionCTR extends CTR implements DCTR {
         }
     }
 
-    public function eliminar(){
+    function eliminar(){
        if ($_POST){
           $id=(int)$_POST["idSeccion"];
           $seccion = new SeccionFichaMD($id,null,null,null,false);

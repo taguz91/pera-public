@@ -3,7 +3,7 @@
 abstract class PersonaFichaBD {
 
   static function guardarPersonaFicha($pf) {
-    return execute(self::$INSERT, [
+    return executeSQL(self::$INSERT, [
       'id_permiso_ingreso_ficha' => $pf['id_permiso_ingreso_ficha'],
       'id_persona' => $pf['id_persona'],
       'persona_ficha_clave' => $pf['clave']
@@ -11,7 +11,7 @@ abstract class PersonaFichaBD {
   }
 
   static function editarPersonaFicha($id, $clave){
-    return execute(self::$UPDATE, [
+    return executeSQL(self::$UPDATE, [
       'id' => $id,
       'persona_ficha_clave' => $clave
     ]);

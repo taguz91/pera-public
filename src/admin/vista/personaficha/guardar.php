@@ -9,7 +9,7 @@ require 'src/admin/vista/templates/header.php';
     <h3 class="text-center my-3">
       Envío de correos
     </h3>
-    <form class="form-horizontal" action="<?php echo constant('URL'); ?>personaficha/guardarpersona" method="post">
+    <form class="form-horizontal" action="<?php echo constant('URL'); ?>miad/correo/guardar" method="post">
 
       <div class="form-group">
         <label for="permiso" class="control-label">Seleccione un Permiso:</label>
@@ -50,8 +50,6 @@ require 'src/admin/vista/templates/header.php';
 
 <script type="text/javascript">
 
-const URLAPI = '<?php echo constant('URLAPI'); ?>';
-
 const CMB_PERMISOS = document.querySelector('#cmbPermisos');
 
 const CMB_CICLOS = document.querySelector('#cmbCiclos');
@@ -65,7 +63,7 @@ CMB_PERMISOS.addEventListener('change', function(){
 
 
 function getCursos(idPermiso) {
-  fetch(URLAPI + 'api/v1/periodo/ciclos/' + idPermiso)
+  fetch(URLAPI + 'v1/periodo/ciclos/' + idPermiso)
   .then(res => res.json())
   .then(data => {
     if(data.statuscode == '200') {

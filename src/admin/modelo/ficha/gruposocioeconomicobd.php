@@ -4,7 +4,7 @@ abstract class GrupoSocioEconomicoBD {
 
   static function guardar($gs) {
     $sql = self::$INSERT;
-    return execute($sql, [
+    return executeSQL($sql, [
       'idTipoFicha' => $gs['id_tipo_ficha'],
       'grupoSocioEconomico' => $gs['grupo_socioeconomico'],
       'puntajeMinimo' => $gs['puntaje_minimo'],
@@ -14,7 +14,7 @@ abstract class GrupoSocioEconomicoBD {
 
   static function editar($gs) {
     $sql = self::$UPDATE;
-    return execute($sql, [
+    return executeSQL($sql, [
       'id' => $gs['id_grupo_socioeconomico'],
       'idTipoFicha' => $gs['id_tipo_ficha'],
       'grupoSocioEconomico' => $gs['grupo_socioeconomico'],

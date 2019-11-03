@@ -9,7 +9,7 @@
           </button>
         </div>
         <div class="modal-body">
-        <form method="post" action="<?php echo constant('URL'); ?>seccionficha/eliminar">
+        <form method="post" action="<?php echo constant('URL'); ?>miad/seccion/eliminar">
             <input type="hidden" name="idSeccion" id="idSeccionE">
             <div class="form-group">
               <label for="nombreSeccion">Nombre de la Seccion:</label>

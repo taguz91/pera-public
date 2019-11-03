@@ -9,7 +9,7 @@
           </button>
         </div>
         <div class="modal-body">
-        <form method="post" action="<?php echo constant('URL'); ?>seccionficha/insertar" >
+        <form method="post" action="<?php echo constant('URL'); ?>miad/seccion/insertar" >
             <div class="form-group">
               <label for="nombreSeccion">Nombre de la Sección:</label>
               <input type="text" class="form-control"  name="nombreSeccion" placeholder="Ingrese un nombre...">

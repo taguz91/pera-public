@@ -12,7 +12,7 @@ require 'src/admin/vista/templates/header.php';
         </h6>
       </div>
       <div class="col-4 col-lg-2">
-        <a href="<?php echo constant('URL'); ?>permisoficha/guardar"
+        <a href="<?php echo constant('URL'); ?>miad/permiso/nuevo"
         class="btn btn-success btn-block">Ingresar</a>
       </div>
     </div>
@@ -63,9 +63,9 @@ require 'src/admin/vista/templates/header.php';
                   <td><?php echo $pi['fecha_inicio'];?></td>
                   <td><?php echo $pi['fecha_fin']; ?></td>
 
-                  <td> <a href="<?php echo constant('URL').'permisoficha/editar?id='.$pi['id_permiso_ingreso_ficha']; ?>" class="btn btn-info btn-sm">Editar</a> </td>
+                  <td> <a href="<?php echo constant('URL').'miad/permiso/editar?id='.$pi['id_permiso_ingreso_ficha']; ?>" class="btn btn-info btn-sm">Editar</a> </td>
 
-                  <td> <button onclick="eliminar('<?php echo constant('URL').'permisoficha/eliminar?id='; ?>', '<?php echo $pi['id_permiso_ingreso_ficha']; ?>')" type="button" class="btn btn-danger btn-sm">Eliminar</button> </td>
+                  <td> <button onclick="eliminar('<?php echo constant('URL').'miad/permiso/eliminar?id='; ?>', '<?php echo $pi['id_permiso_ingreso_ficha']; ?>')" type="button" class="btn btn-danger btn-sm">Eliminar</button> </td>
 
                 </tr>
 

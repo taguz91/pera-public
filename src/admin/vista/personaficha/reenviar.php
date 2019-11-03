@@ -8,7 +8,7 @@ require 'src/admin/vista/templates/header.php';
     <h3 class="text-center my-3">
       Reenviar correo a estudiante
     </h3>
-    <form class="form-horizontal" action="<?php echo constant('URL'); ?>personaficha/editar/" method="post">
+    <form class="form-horizontal" action="<?php echo constant('URL'); ?>miad/correo/editar/" method="post">
       <input type="hidden" name="idperficha" value="<?php echo $_GET['id']; ?>">
       <div class="form-group">
         <label class="control-label" for="">Correo:</label>

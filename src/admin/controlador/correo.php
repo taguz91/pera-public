@@ -11,12 +11,18 @@ class CorreoCTR extends CTR implements DCTR {
     parent::__construct('admin');
   }
 
-  public function inicio($mensaje = null) {
+  function inicio($mensaje = null) {
     $personaFichas = PersonaFichaBD::getAll();
     require cargarVistaAdmin('personaficha/index.php');
   }
 
-  public function guardar() {
+  function masivo() {
+    $permisos = PermisoIngresoBD::getAll();
+    require cargarVistaAdmin('personaficha/guardar.php');
+  }
+
+
+  function guardar() {
     if (isset($_POST['guardar'])) {
 
       if (
@@ -71,8 +77,7 @@ class CorreoCTR extends CTR implements DCTR {
         $this->inicio('No tenemos todos los datos necesarios.');
       }
     } else {
-      $permisos = PermisoIngresoBD::getAll();
-      require cargarVistaAdmin('personaficha/guardar.php');
+      $this->inicio('No indico que guardaremos!.');
     }
   }
 
@@ -81,7 +86,7 @@ class CorreoCTR extends CTR implements DCTR {
       $correo = $_POST['correo'];
       $id = $_POST['idperficha'];
       $mensaje = $_POST['mensaje'];
-      $pass = $this->getRandomPass();
+      $pass = getRandomPass();
 
       if(EnviarCorreo::enviar($correo, $pass, $mensaje)){
         $res = PersonaFichaBD::editarPersonaFicha($id, $pass);
@@ -92,13 +97,13 @@ class CorreoCTR extends CTR implements DCTR {
     }
   }
 
-  function enviarCorreo() {
+  function solo() {
     if(isset($_POST['guardar'])){
       $idPersona = $_POST['idpersona'];
       $idPermiso = $_POST['permiso'];
       $correo = $_POST['correo'];
       $mensaje = $_POST['mensaje'];
-      $pass = $this->getRandomPass();
+      $pass = getRandomPass();
       if(EnviarCorreo::enviar($correo, $pass, $mensaje)){
         $pf = [
           'id_permiso_ingreso_ficha' => $idPermiso,
@@ -151,20 +156,16 @@ class CorreoCTR extends CTR implements DCTR {
   private function generarContrasena($num){
     $pass = array();
     for ($i = 0; $i < $num; $i++) {
-      array_push($pass, $this->getRandomPass());
+      array_push($pass, getRandomPass());
     }
     return $pass;
   }
 
-  private function getRandomPass(){
-    return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 6);
-  }
-
-  public function eliminar(){
+  function eliminar(){
     PersonaFichaBD::eliminar(isset($_GET['id']) ? $_GET['id'] : 0);
   }
 
-  public function enviarCorreoIndividual($idPersona, $correo, $mensajePersonalizado){
+  function enviarCorreoIndividual($idPersona, $correo, $mensajePersonalizado){
     if (
       isset($_POST['permiso']) &&
       isset($_POST['correo'])

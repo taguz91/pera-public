@@ -13,13 +13,17 @@ class TipoCTR extends CTR implements DCTR {
   }
 
   function guardar() {
+    include cargarVistaAdmin('tipoficha/guardar.php');
+  }
+
+  function guardar() {
     $tf = $this->tipoFichaFromPOST();
-    if($tf == null){
-      include cargarVistaAdmin('tipoficha/guardar.php');
-    } else {
+    if($tf != null){
       $res = TipoFichaBD::guardar($tf);
       $mensaje = $res ? 'Guardamos correctamente.' : 'No pudimos guardarlo.';
       $this->inicio($mensaje);
+    } else {
+      $this->inicio('No tenemos datos para guardar.');
     }
   }
 

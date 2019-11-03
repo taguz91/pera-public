@@ -11,7 +11,7 @@ require 'src/admin/vista/templates/header.php';
          <h6 class="m-0 font-weight-bold text-primary">Todos los grupos socieconómicos</h6>
        </div>
        <div class="col-4 col-lg-2">
-         <a href="<?php echo constant('URL'); ?>gruposocioeconomico/guardar"
+         <a href="<?php echo constant('URL'); ?>miad/gruposocioeconomico/nuevo"
          class="btn btn-success btn-block">Ingresar</a>
        </div>
      </div>
@@ -39,7 +39,7 @@ require 'src/admin/vista/templates/header.php';
        <thead class="thead-dark bg-ista-blue">
          <tr>
            <th scope="col">ID</th>
-           <th scope="col">IDTipoFicha</th>
+           <th scope="col">Tipo Ficha</th>
            <th scope="col">GrupoSocienomico</th>
            <th scope="col">Puntaje Mínimo</th>
            <th scope="col">Puntaje Máximo</th>
@@ -58,8 +58,8 @@ require 'src/admin/vista/templates/header.php';
             echo "<td>".$gs['grupo_socioeconomico']."</td>";
             echo "<td>".$gs['puntaje_minimo']."</td>";
             echo "<td>".$gs['puntaje_maximo']."</td>";
-            echo '<td> <a href="'.constant('URL').'gruposocioeconomico/editar?id='.$gs['id_grupo_socioeconomico'].'">Editar</a> </td>';
-            echo '<td> <a href="'.constant('URL').'gruposocioeconomico/eliminar?id='.$gs['id_grupo_socioeconomico'].'">Eliminar</a> </td>';
+            echo '<td> <a href="'.constant('URL').'miad/gruposocioeconomico/editar?id='.$gs['id_grupo_socioeconomico'].'">Editar</a> </td>';
+            echo '<td> <a href="'.constant('URL').'miad/gruposocioeconomico/eliminar?id='.$gs['id_grupo_socioeconomico'].'">Eliminar</a> </td>';
             echo "</tr>";
           }
         }else{

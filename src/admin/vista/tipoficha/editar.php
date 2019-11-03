@@ -9,7 +9,7 @@ require 'src/admin/vista/templates/header.php';
     <h3 class="text-center my-3">
       Ingreso de Permiso Ficha
     </h3>
-    <form class="form-horizontal" action="<?php echo constant('URL') . 'tipoficha/editar'; ?>" method="post">
+    <form class="form-horizontal" action="<?php echo constant('URL'); ?>miad/tipo/editar" method="post">
 
       <input type="hidden" name="id" value="<?php echo $tf['id_tipo_ficha']; ?>">
 

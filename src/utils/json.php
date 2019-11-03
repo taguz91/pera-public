@@ -13,7 +13,7 @@ abstract class JSON {
         ]));
       }
     }else{
-      self::error('No encontramos lo que buscaba.');
+      self::error('No obtuvimos resultados.');
     }
   }
 

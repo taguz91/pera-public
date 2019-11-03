@@ -77,9 +77,19 @@ abstract class PersonaBD {
     return getArrayFromSQL($sql, []);
   }
 
+  static function getAlumnos(){
+    $sql = self::$BASEQUERY . ' JOIN public."Alumnos" a ON a.id_persona = p.id_persona ' . self::$ENDQUERY;
+    return getArrayFromSQL($sql, []);
+  }
+
+  static function getDocentes(){
+    $sql = self::$BASEQUERY . ' JOIN public."Docentes" d ON d.id_persona = p.id_persona ' . self::$ENDQUERY;
+    return getArrayFromSQL($sql, []);
+  }
+
   static private $BASEQUERY = '
   SELECT
-  id_persona,
+  p.id_persona,
   persona_identificacion,
   persona_primer_apellido,
   persona_segundo_apellido,
@@ -88,7 +98,7 @@ abstract class PersonaBD {
   persona_telefono,
   persona_celular,
   persona_correo
-  FROM public."Personas" ';
+  FROM public."Personas" p ';
 
   static private $ENDQUERY = '
     ORDER BY

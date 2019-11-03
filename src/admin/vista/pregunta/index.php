@@ -1,6 +1,6 @@
 <?php
 $pagina = 'Preguntas Ficha';
-require_once 'src/admin/controlador/preguntaficha/preguntaFichaAJAX.php';
+require_once 'src/admin/ajax/preguntaajax.php';
 require 'src/admin/vista/templates/header.php';
 require_once 'src/admin/vista/pregunta/insertar.php';
 require_once 'src/admin/vista/pregunta/eliminar.php';

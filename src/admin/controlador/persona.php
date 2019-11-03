@@ -6,9 +6,19 @@ class PersonaCTR extends CTR implements DCTR {
     parent::__construct('admin');
   }
 
-  public function inicio($mensaje = null) {
+  function inicio($mensaje = null) {
     $personas = PersonaBD::getAll();
     require cargarVistaAdmin('persona/index.php');
+  }
+
+  function alumno() {
+    $personas = PersonaBD::getAlumnos();
+    require cargarVistaAdmin('persona/alumno.php');
+  }
+
+  function docente() {
+    $personas = PersonaBD::getDocentes();
+    require cargarVistaAdmin('persona/docente.php');
   }
 
 

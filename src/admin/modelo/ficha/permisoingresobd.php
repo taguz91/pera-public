@@ -3,7 +3,7 @@
 abstract class PermisoIngresoBD {
 
   static function guardar($pi) {
-    return execute(self::$INSERT, [
+    return executeSQL(self::$INSERT, [
       'idPeriodo' => $pi['id_prd_lectivo'],
       'idTipoFicha' => $pi['id_tipo_ficha'],
       'fechaInicio' => $pi['fecha_inicio'],
@@ -12,7 +12,7 @@ abstract class PermisoIngresoBD {
   }
 
   static function editar($pi) {
-    return execute(self::$UPDATE, [
+    return executeSQL(self::$UPDATE, [
       'id' => $pi['id_permiso_ingreso_ficha'],
       'idPeriodo' => $pi['id_prd_lectivo'],
       'idTipoFicha' => $pi['id_tipo_ficha'],

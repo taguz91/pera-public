@@ -8,7 +8,7 @@ require 'src/admin/vista/templates/header.php';
     <div class="row">
       <div class="col">
         <h6 class="m-0 font-weight-bold text-primary">
-          Personas  | Docentes / Alumnos
+          Personas  | Docentes
         </h6>
       </div>
 
@@ -40,6 +40,7 @@ require 'src/admin/vista/templates/header.php';
             <th scope="col">Telefono</th>
             <th scope="col">Celular</th>
             <th scope="col">Correo</th>
+            <th scope="col">Enviar</th>
           </tr>
         </thead>
 
@@ -58,6 +59,16 @@ require 'src/admin/vista/templates/header.php';
                 <td><?php echo $p['persona_telefono']; ?></td>
                 <td><?php echo $p['persona_celular']; ?></td>
                 <td><?php echo $p['persona_correo']; ?></td>
+                <!--
+                <td><a href="<?php //echo constant('URL').'miad/correo/enviar?idpersona='.$p['id_persona'].'&correo='.$p['persona_correo']; ?>">Enviar</a></td>
+              -->
+                <td>
+                  <button class="btn btn-primary btn-sm" type="button"
+                  onclick="enviar(
+                  <?php echo $p['id_persona']; ?>,
+                  '<?php echo $p['persona_correo'] ?>'
+                  )" data-toggle="modal" data-target="#enviar-correo">Enviar</button>
+                </td>
 
               </tr>
 
@@ -77,6 +88,12 @@ require 'src/admin/vista/templates/header.php';
 
 </div>
 
+<script type="text/javascript">
+  const URLAPIPERMISO = URLAPI + 'v1/permiso/docente/';
+</script>
+
 <?php
+// Modal
+require 'src/admin/vista/persona/enviarcorreo.php';
 require 'src/admin/vista/templates/footer.php';
  ?>
