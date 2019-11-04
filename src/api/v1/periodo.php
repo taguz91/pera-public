@@ -8,7 +8,16 @@ class PeriodoAPI {
       $items = PeriodoBD::getCiclosByPermiso($idPermiso);
       JSON::muestraJSON($items);
     } else {
-      JSON::error('Debe especificarnos el id del periodo a consultar.');
+      JSON::error('Debe especificarnos el id del permiso a consultar.');
+    }
+  }
+
+  function cmbGuardar($idTipoFicha = 0) {
+    if ($idTipoFicha != 0) {
+      $items = PeriodoBD::getParaCmbGuardar($idTipoFicha);
+      JSON::muestraJSON($items);
+    } else {
+      JSON::error('Debe especificarnos el id del tipo de ficha.');
     }
   }
 

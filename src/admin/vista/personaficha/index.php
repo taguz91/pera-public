@@ -14,7 +14,7 @@ require 'src/admin/vista/templates/header.php';
       </div>
 
       <div class="col-4 col-lg-2">
-        <a href="<?php echo constant('URL') ?>miad/correo/masivo" class="btn btn-success btn-block">Ingresar </a>
+        <a href="<?php echo constant('URL') ?>miad/correo/nuevo" class="btn btn-success btn-block">Ingresar </a>
       </div>
 
     </div>

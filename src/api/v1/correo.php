@@ -17,7 +17,9 @@ class CorreoAPI {
     ) {
       $pass = getRandomPass();
 
-      if(EnviarCorreo::enviar($correo, $pass, $mensaje)){
+      $enviado = EnviarCorreo::enviar($correo, $pass, $mensaje);
+
+      if(is_bool($enviado)){
         $pf = [
           'id_permiso_ingreso_ficha' => $idPermiso,
           'id_persona' => $idPersona,
@@ -26,12 +28,12 @@ class CorreoAPI {
 
         $res = PersonaFichaBD::guardarPersonaFicha($pf);
         if(is_bool($res)){
-          JSON::confirmacion('Guardamos correctamente su pass es: ' + $pass);
+          JSON::confirmacion('Guardamos correctamente su pass es: ' . $pass);
         } else {
           JSON::error('No pudimos guardarlo ' . $res);
         }
       } else {
-        JSON::error('No se envio el correo.');
+        JSON::error('No se envio el correo. ' . $enviado);
       }
     } else {
       JSON::error('No tenemos todos los datos necesarios.');

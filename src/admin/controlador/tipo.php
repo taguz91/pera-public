@@ -12,7 +12,7 @@ class TipoCTR extends CTR implements DCTR {
     include cargarVistaAdmin('tipoficha/index.php');
   }
 
-  function guardar() {
+  function nuevo() {
     include cargarVistaAdmin('tipoficha/guardar.php');
   }
 

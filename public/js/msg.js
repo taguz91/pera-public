@@ -20,3 +20,10 @@ function msgSuccess(msg) {
     </button> </div>`;
   }
 }
+
+function msgBorrar() {
+  const CTN_MSG = document.querySelector('#ctn-msg');
+  if (CTN_MSG != null) {
+    CTN_MSG.innerHTML = '';
+  }
+}

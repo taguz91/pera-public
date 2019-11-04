@@ -50,7 +50,7 @@ class PermisoCTR extends CTR implements DCTR {
 
       $pi = PermisoIngresoBD::getPorId($_GET['id']);
       // Cargamos el formulario
-      $periodos = PeriodoLectivoBD::getParaCombo();
+      $periodos = PeriodoBD::getParaCmbEditar($_GET['id']);
       $tipofichas = TipoFichaBD::getParaCombo();
 
       if($pi != null){

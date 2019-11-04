@@ -2,8 +2,6 @@
 const FORM_CORREO = document.querySelector('#form-correo');
 
 function enviar(id, correo) {
-  let fila = document.querySelector('#fila-'+id);
-
   FORM_CORREO.querySelector('input[name="idpersona"]').value = id;
   FORM_CORREO.querySelector('input[name="correo"]').value = correo;
   getPermisos(id);
@@ -60,4 +58,10 @@ function enviarCorreo() {
   } else {
     msgError('No tenemos  la informacion requerida.');
   }
+}
+
+function cerrarModal() {
+  FORM_CORREO.querySelector('input[name="idpersona"]').value = '';
+  FORM_CORREO.querySelector('input[name="correo"]').value = '';
+  msgBorrar();
 }

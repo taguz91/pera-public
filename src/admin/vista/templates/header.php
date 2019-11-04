@@ -20,7 +20,7 @@
   <link href="<?php echo constant('URL');?>public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
   <!-- Mensajes para JavaScript -->
-  <script  type="text/javascript" src="<?php echo constant('URL');?>public/js/msg.js"></script>
+  <script  type="text/javascript" src="<?php echo constant('URL');?>public/js/msg.js?v=1"></script>
 
   <!-- URL DE LA API -->
   <script  type="text/javascript" src="<?php echo constant('URL');?>public/js/main.js"></script>

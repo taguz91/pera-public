@@ -1,4 +1,5 @@
 <?php
+$pagina = 'Tipo Ficha | Nuevo';
 require 'src/admin/vista/templates/header.php';
 ?>
 
@@ -7,7 +8,7 @@ require 'src/admin/vista/templates/header.php';
   <div class="col-md-8 col-lg-6 mx-auto border rounded">
 
     <h3 class="text-center my-3">
-      Ingreso de Permiso Ficha
+      Nuevo Tipo Ficha
     </h3>
     <form class="form-horizontal" action="<?php echo constant('URL'); ?>miad/tipo/guardar" method="post">
 

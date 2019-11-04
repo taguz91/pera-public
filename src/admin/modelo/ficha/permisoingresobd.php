@@ -40,7 +40,7 @@ abstract class PermisoIngresoBD {
     WHERE pF.id_prd_lectivo=p.id_prd_lectivo
     AND pF.id_tipo_ficha=tF.id_tipo_ficha
     AND pF.permiso_ingreso_activo=true
-    AND id_permiso_ingreso_ficha = :id;';
+    AND id_permiso_ingreso_ficha = :id ;';
 
     return getOneFromSQL($sql, [
       'id' => $id
@@ -52,7 +52,7 @@ abstract class PermisoIngresoBD {
     return getArrayFromSQL($sql, []);
   }
 
-  static function getForPersona($idPersona) {
+  static function getForAlumno($idPersona) {
     $sql = '
     SELECT
     id_permiso_ingreso_ficha,
@@ -69,10 +69,31 @@ abstract class PermisoIngresoBD {
         WHERE a.id_persona = :idPersona
     ) AND pf.permiso_ingreso_activo = true
     AND prd_lectivo_estado = true
+    AND tf.id_tipo_ficha = 1
+    AND pf.permiso_ingreso_fecha_fin >= current_timestamp
     ORDER BY prd_lectivo_fecha_inicio DESC;';
     return getArrayFromSQL($sql, [
       'idPersona' => $idPersona
     ]);
+  }
+
+  static function getForDocente($idPersona) {
+    $sql = '
+    SELECT
+    id_permiso_ingreso_ficha,
+    pl.prd_lectivo_nombre,
+    tf.tipo_ficha
+    FROM
+    public."PermisoIngresoFichas" pf
+    JOIN public."PeriodoLectivo" pl ON pl.id_prd_lectivo = pf.id_prd_lectivo
+    JOIN public."TipoFicha" tf ON tf.id_tipo_ficha = pf.id_tipo_ficha
+    WHERE pf.permiso_ingreso_activo = true
+    AND prd_lectivo_estado = true
+    AND tf.id_tipo_ficha = 2
+    AND pf.permiso_ingreso_fecha_fin >= current_timestamp
+    ORDER BY prd_lectivo_fecha_inicio DESC;';
+
+    return getArrayFromSQL($sql, []);
   }
 
   static function getPorPeriodo($idPeriodo){

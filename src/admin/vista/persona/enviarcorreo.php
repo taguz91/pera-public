@@ -9,7 +9,7 @@
       <div class="modal-header">
         <h5 class="modal-title">Envio correo</h5>
 
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button onclick="cerrarModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -57,4 +57,4 @@
 
 <!-- MODAL PARA ENVIAR CORREO -->
 
-<script type="text/javascript" src="<?php echo constant('URL') ?>public/js/ajax/enviarcorreo.js"></script>
+<script type="text/javascript" src="<?php echo constant('URL') ?>public/js/ajax/enviarcorreo.js?v=1"></script>

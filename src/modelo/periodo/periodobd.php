@@ -14,6 +14,16 @@ class PeriodoBD {
   prd_lectivo_nombre,
   prd_lectivo_fecha_fin DESC;';
 
+  static private $QUERYCMB = '
+  SELECT
+  id_prd_lectivo,
+  prd_lectivo_nombre
+  FROM
+  public."PeriodoLectivo"
+  WHERE
+  prd_lectivo_activo = true AND
+  prd_lectivo_estado = true ';
+
   static function cargarTodos() {
     $sql = self::$BASEQUERY . ' ' . self::$ENDQUERY;
     return getArrayFromSQL($sql , []);
@@ -63,19 +73,66 @@ class PeriodoBD {
   }
 
   static function getParaCombo(){
+    $sql = self::$QUERYCMB . '
+    ORDER BY
+    prd_lectivo_fecha_fin DESC;';
+    return getArrayFromSQL($sql, []);
+  }
+
+  static function getParaCmbGuardar($idTipoFicha) {
+    $sql = self::$QUERYCMB . '
+    AND id_prd_lectivo NOT IN (
+      SELECT id_prd_lectivo
+      FROM public."PermisoIngresoFichas"
+      WHERE id_tipo_ficha = :idTipoFicha
+    )
+    ORDER BY
+    prd_lectivo_fecha_fin DESC;';
+    return getArrayFromSQL($sql, [
+      'idTipoFicha' => $idTipoFicha
+    ]);
+  }
+
+  static function getParaCmbEditar($idPermiso) {
     $sql = '
     SELECT
     id_prd_lectivo,
-    prd_lectivo_nombre
+    prd_lectivo_nombre,
+    prd_lectivo_fecha_fin
     FROM
     public."PeriodoLectivo"
     WHERE
     prd_lectivo_activo = true AND
     prd_lectivo_estado = true
+    AND id_prd_lectivo NOT IN (
+        SELECT id_prd_lectivo
+        FROM public."PermisoIngresoFichas"
+        WHERE id_tipo_ficha = (
+          SELECT id_tipo_ficha
+          FROM public."PermisoIngresoFichas"
+          WHERE id_permiso_ingreso_ficha = :idPermiso
+        )
+      )
+    UNION
+    SELECT
+    id_prd_lectivo,
+    prd_lectivo_nombre,
+    prd_lectivo_fecha_fin
+    FROM
+    public."PeriodoLectivo"
+    WHERE
+    prd_lectivo_activo = true AND
+    prd_lectivo_estado = true
+    AND id_prd_lectivo = (
+      SELECT id_prd_lectivo
+    	FROM public."PermisoIngresoFichas"
+    	WHERE id_permiso_ingreso_ficha = :idPermiso
+    )
     ORDER BY
-    prd_lectivo_fecha_fin DESC;
-    ';
-    return getArrayFromSQL($sql, []);
+    prd_lectivo_fecha_fin DESC;';
+    return getArrayFromSQL($sql, [
+      'idPermiso' => $idPermiso
+    ]);
   }
 
 }

@@ -21,10 +21,10 @@ class EnviarCorreo {
       $mail->setFrom('15andresc@gmail.com', 'ISTA - Desarrollo de Software');
       $mail->addAddress($correo);
       $mail->isHTML(true);
-      $mail->Subject = 'Ficha Socioecon&oacute;mica';
+      $mail->Subject = 'Ficha | UBI - ISTA';
       $mail->Body =
       '<p>'. $mensaje.'</p>'.
-      '<p> A continuación se presenta un enlace el cual le redirecciona a la página de ingreso de la ficha</p>
+      '<p> A continuación se presenta un enlace el cual le redirecciona a la página de ingreso de su ficha</p>
       <hr>
       <h2>Su contraseña es: </h2> <h1>'.$pass.'</h1>
       <hr>
@@ -36,7 +36,7 @@ class EnviarCorreo {
       $mail->send();
       return true;
     } catch (Exception $e) {
-      return false;
+      return $e;
     }
   }
 }

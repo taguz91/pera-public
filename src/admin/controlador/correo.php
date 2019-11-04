@@ -16,7 +16,7 @@ class CorreoCTR extends CTR implements DCTR {
     require cargarVistaAdmin('personaficha/index.php');
   }
 
-  function masivo() {
+  function nuevo() {
     $permisos = PermisoIngresoBD::getAll();
     require cargarVistaAdmin('personaficha/guardar.php');
   }
