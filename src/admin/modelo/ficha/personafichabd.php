@@ -50,9 +50,12 @@ abstract class PersonaFichaBD {
     return getArrayFromSQL($sql, []);
   }
 
-  static function getCorreosEst($numCiclo, $idPermiso) {
+  static function getCorreosEst($idPermiso, $numCiclo) {
     $sql = '
-    SELECT id_persona, persona_correo
+    SELECT id_persona,
+    persona_primer_nombre || \' \' ||
+    persona_primer_apellido AS persona_nombre,
+    persona_correo
     FROM public."Personas"
     WHERE id_persona IN (
       SELECT id_persona FROM public."Alumnos"
@@ -74,13 +77,16 @@ abstract class PersonaFichaBD {
     return getArrayFromSQL($sql, [
       'idPermiso1' => $idPermiso,
       'numCiclo' => $numCiclo,
-      'idPermiso2' => $idPeriodo
+      'idPermiso2' => $idPermiso
     ]);
   }
 
-  static function getCorreosDoc($numCiclo, $idPermiso){
+  static function getCorreosDoc($idPermiso, $numCiclo){
     $sql = '
-    SELECT id_persona, persona_correo
+    SELECT id_persona,
+    persona_primer_nombre || \' \' ||
+    persona_primer_apellido AS persona_nombre,
+    persona_correo
     FROM public."Personas"
     WHERE id_persona IN (
       SELECT id_persona FROM public."Docentes"
@@ -99,7 +105,7 @@ abstract class PersonaFichaBD {
     return getArrayFromSQL($sql, [
       'idPermiso1' => $idPermiso,
       'numCiclo' => $numCiclo,
-      'idPermiso2' => $idPeriodo
+      'idPermiso2' => $idPermiso
     ]);
   }
 

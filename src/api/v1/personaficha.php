@@ -22,6 +22,28 @@ class PersonaFichaAPI {
     }
   }
 
+  function correos($param) {
+    if (isset($param[0]) && isset($param[1])) {
+      $res = PersonaFichaBD::getIdTipo($param[0]);
+      if (isset($res['id_tipo_ficha'])) {
+        $items = null;
+        switch ($res['id_tipo_ficha']) {
+          case 1:
+            $items = PersonaFichaBD::getCorreosAlumnos($param[0], $param[1]);
+            break;
+          case 2:
+            $items = PersonaFichaBD::getCorreosDocentes($param[0], $param[1]);
+            break;
+        }
+        JSON::muestraJSON($items);
+      } else {
+        JSON::error('No sabemos que tipo de ficha es.');
+      }
+    } else {
+      JSON::error('No indico los parametros requeridos. permiso-ciclo');
+    }
+  }
+
 }
 
  ?>

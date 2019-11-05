@@ -8,11 +8,8 @@ require 'src/admin/vista/templates/header.php';
     <div class="col-md-8 col-lg-6 mx-auto border rounded shadow">
 
         <h3 class="text-center my-3">Nuevo Permiso Ingreso Ficha</h3>
-
         <hr>
-
         <div id="ctn-msg"></div>
-
 
         <form class="form-horizontal" action="<?php echo constant('URL'); ?>miad/permiso/guardar" method="post"  id="form-permiso">
 
@@ -80,7 +77,7 @@ require 'src/admin/vista/templates/footer.php';
 
   FORM_PERMISO.addEventListener('submit', (e) => {
     e.preventDefault();
-  })
+  });
 
   function guardarPermiso() {
     let formdata = new FormData(FORM_PERMISO);

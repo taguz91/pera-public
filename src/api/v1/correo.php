@@ -5,7 +5,6 @@ require_once "src/utils/enviarcorreo.php";
 class CorreoAPI {
 
   function uno() {
-
     $idPersona = isset($_POST['idpersona']) ? $_POST['idpersona'] : 0;
     $idPermiso = isset($_POST['permiso']) ? $_POST['permiso'] : 0;
     $correo = isset($_POST['correo']) ? $_POST['correo'] : '';
@@ -16,7 +15,6 @@ class CorreoAPI {
       && $correo != ''
     ) {
       $pass = getRandomPass();
-
       $enviado = EnviarCorreo::enviar($correo, $pass, $mensaje);
 
       if(is_bool($enviado)){
