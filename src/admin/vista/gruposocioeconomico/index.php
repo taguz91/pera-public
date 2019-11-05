@@ -49,23 +49,25 @@ require 'src/admin/vista/templates/header.php';
        </thead>
 
       <tbody>
-        <?php
-        if(isset($gruposocioeconomico)){
-          foreach ($gruposocioeconomico as $gs) {
-            echo '<tr scope="row">';
-            echo "<td>".$gs['id_grupo_socioeconomico']."</td>";
-            echo "<td>".$gs['tipo_ficha']."</td>";
-            echo "<td>".$gs['grupo_socioeconomico']."</td>";
-            echo "<td>".$gs['puntaje_minimo']."</td>";
-            echo "<td>".$gs['puntaje_maximo']."</td>";
-            echo '<td> <a href="'.constant('URL').'miad/gruposocioeconomico/editar?id='.$gs['id_grupo_socioeconomico'].'">Editar</a> </td>';
-            echo '<td> <a href="'.constant('URL').'miad/gruposocioeconomico/eliminar?id='.$gs['id_grupo_socioeconomico'].'">Eliminar</a> </td>';
-            echo "</tr>";
-          }
-        }else{
-          Errores::errorBuscar("No encontramos grupos socieconómicos");
-        }
-         ?>
+
+        <?php if (isset($gruposocioeconomico)): ?>
+
+          <?php foreach ($gruposocioeconomico as $key => $gs): ?>
+            <tr id="fila<?php echo $gs['id_grupo_socioeconomico']; ?>">
+              <td><?php echo $gs['id_grupo_socioeconomico']; ?></td>
+              <td><?php echo $gs['tipo_ficha']; ?></td>
+              <td><?php echo $gs['grupo_socioeconomico'] ?></td>
+              <td><?php echo $gs['puntaje_minimo']; ?></td>
+              <td><?php echo $gs['puntaje_maximo']; ?></td>
+              <td> <a href="<?php echo constant('URL').'miad/gruposocioeconomico/editar?id='.$gs['id_grupo_socioeconomico']; ?>">Editar</a> </td>
+
+              <td> <button onclick="eliminar('<?php echo constant('URL').'miad/gruposocioeconomico/eliminar?id='; ?>', '<?php echo $gs['id_grupo_socioeconomico']; ?>')" type="button" class="btn btn-danger btn-sm">Eliminar</button> </td>
+            </tr>
+          <?php endforeach; ?>
+
+          <?php else: ?>
+          <?php Errores::errorBuscar("No encontramos grupos socieconómicos"); ?>
+        <?php endif; ?>
 
       </tbody>
 
@@ -75,6 +77,9 @@ require 'src/admin/vista/templates/header.php';
  </div>
 
  </div>
+
+
+ <script type="text/javascript" src="<?php echo constant('URL'); ?>public/js/ajax/eliminartbl.js"></script>
 
 <?php
 require 'src/admin/vista/templates/footer.php';

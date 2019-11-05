@@ -21,11 +21,8 @@ abstract class PermisoIngresoBD {
     ]);
   }
 
-
   static function eliminar($id) {
-    deleteById($sql, [
-      'id' => $id
-    ]);
+    deleteById(self::$DELETE, $id);
   }
 
   static function getPorId($id){
@@ -190,8 +187,7 @@ abstract class PermisoIngresoBD {
   public static $DELETE = '
   UPDATE public."PermisoIngresoFichas"
   SET permiso_ingreso_activo = false
-  WHERE id_permiso_ingreso_ficha= :id;
-  ';
+  WHERE id_permiso_ingreso_ficha = :id;';
 }
 
 ?>

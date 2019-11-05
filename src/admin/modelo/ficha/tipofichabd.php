@@ -18,9 +18,7 @@ abstract class TipoFichaBD{
   }
 
   static function eliminar($id) {
-    deleteById($sql, [
-      'id' => $id
-    ]);
+    deleteById(self::$DELETE, $id);
   }
 
   public static function getParaCombo(){

@@ -18,9 +18,7 @@ abstract class PersonaFichaBD {
   }
 
   static function eliminar($id) {
-    deleteById($sql, [
-      'id' => $id
-    ]);
+    deleteById(self::$DELETE, $id);
   }
 
   static function getMatricula($idPeriodo) {

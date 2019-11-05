@@ -85,7 +85,6 @@
         return $sen->execute($params);
       } catch (\Exception $e) {
         return $e->getMessage();
-        //return false;
       }
     }else{
       return 'No nos conectammos';
@@ -94,14 +93,14 @@
 
   function deleteById($sql, $id = 0){
     if ($id != 0) {
-      $res = execute($sql, [
+      $res = executeSQL($sql, [
         'id' => $id
       ]);
 
-      if($res){
+      if(is_bool($res)){
           JSON::confirmacion('Eliminamos correctamente.');
       } else {
-        JSON::error('No pudimos eliminarlo');
+        JSON::error('No pudimos eliminarlo. ' . $res);
       }
     } else {
       JSON::error('No tenemos el id para eliminar.');

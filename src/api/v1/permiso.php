@@ -1,5 +1,4 @@
 <?php
-
 require_once 'src/admin/modelo/ficha/permisoingresobd.php';
 
 class PermisoAPI {

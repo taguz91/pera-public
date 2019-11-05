@@ -24,10 +24,7 @@ abstract class GrupoSocioEconomicoBD {
   }
 
   static function eliminar($id) {
-    $sql = self::$DELETE;
-    deleteById($sql, [
-      'id' => $id
-    ]);
+    deleteById(self::$DELETE, $id);
   }
 
   static function getPorId($id){
