@@ -50,6 +50,38 @@ abstract class PersonaFichaBD {
     return getArrayFromSQL($sql, []);
   }
 
+  static function getPorPermiso($idPermiso) {
+    $sql = self::$BASEQUERY . '
+    AND pi.id_permiso_ingreso_ficha = :idPermiso ' . self::$ENDQUERY;
+    return getArrayFromSQL($sql, [
+      'idPermiso' => $idPermiso
+    ]);
+  }
+
+  static function getParaInicio() {
+    $sql = '
+    SELECT
+    pf.id_permiso_ingreso_ficha,
+    pl.prd_lectivo_nombre,
+    tf.tipo_ficha,
+    pf.permiso_ingreso_fecha_fin, (
+      SELECT
+      COUNT(id_permiso_ingreso_ficha)
+      FROM public."PersonaFicha"
+      WHERE id_permiso_ingreso_ficha = pf.id_permiso_ingreso_ficha
+    ) AS num_personas
+    FROM
+    public."PermisoIngresoFichas" pf
+    JOIN public."PeriodoLectivo" pl ON pf.id_prd_lectivo = pl.id_prd_lectivo
+    JOIN public."TipoFicha" tf ON tf.id_tipo_ficha = pf.id_tipo_ficha
+    WHERE
+    pf.permiso_ingreso_activo = true
+    ORDER BY
+    pf.permiso_ingreso_fecha_fin DESC,
+    pl.prd_lectivo_nombre;';
+    return getArrayFromSQL($sql, []);
+  }
+
   static function getCorreosEst($idPermiso, $numCiclo) {
     $sql = '
     SELECT id_persona,
@@ -159,13 +191,13 @@ abstract class PersonaFichaBD {
   public static $BASEQUERY = '
     SELECT
     pr.id_persona_ficha,
-    pi.id_permiso_ingreso_ficha,
     p.id_persona,
     pr.persona_ficha_clave,
     pr.persona_ficha_fecha_ingreso,
     pr.persona_ficha_fecha_modificacion,
-    p.persona_primer_nombre,
-    p.persona_primer_apellido
+    p.persona_primer_nombre || \' \' ||
+    p.persona_primer_apellido AS persona_nombre,
+    p.persona_correo
     FROM
     public."PersonaFicha" pr,
     public."PermisoIngresoFichas" pi,
@@ -173,7 +205,7 @@ abstract class PersonaFichaBD {
     WHERE
     pr.id_permiso_ingreso_ficha = pi.id_permiso_ingreso_ficha
     AND pr.id_persona = p.id_persona
-    AND pr.persona_ficha_activa = true';
+    AND pr.persona_ficha_activa = true ';
 
   public static $ENDQUERY = '
     ORDER BY

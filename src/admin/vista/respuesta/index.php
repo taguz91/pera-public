@@ -43,21 +43,23 @@ require 'src/admin/vista/templates/header.php';
             </tr>
           </thead>
           <tbody>
-            <?php
-            if(!isset($res['error'])){
-              foreach ($res as $r) {
-                echo '<tr scope="row">';
-                echo "<td>".$r['id_permiso_ingreso_ficha']."</td>";
-                echo "<td>".$r['prd_lectivo_nombre']."</td>";
-                echo "<td>".$r['tipo_ficha']."</td>";
-                echo "<td>".$r['num_personas']."</td>";
-                echo "<td>".$r['num_terminados']."</td>";
-                echo '<td> <a target="_blank"  href="'.constant('URL').'miad/respuesta/reporte?idPermiso='.$r['id_permiso_ingreso_ficha'].'">Ver</a> </td>';
-              }
-            }else{
-              Errores::errorBuscar("No encontramos tipos de fichas");
-            }
-             ?>
+
+            <?php if (!isset($res['error']): ?>
+              <?php foreach ($res as $r): ?>
+                <tr>
+                  <td><?php echo $r['id_permiso_ingreso_ficha']; ?></td>
+                  <td><?php echo $r['prd_lectivo_nombre']; ?></td>
+                  <td><?php echo $r['tipo_ficha']; ?></td>
+                  <td><?php echo $r['num_personas']; ?></td>
+                  <td><?php echo $r['num_terminados']; ?></td>
+                  <td> <a href="<?php echo constant('URL').'miad/respuesta/reporte?idPermiso='.$r['id_permiso_ingreso_ficha']; ?>">Ver</a> </td>
+                </tr>
+
+              <?php endforeach; ?>
+              <?php else: ?>
+                <?php Errores::errorBuscar("No obtuvimos permisos."); ?>
+            <?php endif; ?>
+
           </tbody>
         </table>
       </div>

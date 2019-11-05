@@ -1,34 +1,49 @@
-<?php
-$pagina = 'Permiso Ingreso Ficha | Ingresar';
-require 'src/admin/vista/templates/header.php';
- ?>
 
-<div class="my-5">
-  <div class="col-md-8 col-lg-6 mx-auto border rounded shadow">
-    <h3 class="text-center my-3">
-      Reenviar correo a estudiante
-    </h3>
-    <form class="form-horizontal" action="<?php echo constant('URL'); ?>miad/correo/editar/" method="post">
-      <input type="hidden" name="idperficha" value="<?php echo $_GET['id']; ?>">
-      <div class="form-group">
-        <label class="control-label" for="">Correo:</label>
-        <input class="form-control" type="text" name="correo"
-        placeholder="Ingrese el correo" value="">
+<div class="modal fade mx-auto" id="reenviar-correo" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Reenvio correo</h5>
+
+        <button onclick="cerrarModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
 
-      <div class="form-group">
-        <label for="">Mensaje:</label>
-        <textarea class="form-control" name="mensaje" rows="5" cols="5" placeholder="Escriba el mensaje que  enviara." required></textarea>
+      <div class="modal-body">
+
+        <div id="ctn-msg"></div>
+
+        <form id="form-correo" class="form-horizontal" method="post">
+
+          <input type="hidden" name="idperficha" value="">
+
+          <div class="form-group">
+            <label class="control-label" for="">Correo:</label>
+            <input class="form-control" type="email" name="correo"
+            placeholder="Ingrese el correo"
+            value="">
+          </div>
+
+          <div class="form-group">
+            <label for="">Mensaje:</label>
+            <textarea class="form-control" name="mensaje" rows="5" cols="5" placeholder="Escriba el mensaje que  enviara." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-success" type="button" name="guardar" onclick="reenviarCorreo()">Guardar</button>
+          </div>
+
+        </form>
+
       </div>
 
-      <div class="form-group">
-        <input class="btn btn-success btn-block" type="submit" name="guardar" value="Guardar" id="btnGuardar">
-      </div>
+    </div>
 
-    </form>
   </div>
 </div>
 
-<?php
- require 'src/admin/vista/templates/footer.php';
- ?>
+
+<script type="text/javascript" src="<?php echo constant('URL'); ?>public/js/ajax/reenviarcorreo.js"></script>

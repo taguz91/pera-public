@@ -3,7 +3,6 @@ $pagina = 'Fichas Enviadas';
 require 'src/admin/vista/templates/header.php';
  ?>
 
-
 <div class="card shadown mb-4">
   <div class="card-header py-3">
     <div class="row">
@@ -35,49 +34,41 @@ require 'src/admin/vista/templates/header.php';
   </div>
 
   <div class="card-body">
-    <div class="table-responsive">
 
+    <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead class="thead-dark">
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">IDPermiso</th>
-            <th scope="col">Nombre Persona</th>
-            <th scope="col">Fecha Inicio</th>
-            <th scope="col">Fecha Modificación</th>
-            <th scope="col">Reenviar</th>
-            <th scope="col">Eliminar</th>
+            <th scope="col">Periodo </th>
+            <th scope="col">Ficha</th>
+            <th scope="col">Numero de enviados</th>
+            <th scope="col">Ver enviados</th>
           </tr>
         </thead>
-
         <tbody>
-          <?php
-          if(isset($personaFichas)){
-            foreach ($personaFichas as $pf) {
-              echo '<tr scope="row">';
-              echo "<td>".$pf['id_persona_ficha']."</td>";
-              echo "<td>".$pf['id_permiso_ingreso_ficha']."</td>";
-              echo "<td>".$pf['persona_primer_nombre']."  ".$pf['persona_primer_apellido']."</td>";
-              echo "<td>".$pf['persona_ficha_fecha_ingreso']."</td>";
-              echo "<td>".$pf['persona_ficha_fecha_modificacion']."</td>";
-              echo '<td> <a href="'.constant('URL').'miad/correo/reenviar?id='.$pf['id_persona_ficha'].'">Reenviar</a> </td>';
-              echo '<td> <a href="'.constant('URL').'miad/correo/eliminar?id='.$pf['id_persona_ficha'].'">Eliminar</a> </td>';
-              echo "</tr>";
-            }
-          }else{
-            Errores::errorBuscar("No encontramos las fichas de las personas");
-          }
-           ?>
+
+          <?php if (isset($permisos)): ?>
+            <?php foreach ($permisos as $r): ?>
+              <tr>
+                <td><?php echo $r['id_permiso_ingreso_ficha']; ?></td>
+                <td><?php echo $r['prd_lectivo_nombre']; ?></td>
+                <td><?php echo $r['tipo_ficha']; ?></td>
+                <td><?php echo $r['num_personas']; ?></td>
+                <td> <a href="<?php echo constant('URL').'miad/correo/enviados/'.$r['id_permiso_ingreso_ficha']; ?>">Ver</a> </td>
+              </tr>
+            <?php endforeach; ?>
+            <?php else: ?>
+              <?php Errores::errorBuscar("No obtuvimos permisos."); ?>
+          <?php endif; ?>
 
         </tbody>
-
       </table>
-
     </div>
+
   </div>
 
 </div>
-
 
 <?php
 require 'src/admin/vista/templates/footer.php';

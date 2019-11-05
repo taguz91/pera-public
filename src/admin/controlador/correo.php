@@ -12,56 +12,22 @@ class CorreoCTR extends CTR implements DCTR {
   }
 
   function inicio($mensaje = null) {
-    $personaFichas = PersonaFichaBD::getAll();
+    $permisos = PersonaFichaBD::getParaInicio();
     require cargarVistaAdmin('personaficha/index.php');
+  }
+
+  function enviados($idPermiso = 0) {
+    if ($idPermiso != 0) {
+      $personaFichas = PersonaFichaBD::getPorPermiso($idPermiso);
+      require cargarVistaAdmin('personaficha/enviados.php');
+    } else {
+      $this->inicio('No especificaron un permiso del cual ver las fichas enviadas.');
+    }
   }
 
   function nuevo() {
     $permisos = PermisoIngresoBD::getAll();
     require cargarVistaAdmin('personaficha/guardar.php');
-  }
-
-  function solo() {
-    if(isset($_POST['guardar'])){
-      $idPersona = $_POST['idpersona'];
-      $idPermiso = $_POST['permiso'];
-      $correo = $_POST['correo'];
-      $mensaje = $_POST['mensaje'];
-      $pass = getRandomPass();
-      if(EnviarCorreo::enviar($correo, $pass, $mensaje)){
-        $pf = [
-          'id_permiso_ingreso_ficha' => $idPermiso,
-          'id_persona' => $idPersona,
-          'clave' => $pass
-        ];
-
-        $res = PersonaFichaBD::guardarPersonaFicha($pf);
-        if($res){
-          $this->inicio('Enviamos correctamente el correo.');
-        }
-      }
-    }
-  }
-
-  function reenviar(){
-    if(isset($_GET['id'])){
-      require cargarVistaAdmin('personaficha/reenviar.php');
-    }
-  }
-
-  function enviar() {
-    if(isset($_GET['idpersona'])){
-      $permisos = PermisoIngresoBD::getForPersona($_GET['idpersona']);
-      require cargarVistaAdmin('personaficha/enviaruno.php');
-    }
-  }
-
-  private function generarContrasena($num){
-    $pass = array();
-    for ($i = 0; $i < $num; $i++) {
-      array_push($pass, getRandomPass());
-    }
-    return $pass;
   }
 
   function eliminar(){

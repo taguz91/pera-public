@@ -26,7 +26,7 @@ class CorreoAPI {
 
         $res = PersonaFichaBD::guardarPersonaFicha($pf);
         if(is_bool($res)){
-          JSON::confirmacion('Guardamos correctamente su pass es: ' . $pass);
+          JSON::confirmacion('Guardamos correctamente su contraseña es: ' . $pass);
         } else {
           JSON::error('No pudimos guardarlo ' . $res);
         }
@@ -36,8 +36,34 @@ class CorreoAPI {
     } else {
       JSON::error('No tenemos todos los datos necesarios.');
     }
-
   }
+
+  function editar(){
+    $id = isset($_POST['idperficha']) ? $_POST['idperficha'] : 0;
+    $correo = isset($_POST['correo']) ? $_POST['correo'] : '';
+    $mensaje = isset($_POST['mensaje']) ? $_POST['mensaje'] : '';
+
+    if ($id != 0
+    && $correo != ''
+    ) {
+      $pass = getRandomPass();
+      $enviado = EnviarCorreo::enviar($correo, $pass, $mensaje);
+      if(is_bool($enviado)){
+        $res = PersonaFichaBD::editarPersonaFicha($id, $pass);
+        if(is_bool($res)){
+          JSON::confirmacion('Guardamos correctamente su contraseña es: ' . $pass);
+        } else {
+          JSON::error('No guardamos el correo:  ' . $res);
+        }
+      } else {
+        JSON::error('No enviamos el correo: ' . $enviado);
+      }
+    } else {
+      JSON::error('No tenemos toda la informacion necesaria.');
+    }
+  }
+  
+
 }
 
  ?>

@@ -134,10 +134,9 @@
       </a>
       <div id="collapsePF" class="collapse"  data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/persona/">Todas</a>
+          <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/correo/">Lista enviados</a>
           <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/persona/alumno/">Alumnos</a>
           <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/persona/docente/">Docentes</a>
-          <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/correo/">Lista enviados</a>
           <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/correo/nuevo/">Ingresar</a>
         </div>
       </div>

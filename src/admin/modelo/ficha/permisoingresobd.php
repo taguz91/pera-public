@@ -148,9 +148,7 @@ abstract class PermisoIngresoBD {
     pf.permiso_ingreso_activo = true
     ORDER BY
     pf.permiso_ingreso_fecha_fin DESC,
-    pl.prd_lectivo_nombre;
-    ';
-
+    pl.prd_lectivo_nombre;';
     return getArrayFromSQL($sql, []);
   }
 
