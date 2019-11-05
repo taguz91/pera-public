@@ -23,7 +23,9 @@
   <script  type="text/javascript" src="<?php echo constant('URL');?>public/js/msg.js?v=1"></script>
 
   <!-- URL DE LA API -->
-  <script  type="text/javascript" src="<?php echo constant('URL');?>public/js/main.js"></script>
+  <script type="text/javascript">
+  const URLAPI = '<?php echo constant('URL') ?>api/';
+  </script>
 
 </head>
 <body id="page-top">
