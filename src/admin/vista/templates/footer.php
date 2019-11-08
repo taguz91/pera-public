@@ -44,6 +44,5 @@
    <!-- Page level custom scripts -->
    <script  type="text/javascript" src="<?php echo constant('URL');?>public/vendor/sb-admin-2/js/demo/datatables-demo.js?v=2"></script>
 
-
 </body>
 </html>

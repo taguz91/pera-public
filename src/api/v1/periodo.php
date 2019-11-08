@@ -8,7 +8,13 @@ class PeriodoAPI {
       $items = PeriodoBD::getCiclosByPermiso($idPermiso);
       JSON::muestraJSON($items);
     } else {
-      JSON::error('Debe especificarnos el id del permiso a consultar.');
+      $idPeriodo = isset($_GET['idPeriodo']) ? $_GET['idPeriodo'] : 0;
+      if ($idPeriodo != 0) {
+        $items = PeriodoBD::getCiclosByPeriodo($idPeriodo);
+        JSON::muestraJSON($items);
+      } else {
+        JSON::error('Debe especificarnos el id del periodo.');
+      }
     }
   }
 

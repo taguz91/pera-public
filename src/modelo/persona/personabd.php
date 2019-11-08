@@ -87,6 +87,10 @@ abstract class PersonaBD {
     return getArrayFromSQL($sql, []);
   }
 
+  static function getCorreo($identificacion) {
+
+  }
+
   static private $BASEQUERY = '
   SELECT
   p.id_persona,

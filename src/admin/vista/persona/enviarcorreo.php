@@ -57,4 +57,4 @@
 
 <!-- MODAL PARA ENVIAR CORREO -->
 
-<script type="text/javascript" src="<?php echo constant('URL') ?>public/js/ajax/enviarcorreo.js?v=1"></script>
+<script type="text/javascript" src="<?php echo constant('URL') ?>public/js/ajax/enviarcorreo.js?v=3"></script>

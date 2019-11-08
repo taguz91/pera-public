@@ -62,7 +62,41 @@ class CorreoAPI {
       JSON::error('No tenemos toda la informacion necesaria.');
     }
   }
-  
+
+  function masivo(){
+    $mensaje = isset($_POST['mensaje']) ? $_POST['mensaje'] : '';
+    $asunto = isset($_POST['asunto']) ? $_POST['asunto'] : '';
+    $correousar = isset($_POST['correousar']) ? $_POST['correousar'] : '';
+    $passwordusar = isset($_POST['passwordusar']) ? $_POST['passwordusar'] : '';
+    $correoenviar = isset($_POST['correoenviar']) ? $_POST['correoenviar'] : '';
+
+    if (
+      $mensaje != ''
+      && $asunto != ''
+      && $correousar != ''
+      && $passwordusar != ''
+      && $correoenviar != ''
+    ) {
+      //JSON::confirmacion('Enviamos correctamente. \n Mensaje: '.$mensaje . ' | Asunto: ' . $asunto . ' | Pass: ' . $passwordusar . ' | ');
+
+      $res = EnviarCorreo::enviarConCorreo(
+        $correousar,
+        $passwordusar,
+        $correoenviar,
+        $asunto,
+        $mensaje
+      );
+      if (is_bool($res)) {
+        JSON::confirmacion('Enviamos correctamente.');
+      } else {
+        JSON::error('No guardamos el correo:  ' . $res);
+      }
+    } else {
+      JSON::error('No podemos enviar los correos no tenemos todo los datos requeridos.');
+    }
+
+  }
+
 
 }
 

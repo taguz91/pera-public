@@ -23,7 +23,16 @@ class PersonaAPI {
     }else{
       JSON::error('No especifico que actualizaremos ');
     }
+  }
 
+  function correo() {
+    if (isset($_GET['identificacion'])) {
+      require 'src/modelo/persona/correosbd.php';
+      $items = CorreosBD::getCorreoPorIndentificacion($_GET['identificacion']);
+      JSON::muestraJSON($items);
+    } else {
+      JSON::error('Necesitamos la indentificacion para buscar.');
+    }
   }
 
 }

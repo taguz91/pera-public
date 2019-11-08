@@ -60,12 +60,17 @@ abstract class PermisoIngresoBD {
     JOIN public."PeriodoLectivo" pl ON pl.id_prd_lectivo = pf.id_prd_lectivo
     JOIN public."TipoFicha" tf ON tf.id_tipo_ficha = pf.id_tipo_ficha
     WHERE pf.id_prd_lectivo IN (
-        SELECT id_prd_lectivo
+        SELECT m.id_prd_lectivo
         FROM public."Matricula" m
         JOIN public."Alumnos" a ON a.id_alumno = m.id_alumno
         WHERE a.id_persona = :idPersona
     ) AND pf.permiso_ingreso_activo = true
-    AND prd_lectivo_estado = true
+    AND id_permiso_ingreso_ficha NOT IN (
+        SELECT id_permiso_ingreso_ficha
+        FROM public."PersonaFicha"
+        WHERE id_persona = :idPersona
+        AND persona_ficha_activa = true
+    ) AND prd_lectivo_estado = true
     AND tf.id_tipo_ficha = 1
     AND pf.permiso_ingreso_fecha_fin >= current_timestamp
     ORDER BY prd_lectivo_fecha_inicio DESC;';
@@ -88,7 +93,12 @@ abstract class PermisoIngresoBD {
     AND prd_lectivo_estado = true
     AND tf.id_tipo_ficha = 2
     AND pf.permiso_ingreso_fecha_fin >= current_timestamp
-    ORDER BY prd_lectivo_fecha_inicio DESC;';
+    AND id_permiso_ingreso_ficha NOT IN (
+        SELECT id_permiso_ingreso_ficha
+        FROM public."PersonaFicha"
+        WHERE id_persona = :idPersona
+        AND persona_ficha_activa = true
+    ) ORDER BY prd_lectivo_fecha_inicio DESC;';
 
     return getArrayFromSQL($sql, []);
   }

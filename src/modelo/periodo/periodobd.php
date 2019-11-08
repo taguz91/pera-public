@@ -72,6 +72,19 @@ class PeriodoBD {
     ]);
   }
 
+  static function getCiclosByPeriodo($idPeriodo) {
+    $sql = '
+    SELECT
+    DISTINCT curso_ciclo AS ciclo
+    FROM public."Cursos" c
+    WHERE c.curso_activo = true
+    AND c.id_prd_lectivo = :idPeriodo
+    ORDER BY c.curso_ciclo; ';
+    return getArrayFromSQL($sql , [
+      'idPeriodo' => $idPeriodo
+    ]);
+  }
+
   static function getParaCombo(){
     $sql = self::$QUERYCMB . '
     ORDER BY

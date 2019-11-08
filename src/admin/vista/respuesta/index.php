@@ -44,7 +44,7 @@ require 'src/admin/vista/templates/header.php';
           </thead>
           <tbody>
 
-            <?php if (!isset($res['error']): ?>
+            <?php if (!isset($res['error'])): ?>
               <?php foreach ($res as $r): ?>
                 <tr>
                   <td><?php echo $r['id_permiso_ingreso_ficha']; ?></td>

@@ -19,13 +19,12 @@
   <!-- Estilo para las tablas -->
   <link href="<?php echo constant('URL');?>public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-  <!-- Mensajes para JavaScript -->
-  <script  type="text/javascript" src="<?php echo constant('URL');?>public/js/msg.js?v=1"></script>
-
-  <!-- URL DE LA API -->
   <script type="text/javascript">
   const URLAPI = '<?php echo constant('URL') ?>api/';
   </script>
+
+  <!-- Mensajes para JavaScript -->
+  <script  type="text/javascript" src="<?php echo constant('URL');?>public/js/msg.js?v=1"></script>
 
 </head>
 <body id="page-top">
@@ -162,6 +161,27 @@
         </div>
       </div>
     </li>
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">
+      Correos
+    </div>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseALM" aria-expanded="true" aria-controls="collapseALM">
+        <i class="fas fa-fw fa-wrench"></i>
+        <span>Masivos</span>
+      </a>
+      <div id="collapseALM" class="collapse"  data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/correo/masivo">Alumnos</a>
+        </div>
+      </div>
+    </li>
+
 
     <!-- Divider -->
     <hr class="sidebar-divider">

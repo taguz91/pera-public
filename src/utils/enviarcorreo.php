@@ -39,4 +39,28 @@ class EnviarCorreo {
       return $e;
     }
   }
+
+  static function enviarConCorreo($correousar, $passwordusar, $correoenviar, $asunto, $mensaje){
+    $mail = new PHPMailer(true);
+    try {
+      $mail->SMTPDebug = 0;
+      $mail->isSMTP();
+      $mail->Host = 'smtp.gmail.com';
+      $mail->SMTPAuth = true;
+      $mail->Username = $correousar;
+      $mail->Password = $passwordusar;
+      $mail->SMTPSecure = 'tls';
+      $mail->Port = 587;
+      $mail->setFrom($correousar, 'ISTA - Desarrollo de Software');
+      $mail->addAddress($correoenviar);
+      $mail->isHTML(false);
+      $mail->Subject = $asunto;
+      $mail->Body = $mensaje;
+      $mail->send();
+      return true;
+    } catch (Exception $e) {
+      return $e;
+    }
+  }
+
 }

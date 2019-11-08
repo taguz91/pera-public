@@ -15,6 +15,8 @@ function getPermisos(idPersona) {
   .then(data => {
     if(data.statuscode == '200') {
       llenarCmbPermisos(data.items);
+    } else {
+      msgError(data.mensaje);
     }
   })
   .catch( err => {
@@ -50,7 +52,15 @@ function enviarCorreo() {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data);
+      if (data.statuscode == 200) {
+        msgSuccess(data.mensaje);
+        // Borramos datos anteriores
+        while (CMB_PERMISOS.firstChild) {
+          CMB_PERMISOS.removeChild(CMB_PERMISOS.firstChild);
+        }
+      } else {
+        msgError(data.mensaje);
+      }
     })
     .catch(e => {
       msgError('Error al enviar el correo. \n' + e);
