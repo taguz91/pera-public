@@ -128,7 +128,7 @@
   }
 
   function getRandomPass(){
-    return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 6);
+    return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, 6);
   }
 
   // Para saber que tipo de campos es
