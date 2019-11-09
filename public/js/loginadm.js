@@ -26,11 +26,10 @@
         formlogin.submit();
       }else{
         errorLogin(data.mensaje);
-        //console.log(data);
       }
     })
     .catch(e =>{
-      console.log('Errores: ' + e);
+      errorLogin('Errores: ' + e);
     })
   }
 

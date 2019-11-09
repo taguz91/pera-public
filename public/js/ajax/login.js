@@ -29,7 +29,7 @@ function comprobarLogin(url, data){
     }
   })
   .catch(e =>{
-    console.log('Errores: ' + e);
+    errorLogin('Errores: ' + e);
   })
 }
 
