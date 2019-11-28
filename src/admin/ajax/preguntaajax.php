@@ -1,5 +1,5 @@
 <?php
-require_once "src/modelo/respuestaFichaM/respuestaFichaBD.php";
+require_once "src/admin/modelo/cuestionario/respuestabd.php";
 
 if( isset($_POST['ajax']) && isset($_POST['id_A']) ){
    $k= $_POST['id_A'];

@@ -35,6 +35,11 @@ class CorreoCTR extends CTR implements DCTR {
     require 'src/admin/vista/correo/masivo.php';
   }
 
+  function nomatriculados() {
+    $periodos = PeriodoBD::getParaCombo();
+    require 'src/admin/vista/correo/nomatriculados.php';
+  }
+
   function eliminar(){
     PersonaFichaBD::eliminar(isset($_GET['id']) ? $_GET['id'] : 0);
   }

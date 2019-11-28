@@ -32,6 +32,42 @@ abstract class CorreosBD {
     ]);
   }
 
+  static function getCorreosAlumnosNoMatriculadosPeriodo($idPeriodo) {
+    $sql = self::$BASEQUERY . '
+    WHERE id_persona IN (
+      SELECT id_persona FROM public."Alumnos"
+      WHERE id_alumno IN (
+        SELECT id_alumno FROM public."AlumnoCurso"
+        WHERE id_curso IN (
+          SELECT DISTINCT id_curso FROM public."Cursos"
+          WHERE id_prd_lectivo = (
+            SELECT id_prd_lectivo
+            FROM public."PeriodoLectivo"
+            WHERE id_carrera = (
+                SELECT id_carrera
+                FROM public."PeriodoLectivo"
+                WHERE id_prd_lectivo = :idPeriodo
+            ) AND id_prd_lectivo <> :idPeriodo
+            ORDER BY id_prd_lectivo DESC
+            LIMIT 1
+          )
+        )
+      )
+    ) AND id_persona NOT IN (
+      SELECT id_persona FROM public."Alumnos"
+      WHERE id_alumno IN (
+        SELECT id_alumno FROM public."AlumnoCurso"
+        WHERE id_curso IN (
+          SELECT DISTINCT id_curso FROM public."Cursos"
+          WHERE id_prd_lectivo = :idPeriodo
+        )
+      )
+    )' . self::$ENDQUERY;
+    return getArrayFromSQL($sql, [
+      'idPeriodo' => $idPeriodo
+    ]);
+  }
+
   static function getCorreosDocentesPorPeriodoCiclo($idPeriodo, $ciclo) {
 
   }

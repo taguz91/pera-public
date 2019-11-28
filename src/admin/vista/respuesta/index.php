@@ -52,7 +52,7 @@ require 'src/admin/vista/templates/header.php';
                   <td><?php echo $r['tipo_ficha']; ?></td>
                   <td><?php echo $r['num_personas']; ?></td>
                   <td><?php echo $r['num_terminados']; ?></td>
-                  <td> <a href="<?php echo constant('URL').'miad/respuesta/reporte?idPermiso='.$r['id_permiso_ingreso_ficha']; ?>">Ver</a> </td>
+                  <td> <a href="<?php echo constant('URL').'miad/respuesta/reporte?idPermiso='.$r['id_permiso_ingreso_ficha']; ?>" target="_blank">Ver</a> </td>
                 </tr>
 
               <?php endforeach; ?>

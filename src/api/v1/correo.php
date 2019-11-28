@@ -69,6 +69,7 @@ class CorreoAPI {
     $correousar = isset($_POST['correousar']) ? $_POST['correousar'] : '';
     $passwordusar = isset($_POST['passwordusar']) ? $_POST['passwordusar'] : '';
     $correoenviar = isset($_POST['correoenviar']) ? $_POST['correoenviar'] : '';
+    $archivo = isset($_FILES['adjunto']) ? $_FILES['adjunto'] : null;
 
     if (
       $mensaje != ''
@@ -77,24 +78,37 @@ class CorreoAPI {
       && $passwordusar != ''
       && $correoenviar != ''
     ) {
-      //JSON::confirmacion('Enviamos correctamente. \n Mensaje: '.$mensaje . ' | Asunto: ' . $asunto . ' | Pass: ' . $passwordusar . ' | ');
-
-      $res = EnviarCorreo::enviarConCorreo(
-        $correousar,
-        $passwordusar,
-        $correoenviar,
-        $asunto,
-        $mensaje
-      );
-      if (is_bool($res)) {
-        JSON::confirmacion('Enviamos correctamente.');
+      if($archivo != null) {
+        $res = EnviarCorreo::enviarConConArchivo(
+          $correousar,
+          $passwordusar,
+          $correoenviar,
+          $asunto,
+          $mensaje,
+          $archivo
+        );
+        if (is_bool($res)) {
+          JSON::confirmacion('Enviamos correctamente CON Archivo');
+        } else {
+          JSON::error('No enviamos el correo:  ' . $res);
+        }
       } else {
-        JSON::error('No guardamos el correo:  ' . $res);
+        $res = EnviarCorreo::enviarConCorreo(
+          $correousar,
+          $passwordusar,
+          $correoenviar,
+          $asunto,
+          $mensaje
+        );
+        if (is_bool($res)) {
+          JSON::confirmacion('Enviamos correctamente.');
+        } else {
+          JSON::error('No guardamos el correo:  ' . $res);
+        }
       }
     } else {
       JSON::error('No podemos enviar los correos no tenemos todo los datos requeridos.');
     }
-
   }
 
 

@@ -44,6 +44,10 @@ require 'src/admin/vista/templates/header.php';
         <textarea name="mensaje" class="form-control" rows="10" cols="5" placeholder="Escriba el correo que enviara." required></textarea>
       </div>
 
+      <div class="form-group">
+        <label for="">Archivo adjunto:</label>
+        <input type="file" name="adjunto">
+      </div>
 
       <div class="form-group">
         <label for="">Correo usar:</label>
@@ -120,7 +124,7 @@ require 'src/admin/vista/templates/header.php';
   const URLCORREOSAPI = URLAPI + 'v1/alumno/correos/';
 </script>
 
-<script type="text/javascript" src="<?php echo constant('URL'); ?>public/js/ajax/correosmasivosalumnos.js"></script>
+<script type="text/javascript" src="<?php echo constant('URL'); ?>public/js/ajax/correosmasivosalumnos.js?v=3"></script>
 
 <?php
 require 'src/admin/vista/templates/footer.php';

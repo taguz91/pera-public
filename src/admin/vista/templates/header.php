@@ -178,6 +178,7 @@
       <div id="collapseALM" class="collapse"  data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/correo/masivo">Alumnos</a>
+          <a class="collapse-item" href="<?php echo constant('URL'); ?>miad/correo/nomatriculados">Alumnos no matriculados</a>
         </div>
       </div>
     </li>

@@ -53,6 +53,7 @@ function llenarCiclos(items) {
   });
 }
 
+// Es para consultar en el API
 function getPersonas(idperiodo, ciclo){
   fetch(URLCORREOSAPI + idperiodo + '-' + ciclo)
   .then(res => res.json())
@@ -129,6 +130,7 @@ let correos = '';
 
 function enviarCorreos(){
   let form = new FormData(FORMCORREOS);
+  console.log('Archivo: ' + form.get('adjunto'));
   if (form.get('mensaje') != ''
   && form.get('correousar') != ''
   && form.get('passwordusar') != ''
@@ -147,7 +149,8 @@ function enviarCorreos(){
       }
     }
     msgSuccess('En la tabla se muestra de color verde todos los correos que se enviaron, de color rojo los que no fueron enviados y de color amarillo los que son correos repetidos.');
-    num = 1
+    num = 1;
+    correos = '';
   } else {
     msgError('No tenemos todo lo necesario.');
   }
@@ -156,7 +159,7 @@ function enviarCorreos(){
 
 function enviar(fila, form, idPersona, correo){
   form.append('correoenviar', correo);
-
+  console.log(URLAPI + 'v1/correo/masivo');
   fetch(URLAPI + 'v1/correo/masivo', {
     method: 'POST',
     body: form

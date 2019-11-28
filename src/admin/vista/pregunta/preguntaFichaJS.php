@@ -481,7 +481,7 @@ $(document).ready(function(){
   if (b){
       b.addEventListener("keydown", function (e) {
         if (String(b.value).trim() !="" && e.keyCode === 13) {
-          window.location.href = "<?php echo constant('URL'); ?>preguntaficha/buscar?key="+b.value;
+          window.location.href = "<?php echo constant('URL'); ?>miad/pregunta/buscar?key="+b.value;
 
         }
     });

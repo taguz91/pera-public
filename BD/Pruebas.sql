@@ -10,6 +10,22 @@ VALUES (
   to_timestamp('25-08-2019 15:36:38', 'dd-mm-yyyy hh24:mi:ss'),
   to_timestamp('05-09-2019 15:36:38', 'dd-mm-yyyy hh24:mi:ss')
 );
+
+
+-- Para TAS
+
+INSERT INTO public."PermisoIngresoFichas"(
+  id_prd_lectivo,
+  id_tipo_ficha,
+  permiso_ingreso_fecha_inicio,
+  permiso_ingreso_fecha_fin)
+VALUES (
+  34,
+  1,
+  to_timestamp('1-11-2019 15:36:38', 'dd-mm-yyyy hh24:mi:ss'),
+  to_timestamp('16-11-2019 15:36:38', 'dd-mm-yyyy hh24:mi:ss')
+);
+
 --- Id generado 6
 
 INSERT INTO public."PersonaFicha"(
@@ -150,4 +166,23 @@ WHERE id_persona IN (
 	SELECT id_persona
 	FROM public."PersonaFicha" pf
 	WHERE pf.id_permiso_ingreso_ficha = 5
+);
+
+
+-- Para los de TAS 34 Permiso 8
+
+INSERT INTO public."PersonaFicha"(
+  id_permiso_ingreso_ficha,
+  id_persona,
+  persona_ficha_clave)
+SELECT 8, id_persona, set_byte(MD5('tas') :: bytea, 4, 64)
+FROM public."Personas"
+WHERE id_persona IN (
+  SELECT id_persona
+  FROM public."Alumnos"
+  WHERE id_alumno IN (
+    SELECT id_alumno
+    FROM public."Matricula"
+    WHERE id_prd_lectivo = 22
+  )
 );

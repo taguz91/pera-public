@@ -27,4 +27,14 @@ class PeriodoAPI {
     }
   }
 
+  function noMatriculados($idPeriodo = 0) {
+    if($idPeriodo != 0){
+      require 'src/modelo/persona/correosbd.php';
+      $items = CorreosBD::getCorreosAlumnosNoMatriculadosPeriodo($idPeriodo);
+      JSON::muestraJSON($items);
+    } else {
+      JSON::error('No indico los parametros requeridos. periodo-ciclo');
+    }
+  }
+
 }
