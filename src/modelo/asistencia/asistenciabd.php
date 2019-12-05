@@ -65,7 +65,8 @@ class AsistenciaBD {
   prd_lectivo_nombre,
   materia_nombre,
   curso_nombre,
-  dia_sesion
+  dia_sesion,
+  COUNT(dia_sesion) AS horas
   FROM public."SesionClase" sc
   JOIN public."Cursos" c
   ON sc.id_curso = c.id_curso
