@@ -9,7 +9,7 @@ class AsistenciaAPI {
     if ($idAsistencia != 0) {
       $numFalta = isset($_POST['num_falta']) ? $_POST['num_falta'] : 0;
       // Actualizamos la asistencia
-      $res = actualizar($idAsistencia, $numFalta);
+      $res = AsistenciaBD::actualizar($idAsistencia, $numFalta);
       if (is_bool($res)) {
         JSON::confirmacion('Actualizamos correctamente.');
       } else {
