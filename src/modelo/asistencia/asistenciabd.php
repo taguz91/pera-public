@@ -59,41 +59,57 @@ class AsistenciaBD {
     ]);
   }
 
+  static $BQUERYCURSOS = '
+  SELECT
+  c.id_curso,
+  prd_lectivo_nombre,
+  materia_nombre,
+  curso_nombre,
+  dia_sesion
+  FROM public."SesionClase" sc
+  JOIN public."Cursos" c
+  ON sc.id_curso = c.id_curso
+  JOIN public."Materias" m
+  ON m.id_materia = c.id_materia
+  JOIN public."Docentes" d
+  ON d.id_docente = c.id_docente
+  JOIN public."Personas" p
+  ON p.id_persona = d.id_persona
+  JOIN public."PeriodoLectivo" pl
+  ON pl.id_prd_lectivo = c.id_prd_lectivo
+  WHERE prd_lectivo_estado = true ';
+  static $EQUERYCURSOS = '
+  GROUP BY
+  c.id_curso,
+  prd_lectivo_nombre,
+  materia_nombre,
+  curso_nombre,
+  dia_sesion,
+  prd_lectivo_fecha_fin
+  ORDER BY prd_lectivo_fecha_fin DESC,
+  dia_sesion,
+  materia_nombre;';
+
   static function getUltimosCursosByDocente($identificacion) {
-    $sql = '
-    SELECT
-    c.id_curso,
-    prd_lectivo_nombre,
-    materia_nombre,
-    curso_nombre,
-    dia_sesion
-    FROM public."SesionClase" sc
-    JOIN public."Cursos" c
-    ON sc.id_curso = c.id_curso
-    JOIN public."Materias" m
-    ON m.id_materia = c.id_materia
-    JOIN public."Docentes" d
-    ON d.id_docente = c.id_docente
-    JOIN public."Personas" p
-    ON p.id_persona = d.id_persona
-    JOIN public."PeriodoLectivo" pl
-    ON pl.id_prd_lectivo = c.id_prd_lectivo
-    WHERE persona_identificacion = :identificacion
-    AND prd_lectivo_estado = true
-    GROUP BY
-    c.id_curso,
-    prd_lectivo_nombre,
-    materia_nombre,
-    curso_nombre,
-    dia_sesion,
-    prd_lectivo_fecha_fin
-    ORDER BY prd_lectivo_fecha_fin DESC,
-    dia_sesion,
-    materia_nombre;';
+    $sql = self::$BQUERYCURSOS . '
+    AND persona_identificacion = :identificacion '
+    . self::$EQUERYCURSOS;
     return getArrayFromSQL($sql, [
       'identificacion' => $identificacion
     ]);
   }
+
+
+  static function getUltimosCursosByDocenteDia($identificacion) {
+    $sql = self::$BQUERYCURSOS . '
+    AND persona_identificacion = :identificacion
+    AND dia_sesion = EXTRACT(DOW FROM now()) '
+    . self::$EQUERYCURSOS;
+    return getArrayFromSQL($sql, [
+      'identificacion' => $identificacion
+    ]);
+  }
+
 
   static function getAlumnosNuevosDocente($identificacion = ''){
     $sql = "

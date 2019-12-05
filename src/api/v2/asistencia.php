@@ -36,7 +36,14 @@ class AsistenciaAPI {
 
   function cursos($identificacion = ''){
     if ($identificacion != '') {
-      $res = AsistenciaBD::getUltimosCursosByDocente($identificacion);
+      $dia = isset($_GET['dia']) ? $_GET['dia'] : 0;
+      $res;
+      if ($dia != 0) {
+        $res = AsistenciaBD::getUltimosCursosByDocenteDia($identificacion);
+      } else {
+        $res = AsistenciaBD::getUltimosCursosByDocente($identificacion);
+      }
+
       JSON::muestraJSON($res);
     } else {
       JSON::error('No tenemos la indentificación del docente.');
