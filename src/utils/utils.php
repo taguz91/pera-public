@@ -84,10 +84,10 @@
         $sen= $ct->prepare($sql);
         return $sen->execute($params);
       } catch (\Exception $e) {
-        return $e->getMessage();
+        return ['error' => $e->getMessage()];;
       }
     }else{
-      return 'No nos conectammos';
+      return ['error' => 'No nos conectamos.'];;
     }
   }
 
