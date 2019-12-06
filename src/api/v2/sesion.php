@@ -6,7 +6,7 @@ class SesionAPI {
 
   function fechas() {
     $identificacion = isset($_GET['identificacion']) ? $_GET['identificacion'] : null;
-    $idCurso = isset($_GET['id_curso']) ? $_GET['id_curso'] : 0;
+    $idCurso = isset($_GET['idCurso']) ? $_GET['idCurso'] : 0;
 
     if ($idCurso != 0) {
       $res = FechasClaseSV::getSoloFechasClaseCurso($idCurso);
