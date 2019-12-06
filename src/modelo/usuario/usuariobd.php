@@ -12,19 +12,11 @@ class UsuarioBD {
     FROM public."UsersWeb"
     WHERE user_name = :user AND '
     . "user_clave = md5(md5('web') || :pass ||'web');";
-    $ct = getCon();
-    if($ct != null){
-      $sen = $ct->prepare($sql);
-      $sen->execute([
-        'user' => $user,
-        'pass' => $pass
-      ]);
-      $u = null;
-      while($r = $sen->fetch(PDO::FETCH_ASSOC)){
-        $u = true;
-      }
-      return $u;
-    }
+
+    return getOneFromSQL($sql, [
+      'user' => $user,
+      'pass' => $pass
+    ]);
   }
 
   static function getPorUserAndPass($user, $pass){
