@@ -43,7 +43,7 @@ class FechasClaseSV {
           //echo "Dia: " . $fc->format('w') . '<br>';
           //echo $fc->format('d-m-y') . '<br>';
           array_push($fechas, [
-            'fecha' => str_replace ('-', '/', $fc->format('d-m-Y')), 
+            'fecha' => str_replace ('-', '/', $fc->format('d-m-Y')),
             'dia' => $dia
           ]);
         }
@@ -98,7 +98,7 @@ class FechasClaseSV {
 
           $fc = $fc->add(new DateInterval('P'.$da.'D'));
           array_push($fechas, [
-            'id_curso' => $idCurso,
+            'id_curso' => (int) $idCurso,
             'fecha' => str_replace ('-', '/', $fc->format('d-m-Y')),
             'dia' => $dia,
             'horas' => $d['num_horas']
