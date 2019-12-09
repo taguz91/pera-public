@@ -116,7 +116,7 @@ class AsistenciaBD {
     prd_lectivo_nombre,
     materia_nombre,
     curso_nombre,
-    prd_lectivo_fecha_fin
+    prd_lectivo_fecha_fin 
     ORDER BY prd_lectivo_fecha_fin DESC,
     materia_nombre;'
     . self::$EQUERYCURSOS;
