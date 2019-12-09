@@ -92,8 +92,33 @@ class AsistenciaBD {
   materia_nombre;';
 
   static function getUltimosCursosByDocente($identificacion) {
-    $sql = self::$BQUERYCURSOS . '
-    AND persona_identificacion = :identificacion '
+    $sql = '
+    SELECT
+    c.id_curso,
+    prd_lectivo_nombre,
+    materia_nombre,
+    curso_nombre
+    FROM public."SesionClase" sc
+    JOIN public."Cursos" c
+    ON sc.id_curso = c.id_curso
+    JOIN public."Materias" m
+    ON m.id_materia = c.id_materia
+    JOIN public."Docentes" d
+    ON d.id_docente = c.id_docente
+    JOIN public."Personas" p
+    ON p.id_persona = d.id_persona
+    JOIN public."PeriodoLectivo" pl
+    ON pl.id_prd_lectivo = c.id_prd_lectivo
+    WHERE prd_lectivo_estado = true
+    AND persona_identificacion = :identificacion
+    GROUP BY
+    c.id_curso,
+    prd_lectivo_nombre,
+    materia_nombre,
+    curso_nombre,
+    prd_lectivo_fecha_fin
+    ORDER BY prd_lectivo_fecha_fin DESC,
+    materia_nombre;'
     . self::$EQUERYCURSOS;
     return getArrayFromSQL($sql, [
       'identificacion' => $identificacion
