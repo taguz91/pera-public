@@ -91,6 +91,16 @@ class UsuarioBD {
     ]);
   }
 
+  static function getTipoPersona($identificacion) {
+    $sql = '
+    SELECT tipo_persona(p.id_persona) AS tipo
+    FROM public."Personas" p
+    WHERE persona_identificacion = :identificacion; ';
+    return getOneFromSQL($sql, [
+      'identificacion' => $identificacion
+    ]);
+  }
+
 }
 
  ?>

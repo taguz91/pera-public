@@ -59,4 +59,24 @@ class AsistenciaAPI {
     }
   }
 
+  function sincronizar($identificacion = '') {
+    if ($identificacion != '') {
+      require_once 'src/modelo/usuario/usuariobd.php';
+      $tipo = UsuarioBD::getTipoPersona($identificacion);
+      $asistencia = isset($_POST['asistencia']) ? $_POST['asistencia'] : '';
+      if ($tipo['tipo'] == 'D' && $asistencia != '') {
+      if (true) {
+        //var_dump($asistencia);
+        //echo "<hr>";
+        $decoded = json_decode($asistencia, true);
+        //var_dump($decoded);
+        AsistenciaSV::sincronizar($decoded);
+      } else {
+        JSON::error('No tiene permitido realizar esta acción');
+      }
+    } else {
+      JSON::error('No tenemos los datos de indentificacion para comprobarlo en el sistema.');
+    }
+  }
+
 }
