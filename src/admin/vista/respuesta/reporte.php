@@ -210,8 +210,8 @@ require 'src/admin/vista/templates/footer.php';
 
  <!--EXPORTARR-->
 
- <script lang="javascript" src="<?php echo constant('URL'); ?>public/Libs/FileSaver/FileSaver.min.js"></script>
- <script lang="javascript" src="<?php echo constant('URL') ?>public/Libs/xlsx/xlsx.full.min.js"></script>
+ <script lang="javascript" src="<?php echo constant('URL'); ?>public/libs/FileSaver/FileSaver.min.js"></script>
+ <script lang="javascript" src="<?php echo constant('URL') ?>public/libs/xlsx/xlsx.full.min.js"></script>
 
  <script type="text/javascript">
  var wb = XLSX.utils.table_to_book(
