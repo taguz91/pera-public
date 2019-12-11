@@ -37,11 +37,16 @@ class AsistenciaAPI {
   function cursos($identificacion = ''){
     if ($identificacion != '') {
       $dia = isset($_GET['dia']) ? $_GET['dia'] : 0;
+      $descargar = isset($_GET['descargar']);
       $res;
-      if ($dia != 0) {
-        $res = AsistenciaBD::getUltimosCursosByDocenteDia($identificacion);
+      if ($descargar) {
+        $res = AsistenciaBD::getUltimosCursosDocenteDescargar($identificacion);
       } else {
-        $res = AsistenciaBD::getUltimosCursosByDocente($identificacion);
+        if ($dia != 0) {
+          $res = AsistenciaBD::getUltimosCursosByDocenteDia($identificacion);
+        } else {
+          $res = AsistenciaBD::getUltimosCursosByDocente($identificacion);
+        }
       }
 
       JSON::muestraJSON($res);
@@ -65,7 +70,6 @@ class AsistenciaAPI {
       $tipo = UsuarioBD::getTipoPersona($identificacion);
       $asistencia = isset($_POST['asistencia']) ? $_POST['asistencia'] : '';
       if ($tipo['tipo'] == 'D' && $asistencia != '') {
-      if (true) {
         //var_dump($asistencia);
         //echo "<hr>";
         $decoded = json_decode($asistencia, true);

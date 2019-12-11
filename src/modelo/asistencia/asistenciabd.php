@@ -135,6 +135,15 @@ class AsistenciaBD {
     ]);
   }
 
+  static function getUltimosCursosDocenteDescargar($identificacion) {
+    $sql = self::$BQUERYCURSOS . '
+    AND persona_identificacion = :identificacion '
+    . self::$EQUERYCURSOS;
+    return getArrayFromSQL($sql, [
+      'identificacion' => $identificacion
+    ]);
+  }
+
 
   static function getAlumnosNuevosDocente($identificacion = ''){
     $sql = "
