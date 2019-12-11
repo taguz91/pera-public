@@ -37,7 +37,7 @@ class AsistenciaBD {
     JOIN public."Personas" p
     ON p.id_persona = a.id_persona
     WHERE ac.id_curso = :idCurso
-    AND fecha_asistencia = :fecha
+    AND fecha_asistencia = '. "TO_DATE(:fecha, 'DD/MM/YYYY')".'
     ORDER BY alumno;';
     return getArrayFromSQL($sql, [
       'idCurso' => $idCurso,
