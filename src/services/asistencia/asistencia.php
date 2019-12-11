@@ -44,7 +44,7 @@ class AsistenciaSV {
 
   static function getInsert($alu) {
     return "
-    (".$alu['id_almn_curso'].", '".$alu['fecha']."', ".$alu['horas']."),";
+    (".$alu['id_almn_curso'].", "."TO_DATE(".$alu['fecha'].", 'DD/MM/YYYY')".", ".$alu['horas']."),";
   }
 
   static function getUpdate($alu) {
@@ -52,7 +52,7 @@ class AsistenciaSV {
     UPDATE public."Asistencia"
     SET numero_faltas = '.$alu['horas'].'
     WHERE id_almn_curso = '.$alu['id_almn_curso']."
-    AND fecha_asistencia = '".$alu['fecha']."';";
+    AND "."to_char(fecha_asistencia,'DD/MM/YYYY')"." = '".$alu['fecha']."';";
   }
 
   static $INSERTB = '
