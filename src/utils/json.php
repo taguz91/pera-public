@@ -24,6 +24,14 @@ abstract class JSON {
     ]));
   }
 
+  static function resSQL($res, $mensaje) {
+    if (isset($res['error'])) {
+      self::error($res['error']);
+    } else {
+      self::confirmacion($mensaje);
+    }
+  }
+
   static function confirmacion($mensaje) {
     self::imprimeJson(json_encode([
       'statuscode' => 200,

@@ -15,30 +15,30 @@ class AsistenciaSV {
 
   static function sincronizar($asi) {
     require_once 'src/modelo/asistencia/sincronizarbd.php';
-/*
+
     $existe = SincronizarBD::existeAsistencia(
       $asi['id_curso'],
       $asi['fecha']
-    );*/
+    );
     $existe = isset($existe['existe']);
     $sql = '';
     if (!$existe) {
         $sql = self::$INSERTB;
     }
-    var_dump($asi);
-    $alumnos = $asi['alumnos'];
-    if (isset($alumnos)) {
-      foreach ($alumnos as $alu) {
+
+    if (isset($asi['alumnos'])) {
+      foreach ($asi['alumnos'] as $alu) {
         if ($existe) {
           $sql .= self::getUpdate($alu);
         } else {
           $sql .= self::getInsert($alu);
         }
       }
-      echo "<hr>";
       $sql = substr($sql, 0, -1) . ';';
-      var_dump($sql);
-      echo "<br>";
+      $res = executeSQL($sql, []);
+      JSON::resSQL($res, 'Sincronizamos correctamente: ');
+    } else {
+      JSON::error('No tenemos alumnos para editar.');
     }
   }
 
@@ -51,8 +51,8 @@ class AsistenciaSV {
     return '
     UPDATE public."Asistencia"
     SET numero_faltas = '.$alu['horas'].'
-    WHERE id_almn_curso = '.$alu['id_almn_curso'].'
-    AND fecha_asistencia = \''.$alu['fecha'].'\';';
+    WHERE id_almn_curso = '.$alu['id_almn_curso']."
+    AND fecha_asistencia = '".$alu['fecha']."';";
   }
 
   static $INSERTB = '

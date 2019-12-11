@@ -38,10 +38,7 @@ class AsistenciaBD {
     ON p.id_persona = a.id_persona
     WHERE ac.id_curso = :idCurso
     AND fecha_asistencia = :fecha
-    ORDER BY persona_primer_apellido,
-    persona_segundo_apellido,
-    persona_primer_nombre,
-    persona_segundo_nombre;';
+    ORDER BY alumno;';
     return getArrayFromSQL($sql, [
       'idCurso' => $idCurso,
       'fecha' => $fecha
@@ -66,7 +63,7 @@ class AsistenciaBD {
   materia_nombre,
   curso_nombre,
   dia_sesion,
-  NULLIF(COUNT(dia_sesion), 0)::int AS horas  
+  NULLIF(COUNT(dia_sesion), 0)::int AS horas
   FROM public."SesionClase" sc
   JOIN public."Cursos" c
   ON sc.id_curso = c.id_curso

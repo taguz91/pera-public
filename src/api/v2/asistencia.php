@@ -70,10 +70,7 @@ class AsistenciaAPI {
       $tipo = UsuarioBD::getTipoPersona($identificacion);
       $asistencia = isset($_POST['asistencia']) ? $_POST['asistencia'] : '';
       if ($tipo['tipo'] == 'D' && $asistencia != '') {
-        //var_dump($asistencia);
-        //echo "<hr>";
         $decoded = json_decode($asistencia, true);
-        //var_dump($decoded);
         AsistenciaSV::sincronizar($decoded);
       } else {
         JSON::error('No tiene permitido realizar esta acción');
