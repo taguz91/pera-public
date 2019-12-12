@@ -28,7 +28,7 @@ class FechasClaseSV {
           $dia = $d['dia_sesion'];
           $th += $d['num_horas'];
           if ($di == $df) {
-            $da = 8;
+            $da = 7;
           } else {
             $da = self::getDias($dp, $dia);
           }
@@ -47,7 +47,11 @@ class FechasClaseSV {
       return $res;
     }
   }
+//1332	TAS  NOVIEMBRE/2019   ABRIL/2020	BASE DE DATOS II	0101678290	MARCELO MENDEZ	5	N5A	20	13
 
+//1233	TDS  NOVIEMBRE/2019   ABRIL/2020 	FUNDAMENTOS DE REDES Y CONECTIVIDAD	0104399860	WILLIAMS TRELLES	5	M5A	30	26
+
+//1228	TDS  NOVIEMBRE/2019   ABRIL/2020 	TENDENCIAS ACTUALES DE PROGRAMACIÓN	0104069968	PEDRO CORNEJO	5	M5A	30	26
   static function getSoloFechasClaseCurso($idCurso) {
     $res = SesionBD::getDiasByCurso($idCurso);
     if (isset($res['error'])) {
@@ -66,9 +70,11 @@ class FechasClaseSV {
       $ff = new DateTime($ff);
 
       $da = 0;
-      $dp = $di;
+      $dp = 1;
       $th = 0;
       $fechas = [];
+      /*echo "Dia inicio: " . $di . " Dia Fin: " . $df;
+      echo "<hr>";*/
       while ($fc <= $ff) {
         foreach ($dias as $d) {
           $dia = $d['dia_sesion'];
@@ -81,6 +87,10 @@ class FechasClaseSV {
           $dp = $d['dia_sesion'];
 
           $fc = $fc->add(new DateInterval('P'.$da.'D'));
+
+          /*echo "Dia aumentar: " .$da. " Dia sesion: " . $dia. " Fecha: " . $fc->format('d-m-Y');
+          echo "<br>";*/
+
           array_push($fechas, [
             'id_curso' => (int) $idCurso,
             'fecha' => str_replace ('-', '/', $fc->format('d-m-Y')),
