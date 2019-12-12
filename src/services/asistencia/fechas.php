@@ -28,35 +28,19 @@ class FechasClaseSV {
           $dia = $d['dia_sesion'];
           $th += $d['num_horas'];
           if ($di == $df) {
-            //echo "<br> Dia fin de clase: ".$dp."<br>";
             $da = 8;
           } else {
-            //echo "<br> Dia anterior: ".$dp
-            //." Dia toca: ".$dia."<br>";
             $da = self::getDias($dp, $dia);
           }
           $dp = $d['dia_sesion'];
 
-          //echo "Dia actualizaremos: ".$da." <br>";
-
           $fc = $fc->add(new DateInterval('P'.$da.'D'));
-          //echo "Dia: " . $fc->format('w') . '<br>';
-          //echo $fc->format('d-m-y') . '<br>';
           array_push($fechas, [
             'fecha' => str_replace ('-', '/', $fc->format('d-m-Y')),
             'dia' => $dia
           ]);
         }
       }
-      /*
-      echo "Horas: " . $th;
-      echo "<hr>";
-      $json = [
-        'fecha_inicio' => $res['prd_lectivo_fecha_inicio'],
-        'fecha_fin' => $res['prd_lectivo_fecha_fin'],
-        'total_horas' => $th,
-        'fecha' => $fechas
-      ];*/
       $res['total_horas'] = $th;
       $res['dias'] = $dias;
       $res['fechas'] = $fechas;
@@ -90,7 +74,7 @@ class FechasClaseSV {
           $dia = $d['dia_sesion'];
           $th += $d['num_horas'];
           if ($di == $df) {
-            $da = 8;
+            $da = 7;
           } else {
             $da = self::getDias($dp, $dia);
           }
@@ -138,7 +122,7 @@ class FechasClaseSV {
             $dia = $d['dia_sesion'];
             $th += $d['num_horas'];
             if ($di == $df) {
-              $da = 8;
+              $da = 7;
             } else {
               $da = FechasClaseSV::getDias($dp, $dia);
             }
