@@ -28,7 +28,7 @@ abstract class JSON {
     if (isset($res['error'])) {
       self::error($res['error']);
     } else {
-      self::confirmacion($mensaje);
+      self::confirmacion($mensaje .' ' . $res);
     }
   }
 

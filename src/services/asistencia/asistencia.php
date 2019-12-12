@@ -35,7 +35,7 @@ class AsistenciaSV {
         }
       }
       $sql = substr($sql, 0, -1) . ';';
-      $res = executeSQL($sql, []);
+      $res = executeScript($sql, []);
       JSON::resSQL($res, 'Sincronizamos correctamente: ');
     } else {
       JSON::error('No tenemos alumnos para editar.');

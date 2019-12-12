@@ -91,6 +91,19 @@
     }
   }
 
+  function executeScript($sql) {
+    $ct = getCon();
+    if($ct != null){
+      try {
+        return $ct->exec($sql);
+      } catch (\Exception $e) {
+        return ['error' => $e->getMessage()];;
+      }
+    }else{
+      return ['error' => 'No nos conectamos.'];;
+    }
+  }
+
   function deleteById($sql, $id = 0){
     if ($id != 0) {
       $res = executeSQL($sql, [
