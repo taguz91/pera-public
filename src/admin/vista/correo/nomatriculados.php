@@ -6,7 +6,7 @@ require 'src/admin/vista/templates/header.php';
 
 <div class="my-5">
 
-  <div class="col-md-8 col-lg-6 mx-auto border rounded shadow">
+  <div class="col-10 mx-auto border rounded shadow">
 
     <h3 class="text-center my-3">Envío de correos masivos</h3>
     <hr>
@@ -14,52 +14,67 @@ require 'src/admin/vista/templates/header.php';
 
     <form class="form-horizontal" action="#" method="post" id="form-correos">
 
-      <div class="form-group">
-        <label for="" class="control-label">Seleccione un periodo:</label>
-        <select class="form-control" name="periodo" required id="cmbPeriodos">
-          <option value="0">Periodos</option>
-          <?php
-          if (isset($periodos)) {
-            foreach ($periodos as $pr) {
-              echo '<option value="' . $pr['id_prd_lectivo'] . '">' . $pr['prd_lectivo_nombre'] . '</option>';
-            }
-          }
-          ?>
-        </select>
+
+      <div class="form-row">
+
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="control-label">Seleccione un periodo:</label>
+            <select class="form-control" name="periodo" required id="cmbPeriodos">
+              <option value="0">Periodos</option>
+              <?php
+              if (isset($periodos)) {
+                foreach ($periodos as $pr) {
+                  echo '<option value="' . $pr['id_prd_lectivo'] . '">' . $pr['prd_lectivo_nombre'] . '</option>';
+                }
+              }
+              ?>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="">Asunto:</label>
+            <input type="text" name="asunto" value="" class="form-control" placeholder="Asunto del correo." required>
+          </div>
+
+          <div class="form-group">
+            <label for="">Correo usar:</label>
+            <input type="email" name="correousar" value="" class="form-control" placeholder="Correo que usaremos para enviar los correos." required>
+          </div>
+
+          <div class="form-group">
+            <label for="">Password usar:</label>
+            <input type="password" name="passwordusar" value="" class="form-control" placeholder="Contraseña para el correo." required>
+          </div>
+
+        </div>
+
+        <div class="col">
+
+          <div class="form-group">
+            <label for="" class="">Agregar correos de los alumnos:</label>
+            <div class="btn-group btn-block" role="group">
+              <input class="btn btn-info  border-left" type="button" value="Agregar " onclick="agregarCorreos()">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="">Mensaje:</label>
+            <textarea name="mensaje" class="form-control" rows="6" cols="5" placeholder="Escriba el correo que enviara." required></textarea>
+          </div>
+
+
+          <div class="form-group">
+            <label for="">Archivo adjunto:</label>
+            <input type="file" name="adjunto">
+          </div>
+
+        </div>
+
       </div>
 
-
       <div class="form-group">
-        <label for="">Asunto:</label>
-        <input type="text" name="asunto" value="" class="form-control" placeholder="Asunto del correo." required>
-      </div>
-
-      <div class="form-group">
-        <label for="">Mensaje:</label>
-        <textarea name="mensaje" class="form-control" rows="10" cols="5" placeholder="Escriba el correo que enviara." required></textarea>
-      </div>
-
-
-      <div class="form-group">
-        <label for="">Archivo adjunto:</label>
-        <input type="file" name="adjunto">
-      </div>
-
-
-      <div class="form-group">
-        <label for="">Correo usar:</label>
-        <input type="email" name="correousar" value="" class="form-control" placeholder="Correo que usaremos para enviar los correos." required>
-      </div>
-
-      <div class="form-group">
-        <label for="">Password usar:</label>
-        <input type="password" name="passwordusar" value="" class="form-control" placeholder="Contraseña para el correo." required>
-      </div>
-
-      <div class="form-group">
-        <input class="btn btn-info" type="button" value="Agregar" onclick="agregarCorreos()">
-
-        <input class="btn btn-success " type="submit" value="Enviar"  onclick="enviarCorreos()">
+        <input class="btn btn-success " type="submit" value="Enviar Correos"  onclick="enviarCorreos()">
       </div>
 
     </form>
