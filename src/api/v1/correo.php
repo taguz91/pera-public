@@ -78,7 +78,7 @@ class CorreoAPI {
       && $passwordusar != ''
       && $correoenviar != ''
     ) {
-      if($archivo != null) {
+      if($archivo != null && $archivo['name'] != '') {
         $res = EnviarCorreo::enviarConConArchivo(
           $correousar,
           $passwordusar,
@@ -88,7 +88,7 @@ class CorreoAPI {
           $archivo
         );
         if (is_bool($res)) {
-          JSON::confirmacion('Enviamos correctamente CON Archivo');
+          JSON::confirmacion('Enviamos correctamente con Archivo');
         } else {
           JSON::error('No enviamos el correo:  ' . $res);
         }

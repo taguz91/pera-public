@@ -19,6 +19,13 @@ function agregarCorreos() {
   }
 }
 
+function agregarCorreosPeriodo() {
+  if (CMB_PERIODOS.value > 0) {
+    getPersonas(CMB_PERIODOS.value);
+  } else {
+    msgError('Necesitamos que seleccione un periodo.');
+  }
+}
 
 function getCursos(idperiodo) {
   fetch(URLAPI + 'v1/periodo/ciclos/?idPeriodo=' + idperiodo)
@@ -130,7 +137,6 @@ let correos = '';
 
 function enviarCorreos(){
   let form = new FormData(FORMCORREOS);
-  console.log('Archivo: ' + form.get('adjunto'));
   if (form.get('mensaje') != ''
   && form.get('correousar') != ''
   && form.get('passwordusar') != ''

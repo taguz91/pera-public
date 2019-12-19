@@ -22,9 +22,15 @@ class AlumnoAPI {
   }
 
   function correos($param) {
+    // El prametro 0 es el periodo y el parametro 1 es el ciclo
     if(isset($param[0]) && isset($param[1])){
       require 'src/modelo/persona/correosbd.php';
-      $items = CorreosBD::getCorreosAlumnosPorPeriodoCiclo($param[0], $param[1]);
+      $items = [];
+      if ($param[1] == 0) {
+        $items = CorreosBD::getCorreosAlumnosPorPeriodo($param[0]);
+      } else {
+        $items = CorreosBD::getCorreosAlumnosPorPeriodoCiclo($param[0], $param[1]);
+      }
       JSON::muestraJSON($items);
     } else {
       JSON::error('No indico los parametros requeridos. periodo-ciclo');
