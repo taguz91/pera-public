@@ -206,7 +206,7 @@ require_once 'src/datos/persona.php';
         <div class="col">
           <div class="form-group">
             <label for="" class="control-label">Correo:</label>
-            <input class="form-control txt" type="text" name="persona_correo"
+            <input class="form-control txt" type="email" name="persona_correo"
             value="<?php echo isset($persona['persona_correo']) ? $persona['persona_correo'] :  ''; ?>">
           </div>
         </div>
