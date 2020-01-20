@@ -203,6 +203,16 @@ require_once 'src/datos/persona.php';
       </div>
 
       <div class="form-row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="control-label">Correo:</label>
+            <input class="form-control txt" type="text" name="persona_correo"
+            value="<?php echo isset($persona['persona_correo']) ? $persona['persona_correo'] :  ''; ?>">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
 
         <div class="col-6 col-md-3">
           <div class="form-group">
