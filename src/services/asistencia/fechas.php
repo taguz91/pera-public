@@ -20,7 +20,7 @@ class FechasClaseSV {
       $ff = new DateTime($ff);
 
       $da = 0;
-      $dp = $di;
+      $dp = 1;
       $th = 0;
       $fechas = [];
       while ($fc <= $ff) {
@@ -36,7 +36,7 @@ class FechasClaseSV {
 
           $fc = $fc->add(new DateInterval('P'.$da.'D'));
           array_push($fechas, [
-            'fecha' => str_replace ('-', '/', $fc->format('d-m-Y')),
+            'fecha' => str_replace('-', '/', $fc->format('d-m-Y')),
             'dia' => $dia
           ]);
         }
@@ -61,6 +61,7 @@ class FechasClaseSV {
       $ff = $res['prd_lectivo_fecha_fin'];
       $di = $res['dia_inicia'];
       $df = $res['dia_fin'];
+      $asistenciaGuardada = $res['fechas_asistencia_guardada'];
 
       $fa = $fi;
       $dias = $res['dias'];
@@ -73,8 +74,7 @@ class FechasClaseSV {
       $dp = 1;
       $th = 0;
       $fechas = [];
-      /*echo "Dia inicio: " . $di . " Dia Fin: " . $df;
-      echo "<hr>";*/
+
       while ($fc <= $ff) {
         foreach ($dias as $d) {
           $dia = $d['dia_sesion'];
@@ -88,14 +88,19 @@ class FechasClaseSV {
 
           $fc = $fc->add(new DateInterval('P'.$da.'D'));
 
-          /*echo "Dia aumentar: " .$da. " Dia sesion: " . $dia. " Fecha: " . $fc->format('d-m-Y');
-          echo "<br>";*/
+          $fechaGenerada = str_replace ('-', '/', $fc->format('d-m-Y'));
+
+          $fechaGuardada = strpos(
+            $asistenciaGuardada,
+            $fechaGenerada
+          ) != 0 ? 1 : 0;
 
           array_push($fechas, [
             'id_curso' => (int) $idCurso,
-            'fecha' => str_replace ('-', '/', $fc->format('d-m-Y')),
+            'fecha' => $fechaGenerada,
             'dia' => $dia,
-            'horas' => $d['num_horas']
+            'horas' => $d['num_horas'],
+            'asistencia_guardada' => $fechaGuardada
           ]);
         }
       }
@@ -115,6 +120,7 @@ class FechasClaseSV {
         $ff = $sesion['prd_lectivo_fecha_fin'];
         $di = $sesion['dia_inicia'];
         $df = $sesion['dia_fin'];
+        $asistenciaGuardada = $sesion['fechas_asistencia_guardada'];
 
         $fa = $fi;
         $dias = $sesion['dias'];
@@ -124,7 +130,7 @@ class FechasClaseSV {
         $ff = new DateTime($ff);
 
         $da = 0;
-        $dp = $di;
+        $dp = 1;
         $th = 0;
 
         while ($fc <= $ff) {
@@ -139,11 +145,20 @@ class FechasClaseSV {
             $dp = $d['dia_sesion'];
 
             $fc = $fc->add(new DateInterval('P'.$da.'D'));
+
+            $fechaGenerada = str_replace ('-', '/', $fc->format('d-m-Y'));
+
+            $fechaGuardada = strpos(
+              $asistenciaGuardada,
+              $fechaGenerada
+            ) != 0 ? 1 : 0;
+
             array_push($fechas, [
               'id_curso' => $sesion['id_curso'],
-              'fecha' => str_replace ('-', '/', $fc->format('d-m-Y')),
+              'fecha' => $fechaGenerada,
               'dia' => $dia,
-              'horas' => $d['num_horas']
+              'horas' => $d['num_horas'],
+              'asistencia_guardada' => $fechaGuardada
             ]);
           }
         }

@@ -10,7 +10,8 @@ class SincronizarBD {
       SELECT id_almn_curso
       FROM public."AlumnoCurso"
       WHERE id_curso = :idCurso
-    ) AND '."to_char(fecha_asistencia,'DD/MM/YYYY')".' = :fecha ;';
+    ) AND  fecha_asistencia = ' .
+    "TO_DATE(:fecha, 'DD/MM/YYYY')" . ';';
     return getOneFromSQL($sql, [
       'idCurso' => $idCurso,
       'fecha' => $fecha

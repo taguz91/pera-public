@@ -69,6 +69,7 @@ class AsistenciaAPI {
       require_once 'src/modelo/usuario/usuariobd.php';
       $tipo = UsuarioBD::getTipoPersona($identificacion);
       $asistencia = isset($_POST['asistencia']) ? $_POST['asistencia'] : '';
+      // Validamos que el tipo de usuario sea Docente solo ellos pueden sincronizar 
       if ($tipo['tipo'] == 'D' && $asistencia != '') {
         $decoded = json_decode($asistencia, true);
         AsistenciaSV::sincronizar($decoded);

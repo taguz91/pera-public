@@ -24,7 +24,17 @@ class SesionBD {
         WHERE id_curso = cr.id_curso
         GROUP BY dia_sesion
       ) AS d
-    ) AS dias
+    ) AS dias, (
+      SELECT STRING_AGG(fecha, ' . "', '" . ')
+      FROM (
+        SELECT to_char(fecha_asistencia, ' . "'DD/MM/YYYY'" . ') AS fecha
+        FROM public."Asistencia" asi
+        JOIN public."AlumnoCurso" asiac
+        ON asi.id_almn_curso = asiac.id_almn_curso
+        WHERE asiac.id_curso = cr.id_curso
+        GROUP BY fecha
+      ) AS fechas
+    ) AS fechas_asistencia_guardada
 
     FROM public."PeriodoLectivo" plr
     JOIN public."Cursos" cr
@@ -59,7 +69,17 @@ class SesionBD {
         WHERE id_curso = cr.id_curso
         GROUP BY dia_sesion
       ) AS d
-    ) AS dias
+    ) AS dias, (
+      SELECT STRING_AGG(fecha, ' . "', '" . ')
+      FROM (
+        SELECT to_char(fecha_asistencia, ' . "'DD/MM/YYYY'" . ') AS fecha
+        FROM public."Asistencia" asi
+        JOIN public."AlumnoCurso" asiac
+        ON asi.id_almn_curso = asiac.id_almn_curso
+        WHERE asiac.id_curso = cr.id_curso
+        GROUP BY fecha
+      ) AS fechas
+    ) AS fechas_asistencia_guardada
 
     FROM public."PeriodoLectivo" plr
     JOIN public."Cursos" cr

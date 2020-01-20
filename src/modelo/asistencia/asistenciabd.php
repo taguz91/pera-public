@@ -12,7 +12,13 @@ class AsistenciaBD {
     '."TO_DATE(:fecha, 'DD/MM/YYYY')".',
     0
     FROM public."AlumnoCurso"
-    WHERE id_curso = :idCurso;';
+    WHERE id_curso = :idCurso
+    AND id_almn_curso NOT IN (
+      SELECT id_almn_curso
+      FROM public."Asistencia"
+      WHERE fecha_asistencia = ' .
+      "TO_DATE(:fecha, 'DD/MM/YYYY')" . '
+    );';
     return executeSQL($sql, [
       'fecha' => $fecha,
       'idCurso' => $idCurso
@@ -37,7 +43,8 @@ class AsistenciaBD {
     JOIN public."Personas" p
     ON p.id_persona = a.id_persona
     WHERE ac.id_curso = :idCurso
-    AND '." to_char(fecha_asistencia,'DD/MM/YYYY') ".' = :fecha 
+    AND fecha_asistencia = ' .
+    "TO_DATE(:fecha, 'DD/MM/YYYY')" . ' 
     ORDER BY alumno;';
     return getArrayFromSQL($sql, [
       'idCurso' => $idCurso,

@@ -44,7 +44,7 @@ class AsistenciaSV {
 
   static function getInsert($alu) {
     return "
-    (".$alu['id_almn_curso'].", "."TO_DATE(".$alu['fecha'].", 'DD/MM/YYYY')".", ".$alu['horas']."),";
+    (".$alu['id_almn_curso'].", "."TO_DATE('".$alu['fecha']."', 'DD/MM/YYYY')".", ".$alu['horas']."),";
   }
 
   static function getUpdate($alu) {
