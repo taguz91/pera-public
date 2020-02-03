@@ -1,6 +1,7 @@
 <?php
 require_once 'src/modelo/persona/personabd.php';
 require_once 'src/modelo/alumno/alumnobd.php';
+require_once 'src/modelo/usuario/usuariobd.php';
 
 class PerfilCTR extends CTR implements DCTR {
 
@@ -10,6 +11,7 @@ class PerfilCTR extends CTR implements DCTR {
 
   public function inicio() {
     global $U;
+    $_SESSION['U'] = $u = UsuarioBD::getUserByIDPersona($U->idPersona);
     require_once cargarVista('persona/perfil.php');
   }
 

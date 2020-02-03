@@ -4,6 +4,20 @@ require_once 'src/modelo/usuario/usuario.php';
 
 class UsuarioBD {
 
+  static $BASEQUERYUSER = '
+  SELECT
+  uw.user_name,
+  p.id_persona,
+  p.persona_primer_nombre,
+  p.persona_segundo_nombre,
+  p.persona_primer_apellido,
+  p.persona_segundo_apellido,
+  p.persona_correo,
+  p.persona_celular,
+  tipo_persona(p.id_persona) AS tipo
+  FROM public."UsersWeb" uw
+  JOIN public."Personas" p ON uw.id_persona = p.id_persona';
+
   static function login($user, $pass){
     $sql = '
     SELECT
@@ -20,19 +34,7 @@ class UsuarioBD {
   }
 
   static function getPorUserAndPass($user, $pass){
-    $sql = '
-    SELECT
-    uw.user_name,
-    p.id_persona,
-    p.persona_primer_nombre,
-    p.persona_segundo_nombre,
-    p.persona_primer_apellido,
-    p.persona_segundo_apellido,
-    p.persona_correo,
-    p.persona_celular,
-    tipo_persona(p.id_persona) AS tipo
-    FROM public."UsersWeb" uw
-    JOIN public."Personas" p ON uw.id_persona = p.id_persona
+    $sql = self::$BASEQUERYUSER . '
     WHERE uw.user_name = :user AND
     uw.user_clave = '. "md5(md5('web') || :pass || 'web')" .';';
     $ct = getCon();
@@ -99,6 +101,23 @@ class UsuarioBD {
     return getOneFromSQL($sql, [
       'identificacion' => $identificacion
     ]);
+  }
+
+  static function getUserByIDPersona($idPersona){
+    $sql = self::$BASEQUERYUSER . '
+    WHERE p.id_persona = :idPersona;';
+    $ct = getCon();
+    if($ct != null){
+      $sen = $ct->prepare($sql);
+      $sen->execute([
+        'idPersona' => $idPersona
+      ]);
+      $u = null;
+      while($r = $sen->fetch(PDO::FETCH_ASSOC)){
+        $u = UsuarioMD::getFromRow($r);
+      }
+      return $u;
+    }
   }
 
 }

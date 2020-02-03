@@ -549,6 +549,8 @@ require_once 'src/datos/persona.php';
   </div>
 </div>
 
+<div class="my-" style="margin-bottom: 6rem;"></div>
+
 <?php
 require 'src/vista/templates/copy.php';
 ?>

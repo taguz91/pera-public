@@ -60,14 +60,20 @@ require 'src/admin/vista/templates/header.php';
            <div class="col">
                <div class="form-group">
                    <label for="fechaInicio" class="control-label">Fecha Inicio</label>
-                   <input type="date" name="fechaInicio" value="<?php echo $pi['permiso_ingreso_fecha_inicio']; ?>" class="form-control" id="inInicio">
+                   <input type="datetime" name="fechaInicio" value="<?php echo strftime(
+                     '%Y-%m-%d',
+                     strtotime($pi['permiso_ingreso_fecha_inicio'])
+                   ); ?>" class="form-control" id="inInicio">
                </div>
            </div>
 
            <div class="col">
                <div class="form-group">
                    <label for="fechaFin" class="control-label">Fecha Fin</label>
-                   <input type="date" name="fechaFin" value="<?php echo $pi['permiso_ingreso_fecha_fin']; ?>" class="form-control" id="inFin">
+                   <input type="date" name="fechaFin" value="<?php echo strftime(
+                     '%Y-%m-%d',
+                     strtotime($pi['permiso_ingreso_fecha_fin'])
+                   ); ?>" class="form-control" id="inFin">
                </div>
            </div>
        </div>
@@ -90,9 +96,9 @@ require 'src/admin/vista/templates/header.php';
  if(CMBPERIODO != null){
    getPeriodos(CMBPERIODO);
  }
- 
+
  function getPeriodos(cmb) {
-   if (cmb.value == 1 ) {
+   if (cmb.value != 0 ) {
      FORMPERIODO.style.display = 'block';
    } else {
      FORMPERIODO.style.display = 'none';
